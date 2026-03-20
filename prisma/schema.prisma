@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -10,7 +5,53 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+model Entity {
+  id                    String         @id @default(cuid())
+  type                  EntityType
+  title                 String
+  slug                  String         @unique
+  summary               String?
+  body                  String?
+  status                EntityStatus   @default(DRAFT)
+  visibility            Visibility     @default(PRIVATE)
+  aliases               String[]       @default([])
+  tags                  String[]       @default([])
+  searchKeywords        String[]       @default([])
+  featuredImage         String?
+  parentId              String?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  version               Int            @default(1)
+  parent                Entity?        @relation("EntityHierarchy", fields: [parentId], references: [id])
+  children              Entity[]       @relation("EntityHierarchy")
+  outgoingRelationships Relationship[] @relation("SourceEntity")
+  incomingRelationships Relationship[] @relation("TargetEntity")
+
+  @@index([type])
+  @@index([title])
+  @@index([slug])
+  @@index([status])
+  @@index([visibility])
+}
+
+model Relationship {
+  id             String           @id @default(cuid())
+  type           RelationshipType
+  sourceEntityId String
+  targetEntityId String
+  notes          String?
+  weight         Int?
+  directionality String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  sourceEntity   Entity           @relation("SourceEntity", fields: [sourceEntityId], references: [id], onDelete: Cascade)
+  targetEntity   Entity           @relation("TargetEntity", fields: [targetEntityId], references: [id], onDelete: Cascade)
+
+  @@index([type])
+  @@index([sourceEntityId])
+  @@index([targetEntityId])
 }
 
 enum EntityType {
@@ -53,56 +94,4 @@ enum RelationshipType {
   IS_A
   PART_OF
   RELATED_TO
-}
-
-model Entity {
-  id              String         @id @default(cuid())
-  type            EntityType
-  title           String
-  slug            String         @unique
-  summary         String?
-  body            String?
-  status          EntityStatus   @default(DRAFT)
-  visibility      Visibility     @default(PRIVATE)
-  aliases         String[]       @default([])
-  tags            String[]       @default([])
-  searchKeywords  String[]       @default([])
-  featuredImage   String?
-
-  parentId        String?
-  parent          Entity?        @relation("EntityHierarchy", fields: [parentId], references: [id])
-  children        Entity[]       @relation("EntityHierarchy")
-
-  outgoingRelationships Relationship[] @relation("SourceEntity")
-  incomingRelationships Relationship[] @relation("TargetEntity")
-
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime       @updatedAt
-  version         Int            @default(1)
-
-  @@index([type])
-  @@index([title])
-  @@index([slug])
-  @@index([status])
-  @@index([visibility])
-}
-
-model Relationship {
-  id             String           @id @default(cuid())
-  type           RelationshipType
-  sourceEntityId  String
-  targetEntityId  String
-  sourceEntity    Entity           @relation("SourceEntity", fields: [sourceEntityId], references: [id], onDelete: Cascade)
-  targetEntity    Entity           @relation("TargetEntity", fields: [targetEntityId], references: [id], onDelete: Cascade)
-
-  notes          String?
-  weight         Int?             // optional importance score
-  directionality String?          // optional human-readable note like "one-way", "two-way", etc.
-
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-
-  @@index([type])
-  @@index([sourceEntityId])
-  @@index([targetEntityId])
 }
