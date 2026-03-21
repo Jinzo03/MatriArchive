@@ -25,6 +25,7 @@ const quickActions = [
   { label: "New Story", href: "/create/story" },
   { label: "New Institution", href: "/create/institution" },
   { label: "Open Timeline", href: "/timeline" },
+  { label: "Import / Export", href: "/admin/import-export" },
 ];
 
 export default function DashboardPage() {

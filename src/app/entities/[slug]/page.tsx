@@ -70,7 +70,7 @@ export default async function EntityPage({ params }: PageProps) {
                   className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
                   >
                   Delete
-                  </Link>
+              </Link>
             </div>
           </div>
 

@@ -12,6 +12,7 @@ const navLinks = [
   { href: "/browse", label: "Browse" },
   { href: "/search", label: "Search" },
   { href: "/create", label: "Create" },
+  { href: "/admin/import-export", label: "Import/Export" },
 ];
 
 export default function RootLayout({
@@ -32,8 +33,10 @@ export default function RootLayout({
                 <Link
                   key={link.href}
                   href={link.href}
+                  
                   className="rounded-full border border-border px-4 py-2 text-sm transition hover:bg-accent"
                 >
+                  
                   {link.label}
                 </Link>
               ))}

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { revalidatePath } from "next/cache";
+import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +19,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
       slug: true,
       title: true,
       type: true,
+      version: true,
     },
   });
 
@@ -28,6 +30,63 @@ export default async function EntityHistoryPage({ params }: PageProps) {
     orderBy: { version: "desc" },
   });
 
+  async function restoreRevision(formData: FormData) {
+    "use server";
+  if (!entity) return;
+    const revisionId = String(formData.get("revisionId") ?? "").trim();
+    if (!revisionId) return;
+
+    const revision = await prisma.entityRevision.findUnique({
+      where: { id: revisionId },
+    });
+
+    if (!revision) return;
+
+    const restored = await prisma.$transaction(async (tx) => {
+      const updatedEntity = await tx.entity.update({
+        where: { id: entity.id },
+        data: {
+          title: revision.title,
+          slug: revision.slug,
+          summary: revision.summary,
+          body: revision.body,
+          status: revision.status,
+          visibility: revision.visibility,
+          aliases: revision.aliases,
+          tags: revision.tags,
+          searchKeywords: revision.searchKeywords,
+          version: { increment: 1 },
+        },
+      });
+
+      await tx.entityRevision.create({
+        data: {
+          entityId: updatedEntity.id,
+          version: updatedEntity.version,
+          title: updatedEntity.title,
+          slug: updatedEntity.slug,
+          summary: updatedEntity.summary,
+          body: updatedEntity.body,
+          status: updatedEntity.status,
+          visibility: updatedEntity.visibility,
+          aliases: updatedEntity.aliases,
+          tags: updatedEntity.tags,
+          searchKeywords: updatedEntity.searchKeywords,
+        },
+      });
+
+      return updatedEntity;
+    });
+
+    revalidatePath("/");
+    revalidatePath("/browse");
+    revalidatePath("/search");
+    revalidatePath(`/entities/${slug}`);
+    revalidatePath(`/entities/${restored.slug}`);
+    revalidatePath(`/entities/${restored.slug}/history`);
+    redirect(`/entities/${restored.slug}/history`);
+  }
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
@@ -35,6 +94,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           <p className="text-sm text-muted-foreground">History</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
           <p className="mt-3 text-sm text-muted-foreground">Type: {entity.type}</p>
+          <p className="mt-1 text-sm text-muted-foreground">Current version: {entity.version}</p>
           <div className="mt-4 flex gap-3">
             <Link href={`/entities/${entity.slug}`} className="text-sm underline">
               Back to entity
@@ -48,20 +108,27 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           <div className="mt-4 space-y-4">
             {revisions.length > 0 ? (
               revisions.map((revision) => (
-                <article
-                  key={revision.id}
-                  className="rounded-xl border border-border p-4"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="font-medium">Version {revision.version}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {revision.createdAt.toLocaleString()}
-                    </p>
+                <article key={revision.id} className="rounded-xl border border-border p-4">
+                  <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+                    <div>
+                      <p className="font-medium">Version {revision.version}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {revision.createdAt.toLocaleString()}
+                      </p>
+                    </div>
+
+                    <form action={restoreRevision}>
+                      <input type="hidden" name="revisionId" value={revision.id} />
+                      <button
+                        type="submit"
+                        className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                      >
+                        Restore
+                      </button>
+                    </form>
                   </div>
 
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    {revision.slug}
-                  </p>
+                  <p className="mt-2 text-sm text-muted-foreground">{revision.slug}</p>
 
                   {revision.summary ? (
                     <p className="mt-2 text-sm">{revision.summary}</p>

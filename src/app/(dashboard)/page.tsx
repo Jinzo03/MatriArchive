@@ -34,6 +34,7 @@ export default async function DashboardPage() {
     { label: "New Story", href: "/create/story" },
     { label: "New Institution", href: "/create/institution" },
     { label: "Open Timeline", href: "/timeline" },
+    { label: "Import / Export", href: "/admin/import-export" },
   ];
 
   return (

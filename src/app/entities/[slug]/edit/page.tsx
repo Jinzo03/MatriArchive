@@ -50,6 +50,7 @@ export default async function EditEntityPage({ params }: PageProps) {
   async function updateEntity(formData: FormData) {
   "use server";
   if (!entity) return;
+  
   const title = String(formData.get("title") ?? "").trim();
   if (!title) return;
 
