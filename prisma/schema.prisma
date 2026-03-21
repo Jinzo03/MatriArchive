@@ -8,32 +8,60 @@ datasource db {
 }
 
 model Entity {
-  id                    String         @id @default(cuid())
-  type                  EntityType
-  title                 String
-  slug                  String         @unique
-  summary               String?
-  body                  String?
-  status                EntityStatus   @default(DRAFT)
-  visibility            Visibility     @default(PRIVATE)
-  aliases               String[]       @default([])
-  tags                  String[]       @default([])
-  searchKeywords        String[]       @default([])
-  featuredImage         String?
-  parentId              String?
-  createdAt             DateTime       @default(now())
-  updatedAt             DateTime       @updatedAt
-  version               Int            @default(1)
-  parent                Entity?        @relation("EntityHierarchy", fields: [parentId], references: [id])
-  children              Entity[]       @relation("EntityHierarchy")
+  id             String         @id @default(cuid())
+  type           EntityType
+  title          String
+  slug           String         @unique
+  summary        String?
+  body           String?
+  status         EntityStatus   @default(DRAFT)
+  visibility     Visibility     @default(PRIVATE)
+  aliases        String[]       @default([])
+  tags           String[]       @default([])
+  searchKeywords String[]       @default([])
+  featuredImage  String?
+
+  parentId String?
+  parent   Entity?  @relation("EntityHierarchy", fields: [parentId], references: [id])
+  children Entity[] @relation("EntityHierarchy")
+
   outgoingRelationships Relationship[] @relation("SourceEntity")
   incomingRelationships Relationship[] @relation("TargetEntity")
+
+  revisions     EntityRevision[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  version   Int      @default(1)
 
   @@index([type])
   @@index([title])
   @@index([slug])
   @@index([status])
   @@index([visibility])
+}
+
+model EntityRevision {
+  id             String         @id @default(cuid())
+  entityId       String
+  entity         Entity         @relation(fields: [entityId], references: [id], onDelete: Cascade)
+
+  version        Int
+  title          String
+  slug           String
+  summary        String?
+  body           String?
+  status         EntityStatus
+  visibility     Visibility
+  aliases        String[]       @default([])
+  tags           String[]       @default([])
+  searchKeywords String[]       @default([])
+
+  createdAt      DateTime       @default(now())
+
+  @@index([entityId])
+  @@index([version])
+  @@unique([entityId, version])
 }
 
 model Relationship {

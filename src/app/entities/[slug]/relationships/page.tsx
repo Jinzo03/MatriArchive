@@ -66,6 +66,21 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
     redirect(`/entities/${entity.slug}/relationships`);
   }
 
+  async function removeRelationship(formData: FormData) {
+    "use server";
+  if (!entity) return;
+    const relationshipId = String(formData.get("relationshipId") ?? "").trim();
+    if (!relationshipId) return;
+
+    await prisma.relationship.delete({
+      where: { id: relationshipId },
+    });
+
+    revalidatePath(`/entities/${entity.slug}`);
+    revalidatePath(`/entities/${entity.slug}/relationships`);
+    redirect(`/entities/${entity.slug}/relationships`);
+  }
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
@@ -135,17 +150,30 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
             <div className="mt-4 space-y-3">
               {entity.outgoingRelationships.length > 0 ? (
                 entity.outgoingRelationships.map((relationship) => (
-                  <Link
+                  <div
                     key={relationship.id}
-                    href={`/entities/${relationship.targetEntity.slug}`}
-                    className="block rounded-xl border border-border p-4 transition hover:bg-accent"
+                    className="rounded-xl border border-border p-4 transition hover:bg-accent"
                   >
-                    <p className="font-medium">{relationship.targetEntity.title}</p>
+                    <Link href={`/entities/${relationship.targetEntity.slug}`}>
+                      <p className="font-medium">{relationship.targetEntity.title}</p>
+                    </Link>
                     <p className="text-sm text-muted-foreground">{relationship.type}</p>
                     {relationship.notes ? (
-                      <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {relationship.notes}
+                      </p>
                     ) : null}
-                  </Link>
+
+                    <form action={removeRelationship} className="mt-3">
+                      <input type="hidden" name="relationshipId" value={relationship.id} />
+                      <button
+                        type="submit"
+                        className="text-sm text-red-500 underline"
+                      >
+                        Remove
+                      </button>
+                    </form>
+                  </div>
                 ))
               ) : (
                 <p className="text-sm text-muted-foreground">No outgoing relationships yet.</p>
@@ -158,17 +186,30 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
             <div className="mt-4 space-y-3">
               {entity.incomingRelationships.length > 0 ? (
                 entity.incomingRelationships.map((relationship) => (
-                  <Link
+                  <div
                     key={relationship.id}
-                    href={`/entities/${relationship.sourceEntity.slug}`}
-                    className="block rounded-xl border border-border p-4 transition hover:bg-accent"
+                    className="rounded-xl border border-border p-4 transition hover:bg-accent"
                   >
-                    <p className="font-medium">{relationship.sourceEntity.title}</p>
+                    <Link href={`/entities/${relationship.sourceEntity.slug}`}>
+                      <p className="font-medium">{relationship.sourceEntity.title}</p>
+                    </Link>
                     <p className="text-sm text-muted-foreground">{relationship.type}</p>
                     {relationship.notes ? (
-                      <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {relationship.notes}
+                      </p>
                     ) : null}
-                  </Link>
+
+                    <form action={removeRelationship} className="mt-3">
+                      <input type="hidden" name="relationshipId" value={relationship.id} />
+                      <button
+                        type="submit"
+                        className="text-sm text-red-500 underline"
+                      >
+                        Remove
+                      </button>
+                    </form>
+                  </div>
                 ))
               ) : (
                 <p className="text-sm text-muted-foreground">No incoming relationships yet.</p>

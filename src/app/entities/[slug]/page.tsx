@@ -59,6 +59,18 @@ export default async function EntityPage({ params }: PageProps) {
               >
                 Archive
               </Link>
+              <Link
+              href={`/entities/${entity.slug}/history`}
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+              >
+              History
+              </Link>
+              <Link
+                  href={`/entities/${entity.slug}/delete`}
+                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                  Delete
+                  </Link>
             </div>
           </div>
 
