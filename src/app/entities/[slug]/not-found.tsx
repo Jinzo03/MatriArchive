@@ -19,7 +19,7 @@ export default function NotFound() {
           >
             Browse Universe
           </Link>
-          <Link href="/" className="text-sm underline">
+          <Link href="/dashboard" className="text-sm underline">
             Return to Dashboard
           </Link>
         </div>

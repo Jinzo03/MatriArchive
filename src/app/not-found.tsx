@@ -13,7 +13,7 @@ export default function NotFound() {
         </div>
 
         <Link
-          href="/"
+          href="/dashboard"
           className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
         >
           Return to Dashboard
