@@ -8,6 +8,18 @@ type SearchPageProps = {
   searchParams: Promise<{ q?: string }>;
 };
 
+const typeLabels: Record<EntityType, string> = {
+  CHARACTER: "Character",
+  STORY: "Story",
+  INSTITUTION: "Institution",
+  LOCATION: "Location",
+  DOCTRINE: "Doctrine",
+  EVENT: "Event",
+  TERM: "Term",
+  ARTIFACT: "Artifact",
+  OTHER: "Other",
+};
+
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const { q } = await searchParams;
   const query = q?.trim() ?? "";
@@ -35,18 +47,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         },
       })
     : [];
-
-  const typeLabels: Record<EntityType, string> = {
-    CHARACTER: "Character",
-    STORY: "Story",
-    INSTITUTION: "Institution",
-    LOCATION: "Location",
-    DOCTRINE: "Doctrine",
-    EVENT: "Event",
-    TERM: "Term",
-    ARTIFACT: "Artifact",
-    OTHER: "Other",
-  };
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -101,13 +101,26 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   </Link>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground">No results yet.</p>
+                <div className="rounded-xl border border-dashed border-border p-6 text-sm text-muted-foreground">
+                  <p>No results found for “{query}”.</p>
+                  <p className="mt-2">
+                    Try another term, or{" "}
+                    <Link href="/browse" className="underline">
+                      browse the universe
+                    </Link>
+                    .
+                  </p>
+                </div>
               )}
             </div>
           </section>
         ) : (
           <section className="rounded-2xl border border-border p-6 shadow-sm text-sm text-muted-foreground">
-            Enter a search term to begin.
+            Enter a search term to begin, or{" "}
+            <Link href="/browse" className="underline">
+              browse the universe
+            </Link>
+            .
           </section>
         )}
       </div>

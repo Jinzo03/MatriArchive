@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { PageHeader } from "@/components/page-header";
 
 export const dynamic = "force-dynamic";
 
@@ -31,52 +32,52 @@ export default async function EntityPage({ params }: PageProps) {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <section className="rounded-2xl border border-border p-6 shadow-sm">
-          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-            <div>
-              <p className="text-sm text-muted-foreground">{entity.type}</p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
-              {entity.summary ? (
-                <p className="mt-3 max-w-3xl text-sm text-muted-foreground">{entity.summary}</p>
-              ) : null}
-            </div>
+          <PageHeader
+            eyebrow={entity.type}
+            title={entity.title}
+            description={entity.summary || "No summary yet."}
+          />
 
-            <div className="flex flex-wrap gap-2">
-              <Link
-                href={`/entities/${entity.slug}/edit`}
-                className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-              >
-                Edit
-              </Link>
-              <Link
-                href={`/entities/${entity.slug}/relationships`}
-                className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-              >
-                Relationships
-              </Link>
-              <Link
-                href={`/entities/${entity.slug}/archive`}
-                className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-              >
-                Archive
-              </Link>
-              <Link
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              href={`/entities/${entity.slug}/edit`}
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+            >
+              Edit
+            </Link>
+            <Link
+              href={`/entities/${entity.slug}/relationships`}
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+            >
+              Relationships
+            </Link>
+            <Link
+              href={`/entities/${entity.slug}/archive`}
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+            >
+              Archive
+            </Link>
+            <Link
               href={`/entities/${entity.slug}/history`}
               className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-              >
+            >
               History
-              </Link>
-              <Link
-                  href={`/entities/${entity.slug}/delete`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                  >
-                  Delete
-              </Link>
-            </div>
+            </Link>
+            <Link
+              href={`/entities/${entity.slug}/delete`}
+              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+            >
+              Delete
+            </Link>
           </div>
 
           <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
-            <span className="rounded-full border border-border px-3 py-1">{entity.status}</span>
-            <span className="rounded-full border border-border px-3 py-1">{entity.visibility}</span>
+            <span className="rounded-full border border-border px-3 py-1">
+              {entity.status}
+            </span>
+            <span className="rounded-full border border-border px-3 py-1">
+              {entity.visibility}
+            </span>
             {entity.tags.map((tag) => (
               <span key={tag} className="rounded-full border border-border px-3 py-1">
                 {tag}
@@ -106,7 +107,11 @@ export default async function EntityPage({ params }: PageProps) {
               </div>
               <div>
                 <dt className="text-muted-foreground">Search Keywords</dt>
-                <dd>{entity.searchKeywords.length > 0 ? entity.searchKeywords.join(", ") : "None"}</dd>
+                <dd>
+                  {entity.searchKeywords.length > 0
+                    ? entity.searchKeywords.join(", ")
+                    : "None"}
+                </dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Version</dt>

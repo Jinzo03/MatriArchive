@@ -1,62 +1,53 @@
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { PageHeader } from "@/components/page-header";
 
-const quickStats = [
-  { label: "Characters", value: "2" },
-  { label: "Stories", value: "0" },
-  { label: "Institutions", value: "1" },
-  { label: "Locations", value: "0" },
-];
+export const dynamic = "force-dynamic";
 
-const recentItems = [
-  {
-    title: "Sheikha Example",
-    type: "Character",
-    href: "/entities/sheikha-example",
-  },
-  {
-    title: "The First Council",
-    type: "Institution",
-    href: "/entities/the-first-council",
-  },
-];
+export default async function DashboardPage() {
+  const [characters, stories, institutions, locations, recentItems] = await Promise.all([
+    prisma.entity.count({ where: { type: "CHARACTER" } }),
+    prisma.entity.count({ where: { type: "STORY" } }),
+    prisma.entity.count({ where: { type: "INSTITUTION" } }),
+    prisma.entity.count({ where: { type: "LOCATION" } }),
+    prisma.entity.findMany({
+      orderBy: { updatedAt: "desc" },
+      take: 6,
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        type: true,
+        updatedAt: true,
+      },
+    }),
+  ]);
 
-const quickActions = [
-  { label: "New Character", href: "/create/character" },
-  { label: "New Story", href: "/create/story" },
-  { label: "New Institution", href: "/create/institution" },
-  { label: "Open Timeline", href: "/timeline" },
-  { label: "Import / Export", href: "/admin/import-export" },
-];
+  const quickStats = [
+    { label: "Characters", value: characters },
+    { label: "Stories", value: stories },
+    { label: "Institutions", value: institutions },
+    { label: "Locations", value: locations },
+  ];
 
-export default function DashboardPage() {
+  const quickActions = [
+    { label: "New Character", href: "/create/character" },
+    { label: "New Story", href: "/create/story" },
+    { label: "New Institution", href: "/create/institution" },
+    { label: "Open Timeline", href: "/timeline" },
+    { label: "Import / Export", href: "/admin/import-export" },
+  ];
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
-        <section className="space-y-4">
-          <div>
-            <p className="text-sm text-muted-foreground">Matriarchal Shari&apos;ah</p>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              Universe Dashboard
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              A central place to create, connect, and navigate the universe.
-            </p>
-          </div>
-
-          <div className="flex flex-col gap-3 md:flex-row">
-            <input
-              aria-label="Search universe"
-              placeholder="Search characters, stories, institutions..."
-              className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:ring-2 focus:ring-ring"
-            />
-            <Link
-              href="/create"
-              className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
-            >
-              Create New
-            </Link>
-          </div>
-        </section>
+        <PageHeader
+          eyebrow="Matriarchal Shari'ah"
+          title="Universe Dashboard"
+          description="A central place to create, connect, and navigate the universe."
+          actionHref="/create"
+          actionLabel="Create New"
+        />
 
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {quickStats.map((stat) => (
@@ -74,12 +65,13 @@ export default function DashboardPage() {
               <Link href="/browse" className="text-sm text-muted-foreground hover:underline">
                 Browse all
               </Link>
-     </div>
+            </div>
+
             <div className="mt-4 space-y-3">
               {recentItems.map((item) => (
                 <Link
-                  key={item.title}
-                  href={item.href}
+                  key={item.id}
+                  href={`/entities/${item.slug}`}
                   className="flex items-center justify-between rounded-xl border border-border px-4 py-3 transition hover:bg-accent"
                 >
                   <div>
