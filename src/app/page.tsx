@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Sparkles, Orbit } from "lucide-react";
-
 
 const chips = ["Connected lore", "Creator workspace", "Universe graph"];
 
@@ -28,6 +27,56 @@ const floaters = [
   { className: "left-[76%] top-[76%] h-64 w-64" },
   { className: "left-[18%] top-[78%] h-36 w-36" },
 ];
+
+function CtaLink({
+  href,
+  children,
+  variant = "primary",
+}: {
+  href: string;
+  children: React.ReactNode;
+  variant?: "primary" | "secondary";
+}) {
+  const reduceMotion = useReducedMotion();
+
+  const base =
+    "inline-flex h-12 items-center justify-center gap-2 rounded-2xl px-6 text-sm font-medium transition";
+
+  const styles =
+    variant === "primary"
+      ? "bg-foreground text-background shadow-lg shadow-foreground/10"
+      : "border border-border bg-background/70 text-foreground backdrop-blur-md hover:bg-accent";
+
+  return (
+    <motion.div
+      whileHover={reduceMotion ? undefined : { y: -2, scale: 1.01 }}
+      whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 500, damping: 35 }}
+      className="relative"
+    >
+      <Link href={href} className={`${base} ${styles} relative overflow-hidden`}>
+        {variant === "primary" ? (
+          <motion.span
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(110deg,transparent_0%,rgba(255,255,255,0.18)_45%,transparent_70%)]"
+            initial={{ x: "-120%" }}
+            animate={reduceMotion ? undefined : { x: "120%" }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "linear",
+              repeatDelay: 1.2,
+            }}
+          />
+        ) : null}
+        <span className="relative z-10 flex items-center gap-2">
+          {children}
+          {variant === "primary" ? <ArrowRight className="h-4 w-4" /> : null}
+        </span>
+      </Link>
+    </motion.div>
+  );
+}
 
 export default function SplashPage() {
   const reduceMotion = useReducedMotion();
@@ -103,13 +152,7 @@ export default function SplashPage() {
             <p className="text-sm font-medium tracking-wide">Matriarchal Shari&apos;ah</p>
           </div>
 
-          <Link
-            href="/dashboard"
-            className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-foreground px-4 text-sm font-medium text-background transition hover:opacity-90"
-          >
-            Enter
-            <ArrowRight className="h-4 w-4" />
-          </Link>
+          <CtaLink href="/dashboard">Enter</CtaLink>
         </motion.header>
 
         <section className="grid flex-1 items-center gap-14 py-10 lg:grid-cols-[1.15fr_0.85fr]">
@@ -133,25 +176,16 @@ export default function SplashPage() {
                 variants={riseVariants}
                 className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg"
               >
-                Create, connect, and navigate your canon through a calm, elegant system designed for lore,
-                structure, and long-term growth.
+                Create, connect, and navigate your canon through a calm, elegant system designed
+                for lore, structure, and long-term growth.
               </motion.p>
             </motion.div>
 
             <motion.div variants={riseVariants} className="flex flex-wrap gap-3">
-              <Link
-                href="/dashboard"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-foreground px-6 text-sm font-medium text-background transition hover:opacity-90"
-              >
-                Open Dashboard
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/browse"
-                className="inline-flex h-12 items-center justify-center rounded-2xl border border-border px-6 text-sm font-medium transition hover:bg-accent"
-              >
+              <CtaLink href="/dashboard">Open Dashboard</CtaLink>
+              <CtaLink href="/browse" variant="secondary">
                 Browse Universe
-              </Link>
+              </CtaLink>
             </motion.div>
 
             <motion.div variants={riseVariants} className="flex flex-wrap gap-3 pt-2">
@@ -180,7 +214,7 @@ export default function SplashPage() {
               </div>
 
               <div className="mt-6 grid gap-4">
-                {cardItems.map((item, index) => (
+                {cardItems.map((item) => (
                   <motion.div
                     key={item.title}
                     className="rounded-2xl border border-border bg-background/80 p-4"
@@ -199,7 +233,9 @@ export default function SplashPage() {
                 className="mt-6 rounded-3xl border border-border bg-foreground p-5 text-background"
               >
                 <p className="text-sm/6 text-background/75">A calm threshold before the workspace</p>
-                <p className="mt-2 text-xl font-semibold tracking-tight">Step inside when you are ready.</p>
+                <p className="mt-2 text-xl font-semibold tracking-tight">
+                  Step inside when you are ready.
+                </p>
               </motion.div>
             </div>
           </motion.div>
