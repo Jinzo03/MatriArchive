@@ -37,9 +37,9 @@ const navLinks: NavLink[] = [
     isActive: (pathname) => pathname.startsWith("/timeline"),
   },
   {
-    href: "/admin/import-export",
-    label: "Import/Export",
-    isActive: (pathname) => pathname.startsWith("/admin/import-export"),
+    href: "/admin",
+    label: "Admin",
+    isActive: (pathname) => pathname.startsWith("/admin"),
   },
 ];
 

@@ -46,7 +46,8 @@ export default async function DashboardPage() {
     { label: "New Institution", href: "/create/institution" },
     { label: "Open Timeline", href: "/timeline" },
     { label: "Import / Export", href: "/admin/import-export" },
-  ];
+    { label: "Admin Hub", href: "/admin" },
+];
 
   return (
     <DashboardShell>
