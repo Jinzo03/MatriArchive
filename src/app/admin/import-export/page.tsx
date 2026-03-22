@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { Reveal } from "@/components/reveal";
+import { AdminIndexNav } from "@/components/admin-index-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -83,15 +84,16 @@ export default async function ImportExportPage() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
           <section className="rounded-2xl border border-border p-6 shadow-sm">
-            <p className="text-sm text-muted-foreground">Admin</p>
+            <p className="text-sm text-muted-foreground">Admin / Import & Export</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">Import / Export</h1>
             <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
               Export the universe as JSON or paste a JSON backup to restore it.
             </p>
-            <div className="mt-4">
-              <Link href="/dashboard" className="text-sm underline">
-                Back to dashboard
+            <div className="mt-4 flex items-center gap-4">
+              <Link href="/admin" className="text-sm underline">
+                Back to Admin Hub
               </Link>
+              <AdminIndexNav />
             </div>
           </section>
         </Reveal>

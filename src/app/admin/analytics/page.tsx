@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Reveal } from "@/components/reveal";
+import { AdminIndexNav } from "@/components/admin-index-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +48,10 @@ export default async function AdminAnalyticsPage() {
               <Link href="/admin" className="text-sm underline">
                 Back to Admin Hub
               </Link>
+            </div>
+
+            <div className="mt-5">
+              <AdminIndexNav />
             </div>
           </section>
         </Reveal>

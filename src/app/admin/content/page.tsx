@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { Reveal } from "@/components/reveal";
+import { AdminIndexNav } from "@/components/admin-index-nav";
 
 export const dynamic = "force-dynamic";
 
@@ -40,6 +41,10 @@ export default async function AdminContentPage() {
                 Back to Admin Hub
               </Link>
             </div>
+
+            <div className="mt-5">
+              <AdminIndexNav />
+            </div>
           </section>
         </Reveal>
 
@@ -69,20 +74,21 @@ export default async function AdminContentPage() {
             </div>
 
             <div className="mt-4 space-y-3">
-              {recent.map((item) => (
-                <Link
-                  key={item.id}
-                  href={`/entities/${item.slug}`}
-                  className="block rounded-xl border border-border p-4 transition hover:bg-accent"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="font-medium">{item.title}</p>
-                    <span className="text-xs text-muted-foreground">{item.type}</span>
-                  </div>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{item.status}</span>
-                  </div>
-                </Link>
+              {recent.map((item, index) => (
+                <Reveal key={item.id} delay={index * 0.03}>
+                  <Link
+                    href={`/entities/${item.slug}`}
+                    className="block rounded-xl border border-border p-4 transition hover:bg-accent"
+                  >
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="font-medium">{item.title}</p>
+                      <span className="text-xs text-muted-foreground">{item.type}</span>
+                    </div>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {item.status} · {item.updatedAt.toLocaleString()}
+                    </p>
+                  </Link>
+                </Reveal>
               ))}
             </div>
           </section>

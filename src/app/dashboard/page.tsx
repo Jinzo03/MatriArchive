@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { PageHeader } from "@/components/page-header";
 import { DashboardShell } from "@/components/dashboard-shell";
+import { DashboardCta } from "@/components/dashboard-cta";
 
 export const dynamic = "force-dynamic";
 
@@ -55,9 +56,12 @@ export default async function DashboardPage() {
         eyebrow="Matriarchal Shari'ah"
         title="Universe Dashboard"
         description="A central place to create, connect, and navigate the universe."
-        actionHref="/create"
-        actionLabel="Create New"
+        actionHref={undefined}
+        actionLabel={undefined}
       />
+      <div className="mt-4">
+      <DashboardCta />
+      </div>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {quickStats.map((stat, i) => (
