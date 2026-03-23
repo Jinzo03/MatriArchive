@@ -2,6 +2,8 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { formatLocaleDateTime, getEntityStatusLabel, getVisibilityLabel, t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +13,7 @@ type PageProps = {
 };
 
 export default async function EntityHistoryPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
@@ -33,7 +36,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
 
   async function restoreRevision(formData: FormData) {
     "use server";
-  if (!entity) return;
+    if (!entity) return;
     const revisionId = String(formData.get("revisionId") ?? "").trim();
     if (!revisionId) return;
 
@@ -94,13 +97,17 @@ export default async function EntityHistoryPage({ params }: PageProps) {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
           <section className="ms-panel">
-            <p className="text-sm text-muted-foreground">History</p>
+            <p className="text-sm text-muted-foreground">{t(locale, "history")}</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
-            <p className="mt-3 text-sm text-muted-foreground">Type: {entity.type}</p>
-            <p className="mt-1 text-sm text-muted-foreground">Current version: {entity.version}</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {locale === "ar" ? "النوع" : "Type"}: {entity.type}
+            </p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {locale === "ar" ? "الإصدار الحالي" : "Current version"}: {entity.version}
+            </p>
             <div className="mt-4 flex gap-3">
               <Link href={`/entities/${entity.slug}`} className="text-sm underline">
-                Back to entity
+                {locale === "ar" ? "العودة إلى العنصر" : "Back to entity"}
               </Link>
             </div>
           </section>
@@ -108,7 +115,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
 
         <Reveal delay={0.08}>
           <section className="ms-panel">
-            <h2 className="text-lg font-semibold">Revisions</h2>
+            <h2 className="text-lg font-semibold">{t(locale, "revisions")}</h2>
 
             <div className="mt-4 space-y-4">
               {revisions.length > 0 ? (
@@ -117,9 +124,11 @@ export default async function EntityHistoryPage({ params }: PageProps) {
                     <article className="rounded-xl border border-border p-4">
                       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                         <div>
-                          <p className="font-medium">Version {revision.version}</p>
+                          <p className="font-medium">
+                            {locale === "ar" ? "الإصدار" : "Version"} {revision.version}
+                          </p>
                           <p className="text-xs text-muted-foreground">
-                            {revision.createdAt.toLocaleString()}
+                            {formatLocaleDateTime(locale, revision.createdAt)}
                           </p>
                         </div>
 
@@ -129,16 +138,14 @@ export default async function EntityHistoryPage({ params }: PageProps) {
                             type="submit"
                             className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
                           >
-                            Restore
+                            {locale === "ar" ? "استعادة" : "Restore"}
                           </button>
                         </form>
                       </div>
 
                       <p className="mt-2 text-sm text-muted-foreground">{revision.slug}</p>
 
-                      {revision.summary ? (
-                        <p className="mt-2 text-sm">{revision.summary}</p>
-                      ) : null}
+                      {revision.summary ? <p className="mt-2 text-sm">{revision.summary}</p> : null}
 
                       {revision.body ? (
                         <div className="mt-3 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
@@ -148,17 +155,19 @@ export default async function EntityHistoryPage({ params }: PageProps) {
 
                       <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground">
                         <span className="rounded-full border border-border px-3 py-1">
-                          {revision.status}
+                          {getEntityStatusLabel(locale, revision.status)}
                         </span>
                         <span className="rounded-full border border-border px-3 py-1">
-                          {revision.visibility}
+                          {getVisibilityLabel(locale, revision.visibility)}
                         </span>
                       </div>
                     </article>
                   </Reveal>
                 ))
               ) : (
-                <p className="text-sm text-muted-foreground">No revisions yet.</p>
+                <p className="text-sm text-muted-foreground">
+                  {locale === "ar" ? "لا توجد مراجعات بعد." : "No revisions yet."}
+                </p>
               )}
             </div>
           </section>

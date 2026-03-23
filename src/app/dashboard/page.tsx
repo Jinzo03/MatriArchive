@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getEntityTypeLabel, t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { PageHeader } from "@/components/page-header";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { DashboardCta } from "@/components/dashboard-cta";
@@ -7,6 +9,7 @@ import { DashboardCta } from "@/components/dashboard-cta";
 export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
+  const locale = await getRequestLocale();
   const [characters, stories, institutions, locations, recentItems] = await Promise.all([
     prisma.entity.count({ where: { type: "CHARACTER" } }),
     prisma.entity.count({ where: { type: "STORY" } }),
@@ -26,40 +29,50 @@ export default async function DashboardPage() {
   ]);
 
   const quickStats = [
-    { label: "Characters", value: characters },
-    { label: "Stories", value: stories },
-    { label: "Institutions", value: institutions },
-    { label: "Locations", value: locations },
+    { label: locale === "ar" ? "الشخصيات" : "Characters", value: characters },
+    { label: locale === "ar" ? "القصص" : "Stories", value: stories },
+    { label: locale === "ar" ? "المؤسسات" : "Institutions", value: institutions },
+    { label: locale === "ar" ? "الأماكن" : "Locations", value: locations },
   ];
 
   const quickActions = [
-    { label: "New Character", href: "/create/character" },
-    { label: "New Story", href: "/create/story" },
-    { label: "New Institution", href: "/create/institution" },
-    { label: "Open Timeline", href: "/timeline" },
-    { label: "Import / Export", href: "/admin/import-export" },
-    { label: "Admin Hub", href: "/admin" },
-];
+    {
+      label: locale === "ar" ? "شخصية جديدة" : "New Character",
+      href: "/create/character",
+    },
+    {
+      label: locale === "ar" ? "قصة جديدة" : "New Story",
+      href: "/create/story",
+    },
+    {
+      label: locale === "ar" ? "مؤسسة جديدة" : "New Institution",
+      href: "/create/institution",
+    },
+    {
+      label: locale === "ar" ? "افتح الخط الزمني" : "Open Timeline",
+      href: "/timeline",
+    },
+    { label: t(locale, "importExport"), href: "/admin/import-export" },
+    {
+      label: locale === "ar" ? "مركز الإدارة" : "Admin Hub",
+      href: "/admin",
+    },
+  ];
 
   return (
     <DashboardShell>
       <PageHeader
         eyebrow="Matriarchal Shari'ah"
-        title="Universe Dashboard"
-        description="A central place to create, connect, and navigate the universe."
-        actionHref={undefined}
-        actionLabel={undefined}
+        title={t(locale, "dashboardTitle")}
+        description={t(locale, "dashboardIntro")}
       />
       <div className="mt-4">
-      <DashboardCta />
+        <DashboardCta />
       </div>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {quickStats.map((stat) => (
-          <div
-            key={stat.label}
-            className="ms-panel-soft"
-          >
+          <div key={stat.label} className="ms-panel-soft">
             <p className="text-sm text-muted-foreground">{stat.label}</p>
             <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
           </div>
@@ -69,9 +82,9 @@ export default async function DashboardPage() {
       <section className="grid gap-6 lg:grid-cols-3">
         <div className="ms-panel-soft lg:col-span-2">
           <div className="flex items-center justify-between gap-4">
-            <h2 className="text-lg font-semibold">Recent Items</h2>
+            <h2 className="text-lg font-semibold">{t(locale, "recentItems")}</h2>
             <Link href="/browse" className="text-sm text-muted-foreground hover:underline">
-              Browse all
+              {t(locale, "browseAll")}
             </Link>
           </div>
 
@@ -84,16 +97,18 @@ export default async function DashboardPage() {
               >
                 <div>
                   <p className="font-medium">{item.title}</p>
-                  <p className="text-sm text-muted-foreground">{item.type}</p>
+                  <p className="text-sm text-muted-foreground">
+                    {getEntityTypeLabel(locale, item.type)}
+                  </p>
                 </div>
-                <span className="text-sm text-muted-foreground">Open</span>
+                <span className="text-sm text-muted-foreground">{t(locale, "open")}</span>
               </Link>
             ))}
           </div>
         </div>
 
         <div className="ms-panel-soft">
-          <h2 className="text-lg font-semibold">Quick Actions</h2>
+          <h2 className="text-lg font-semibold">{t(locale, "quickActions")}</h2>
           <div className="mt-4 flex flex-col gap-3">
             {quickActions.map((action) => (
               <Link

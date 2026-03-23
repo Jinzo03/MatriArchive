@@ -3,6 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { EntityForm } from "@/components/entity-form";
 import { Reveal } from "@/components/reveal";
+import { getEntityTypeLabel } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { EntityStatus, EntityType, Visibility } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -23,18 +25,6 @@ const typeMap: Record<string, EntityType> = {
   other: EntityType.OTHER,
 };
 
-const typeLabels: Record<EntityType, string> = {
-  CHARACTER: "Character",
-  STORY: "Story",
-  INSTITUTION: "Institution",
-  LOCATION: "Location",
-  DOCTRINE: "Doctrine",
-  EVENT: "Event",
-  TERM: "Term",
-  ARTIFACT: "Artifact",
-  OTHER: "Other",
-};
-
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -52,6 +42,7 @@ function splitList(value: FormDataEntryValue | null) {
 }
 
 export default async function CreateEntityPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { type } = await params;
   const entityType = typeMap[type];
 
@@ -117,13 +108,19 @@ export default async function CreateEntityPage({ params }: PageProps) {
     redirect(`/entities/${entity.slug}`);
   }
 
+  const typeLabel = getEntityTypeLabel(locale, entityType);
+
   return (
     <Reveal>
       <EntityForm
         mode="create"
-        title={`New ${typeLabels[entityType]}`}
-        description={`Add a new ${typeLabels[entityType].toLowerCase()} to the connected universe.`}
-        submitLabel={`Create ${typeLabels[entityType]}`}
+        title={locale === "ar" ? `${typeLabel} جديدة` : `New ${typeLabel}`}
+        description={
+          locale === "ar"
+            ? `أضف ${typeLabel} جديدة إلى الكون المترابط.`
+            : `Add a new ${typeLabel.toLowerCase()} to the connected universe.`
+        }
+        submitLabel={locale === "ar" ? `أنشئ ${typeLabel}` : `Create ${typeLabel}`}
         onSubmit={createEntity}
       />
     </Reveal>

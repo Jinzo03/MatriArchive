@@ -30,23 +30,31 @@ export function LocaleProvider({
   const [locale, setLocaleState] = useState<Locale>(initialLocale);
   const router = useRouter();
 
+  function applyLocale(next: Locale) {
+    document.documentElement.lang = next;
+    document.documentElement.dir = localeDir[next];
+    document.body.dir = localeDir[next];
+    document.cookie = `${LOCALE_COOKIE}=${next}; path=/; max-age=31536000; samesite=lax`;
+  }
+
   useEffect(() => {
-    document.documentElement.lang = locale;
-    document.documentElement.dir = localeDir[locale];
-    document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+    applyLocale(locale);
   }, [locale]);
 
   const value = useMemo<LocaleContextValue>(
     () => ({
       locale,
       setLocale: (next) => {
+        applyLocale(next);
         setLocaleState(next);
         startTransition(() => {
           router.refresh();
         });
       },
       toggleLocale: () => {
-        setLocaleState((current) => (current === "en" ? "ar" : "en"));
+        const next = locale === "en" ? "ar" : "en";
+        applyLocale(next);
+        setLocaleState(next);
         startTransition(() => {
           router.refresh();
         });

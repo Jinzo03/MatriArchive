@@ -1,41 +1,52 @@
 import Link from "next/link";
+import { getEntityTypeLabel, t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { EntityType } from "@/generated/prisma/client";
 
-export default function CreateIndexPage() {
+export default async function CreateIndexPage() {
+  const locale = await getRequestLocale();
   const createOptions = [
-    { label: "Character", href: "/create/character", type: EntityType.CHARACTER },
-    { label: "Story", href: "/create/story", type: EntityType.STORY },
-    { label: "Institution", href: "/create/institution", type: EntityType.INSTITUTION },
-    { label: "Location", href: "/create/location", type: EntityType.LOCATION },
-    { label: "Doctrine", href: "/create/doctrine", type: EntityType.DOCTRINE },
-    { label: "Event", href: "/create/event", type: EntityType.EVENT },
-    { label: "Term", href: "/create/term", type: EntityType.TERM },
-    { label: "Artifact", href: "/create/artifact", type: EntityType.ARTIFACT },
-    { label: "Other", href: "/create/other", type: EntityType.OTHER },
+    { type: EntityType.CHARACTER, href: "/create/character" },
+    { type: EntityType.STORY, href: "/create/story" },
+    { type: EntityType.INSTITUTION, href: "/create/institution" },
+    { type: EntityType.LOCATION, href: "/create/location" },
+    { type: EntityType.DOCTRINE, href: "/create/doctrine" },
+    { type: EntityType.EVENT, href: "/create/event" },
+    { type: EntityType.TERM, href: "/create/term" },
+    { type: EntityType.ARTIFACT, href: "/create/artifact" },
+    { type: EntityType.OTHER, href: "/create/other" },
   ];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <section>
-          <p className="text-sm text-muted-foreground">Create</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">Choose a type</h1>
+          <p className="text-sm text-muted-foreground">{t(locale, "create")}</p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight">{t(locale, "chooseType")}</h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Select what kind of entity you want to create in the universe.
+            {locale === "ar"
+              ? "اختر نوع العنصر الذي تريد إنشاءه داخل الكون."
+              : "Select what kind of entity you want to create in the universe."}
           </p>
         </section>
 
         <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {createOptions.map((option) => (
-            <Link
-              key={option.href}
-              href={option.href}
-              className="ms-panel-soft transition hover:bg-accent"
-            >
-              <p className="text-lg font-semibold">{option.label}</p>
-              <p className="mt-2 text-sm text-muted-foreground">Create a new {option.label.toLowerCase()}.</p>
-            </Link>
-          ))}
+          {createOptions.map((option) => {
+            const label = getEntityTypeLabel(locale, option.type);
+
+            return (
+              <Link
+                key={option.href}
+                href={option.href}
+                className="ms-panel-soft transition hover:bg-accent"
+              >
+                <p className="text-lg font-semibold">{label}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {locale === "ar" ? `أنشئ ${label} جديدة.` : `Create a new ${label.toLowerCase()}.`}
+                </p>
+              </Link>
+            );
+          })}
         </section>
       </div>
     </main>

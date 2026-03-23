@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { getEntityTypeLabel, t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { EntityType } from "@/generated/prisma/client";
 import { Reveal } from "@/components/reveal";
 
@@ -17,19 +19,8 @@ const typeOrder: EntityType[] = [
   EntityType.OTHER,
 ];
 
-const typeLabels: Record<EntityType, string> = {
-  CHARACTER: "Characters",
-  STORY: "Stories",
-  INSTITUTION: "Institutions",
-  LOCATION: "Locations",
-  DOCTRINE: "Doctrines",
-  EVENT: "Events",
-  TERM: "Terms",
-  ARTIFACT: "Artifacts",
-  OTHER: "Other",
-};
-
 export default async function BrowsePage() {
+  const locale = await getRequestLocale();
   const entities = await prisma.entity.findMany({
     orderBy: [{ type: "asc" }, { title: "asc" }],
     select: {
@@ -51,25 +42,18 @@ export default async function BrowsePage() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <section>
-          <p className="text-sm text-muted-foreground">Browse Universe</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">All Entities</h1>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Explore the universe by category and jump into any entity page.
-          </p>
+          <p className="text-sm text-muted-foreground">{t(locale, "browseUniverseTitle")}</p>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight">{t(locale, "allEntities")}</h1>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{t(locale, "browseIntro")}</p>
         </section>
 
         {entities.length === 0 ? (
           <section className="rounded-2xl border border-dashed border-border p-8 text-center shadow-sm">
-            <h2 className="text-lg font-semibold">Nothing here yet</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Create your first entity to begin building the universe.
-            </p>
+            <h2 className="text-lg font-semibold">{t(locale, "nothingHereYet")}</h2>
+            <p className="mt-2 text-sm text-muted-foreground">{t(locale, "createFirstEntityHelp")}</p>
             <div className="mt-5">
-              <Link
-                href="/create"
-                className="ms-button"
-              >
-                Create First Entity
+              <Link href="/create" className="ms-button">
+                {t(locale, "createFirstEntity")}
               </Link>
             </div>
           </section>
@@ -79,7 +63,7 @@ export default async function BrowsePage() {
           {typeOrder.map((type, index) => (
             <Reveal key={type} delay={index * 0.03}>
               <div className="ms-panel-soft">
-                <p className="text-sm text-muted-foreground">{typeLabels[type]}</p>
+                <p className="text-sm text-muted-foreground">{getEntityTypeLabel(locale, type)}</p>
                 <p className="mt-2 text-2xl font-semibold">{grouped[type]?.length ?? 0}</p>
               </div>
             </Reveal>
@@ -89,12 +73,15 @@ export default async function BrowsePage() {
         <section className="space-y-8">
           {typeOrder.map((type) => {
             const items = grouped[type] ?? [];
+            const typeLabel = getEntityTypeLabel(locale, type);
 
             return (
               <div key={type} className="ms-panel">
                 <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-lg font-semibold">{typeLabels[type]}</h2>
-                  <span className="text-sm text-muted-foreground">{items.length} items</span>
+                  <h2 className="text-lg font-semibold">{typeLabel}</h2>
+                  <span className="text-sm text-muted-foreground">
+                    {items.length} {t(locale, "items")}
+                  </span>
                 </div>
 
                 {items.length > 0 ? (
@@ -117,7 +104,7 @@ export default async function BrowsePage() {
                   </div>
                 ) : (
                   <div className="mt-4 rounded-xl border border-dashed border-border p-5 text-sm text-muted-foreground">
-                    No {typeLabels[type].toLowerCase()} yet.
+                    {locale === "ar" ? `لا توجد ${typeLabel} بعد.` : `No ${typeLabel.toLowerCase()} yet.`}
                   </div>
                 )}
               </div>

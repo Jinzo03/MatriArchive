@@ -2,6 +2,8 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getEntityTypeLabel } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +13,7 @@ type PageProps = {
 };
 
 export default async function DeleteEntityPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
@@ -27,7 +30,7 @@ export default async function DeleteEntityPage({ params }: PageProps) {
 
   async function deleteEntity() {
     "use server";
-  if (!entity) return;
+    if (!entity) return;
     await prisma.entity.delete({
       where: { id: entity.id },
     });
@@ -45,12 +48,16 @@ export default async function DeleteEntityPage({ params }: PageProps) {
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-6 py-8">
         <Reveal>
           <section className="ms-panel">
-            <p className="text-sm text-muted-foreground">Delete Entity</p>
+            <p className="text-sm text-muted-foreground">
+              {locale === "ar" ? "حذف عنصر" : "Delete Entity"}
+            </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
-            <p className="mt-3 text-sm text-muted-foreground">Type: {entity.type}</p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              {locale === "ar" ? "النوع" : "Type"}: {getEntityTypeLabel(locale, entity.type)}
+            </p>
             <div className="mt-4">
               <Link href={`/entities/${entity.slug}`} className="text-sm underline">
-                Back to entity
+                {locale === "ar" ? "العودة إلى العنصر" : "Back to entity"}
               </Link>
             </div>
           </section>
@@ -59,10 +66,14 @@ export default async function DeleteEntityPage({ params }: PageProps) {
         <Reveal delay={0.08}>
           <section className="rounded-2xl border border-red-500/30 p-6 shadow-sm">
             <p className="text-sm text-red-500">
-              This action is permanent. The entity will be removed from the universe.
+              {locale === "ar"
+                ? "هذا الإجراء دائم. سيتم حذف العنصر من الكون."
+                : "This action is permanent. The entity will be removed from the universe."}
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Use archive instead if you only want to hide it temporarily.
+              {locale === "ar"
+                ? "استخدم الأرشفة بدلًا من ذلك إذا كنت تريد إخفاءه مؤقتًا فقط."
+                : "Use archive instead if you only want to hide it temporarily."}
             </p>
 
             <form action={deleteEntity} className="mt-5">
@@ -70,7 +81,7 @@ export default async function DeleteEntityPage({ params }: PageProps) {
                 type="submit"
                 className="inline-flex h-11 items-center justify-center rounded-xl bg-red-500 px-5 text-sm font-medium text-white transition hover:opacity-90"
               >
-                Permanently Delete
+                {locale === "ar" ? "حذف نهائي" : "Permanently Delete"}
               </button>
             </form>
           </section>

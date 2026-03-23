@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { EntityType } from "@/generated/prisma/client";
+import { getEntityTypeLabel, t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -9,19 +10,8 @@ type SearchPageProps = {
   searchParams: Promise<{ q?: string }>;
 };
 
-const typeLabels: Record<EntityType, string> = {
-  CHARACTER: "Character",
-  STORY: "Story",
-  INSTITUTION: "Institution",
-  LOCATION: "Location",
-  DOCTRINE: "Doctrine",
-  EVENT: "Event",
-  TERM: "Term",
-  ARTIFACT: "Artifact",
-  OTHER: "Other",
-};
-
 export default async function SearchPage({ searchParams }: SearchPageProps) {
+  const locale = await getRequestLocale();
   const { q } = await searchParams;
   const query = q?.trim() ?? "";
 
@@ -54,11 +44,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
           <section>
-            <p className="text-sm text-muted-foreground">Search Universe</p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight">Find anything</h1>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Search by title, summary, body, slug, alias, tag, or keyword.
-            </p>
+            <p className="text-sm text-muted-foreground">{t(locale, "searchUniverse")}</p>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight">{t(locale, "findAnything")}</h1>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{t(locale, "searchIntro")}</p>
           </section>
         </Reveal>
 
@@ -67,14 +55,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             <input
               name="q"
               defaultValue={query}
-              placeholder="Search the universe..."
+              placeholder={locale === "ar" ? "ابحث في الكون..." : "Search the universe..."}
               className="ms-input"
             />
-            <button
-              type="submit"
-              className="ms-button"
-            >
-              Search
+            <button type="submit" className="ms-button">
+              {t(locale, "search")}
             </button>
           </form>
         </Reveal>
@@ -83,8 +68,10 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <Reveal delay={0.1}>
             <section className="ms-panel">
               <div className="flex items-center justify-between gap-4">
-                <h2 className="text-lg font-semibold">Results</h2>
-                <span className="text-sm text-muted-foreground">{results.length} found</span>
+                <h2 className="text-lg font-semibold">{t(locale, "results")}</h2>
+                <span className="text-sm text-muted-foreground">
+                  {results.length} {t(locale, "found")}
+                </span>
               </div>
 
               <div className="mt-4 space-y-3">
@@ -98,7 +85,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                         <div className="flex items-center justify-between gap-4">
                           <p className="font-medium">{item.title}</p>
                           <span className="text-xs text-muted-foreground">
-                            {typeLabels[item.type]}
+                            {getEntityTypeLabel(locale, item.type)}
                           </span>
                         </div>
                         {item.summary ? (
@@ -109,11 +96,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   ))
                 ) : (
                   <div className="rounded-xl border border-dashed border-border p-6 text-sm text-muted-foreground">
-                    <p>No results found for “{query}”.</p>
+                    <p>
+                      {t(locale, "noResultsFor")} &quot;{query}&quot;.
+                    </p>
                     <p className="mt-2">
-                      Try another term, or{" "}
+                      {t(locale, "tryAnotherTerm")}{" "}
                       <Link href="/browse" className="underline">
-                        browse the universe
+                        {t(locale, "browseUniverseLower")}
                       </Link>
                       .
                     </p>
@@ -125,9 +114,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         ) : (
           <Reveal delay={0.1}>
             <section className="ms-panel text-sm text-muted-foreground">
-              Enter a search term to begin, or{" "}
+              {t(locale, "enterSearchTerm")}{" "}
               <Link href="/browse" className="underline">
-                browse the universe
+                {t(locale, "browseUniverseLower")}
               </Link>
               .
             </section>

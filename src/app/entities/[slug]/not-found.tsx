@@ -1,26 +1,25 @@
 import Link from "next/link";
+import { getRequestLocale } from "@/lib/locale.server";
+import { t } from "@/lib/locale";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const locale = await getRequestLocale();
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col items-center justify-center gap-6 px-6 text-center">
         <div className="space-y-3">
-          <p className="text-sm text-muted-foreground">Entity not found</p>
-          <h1 className="text-3xl font-semibold tracking-tight">This entity does not exist</h1>
-          <p className="max-w-xl text-sm text-muted-foreground">
-            The slug you opened does not match any entity in the universe.
-          </p>
+          <p className="text-sm text-muted-foreground">{t(locale, "entityNotFound")}</p>
+          <h1 className="text-3xl font-semibold tracking-tight">{t(locale, "thisEntityDoesNotExist")}</h1>
+          <p className="max-w-xl text-sm text-muted-foreground">{t(locale, "slugDoesNotMatch")}</p>
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/browse"
-            className="ms-button"
-          >
-            Browse Universe
+          <Link href="/browse" className="ms-button">
+            {t(locale, "browseUniverse")}
           </Link>
           <Link href="/dashboard" className="text-sm underline">
-            Return to Dashboard
+            {t(locale, "returnToDashboard")}
           </Link>
         </div>
       </div>

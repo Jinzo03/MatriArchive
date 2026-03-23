@@ -3,23 +3,8 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Sparkles, Orbit } from "lucide-react";
-
-const chips = ["Connected lore", "Creator workspace", "Universe graph"];
-
-const cardItems = [
-  {
-    title: "Create",
-    text: "Add characters, stories, institutions, and concepts.",
-  },
-  {
-    title: "Connect",
-    text: "Link every part of the universe into a coherent graph.",
-  },
-  {
-    title: "Preserve",
-    text: "Keep revisions, archives, and exports ready for the future.",
-  },
-];
+import { useLocale } from "@/components/locale-provider";
+import { t } from "@/lib/locale";
 
 const floaters = [
   { className: "left-[10%] top-[16%] h-56 w-56" },
@@ -80,6 +65,25 @@ function CtaLink({
 
 export default function SplashPage() {
   const reduceMotion = useReducedMotion();
+  const { locale } = useLocale();
+
+  const chips =
+    locale === "ar"
+      ? ["معرفة مترابطة", "مساحة إنشاء", "مخطط كوني"]
+      : ["Connected lore", "Creator workspace", "Universe graph"];
+
+  const cardItems =
+    locale === "ar"
+      ? [
+          { title: "أنشئ", text: "أضف الشخصيات والقصص والمؤسسات والمفاهيم." },
+          { title: "اربط", text: "صل كل جزء من الكون داخل شبكة واحدة مترابطة." },
+          { title: "احفظ", text: "احتفظ بالمراجعات والأرشفة والتصدير للمستقبل." },
+        ]
+      : [
+          { title: "Create", text: "Add characters, stories, institutions, and concepts." },
+          { title: "Connect", text: "Link every part of the universe into a coherent graph." },
+          { title: "Preserve", text: "Keep revisions, archives, and exports ready for the future." },
+        ];
 
   const pageVariants = {
     hidden: { opacity: 0 },
@@ -152,7 +156,7 @@ export default function SplashPage() {
             <p className="text-sm font-medium tracking-wide">Matriarchal Shari&apos;ah</p>
           </div>
 
-          <CtaLink href="/dashboard">Enter</CtaLink>
+          <CtaLink href="/dashboard">{t(locale, "enter")}</CtaLink>
         </motion.header>
 
         <section className="grid flex-1 items-center gap-14 py-10 lg:grid-cols-[1.15fr_0.85fr]">
@@ -162,7 +166,7 @@ export default function SplashPage() {
               className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-background/60 px-4 py-2 text-xs text-muted-foreground backdrop-blur-md"
             >
               <Orbit className="h-3.5 w-3.5" />
-              A living universe interface
+              {locale === "ar" ? "واجهة كونية حيّة" : "A living universe interface"}
             </motion.div>
 
             <motion.div variants={pageVariants} className="space-y-5">
@@ -170,21 +174,24 @@ export default function SplashPage() {
                 variants={riseVariants}
                 className="max-w-3xl text-5xl font-semibold tracking-tight md:text-7xl"
               >
-                Build a world that remembers itself.
+                {locale === "ar"
+                  ? "ابنِ عالمًا يتذكّر نفسه."
+                  : "Build a world that remembers itself."}
               </motion.h1>
               <motion.p
                 variants={riseVariants}
                 className="max-w-2xl text-base leading-7 text-muted-foreground md:text-lg"
               >
-                Create, connect, and navigate your canon through a calm, elegant system designed
-                for lore, structure, and long-term growth.
+                {locale === "ar"
+                  ? "أنشئ قانونك الكوني واربطه وتنقّل داخله عبر نظام هادئ وأنيق صُمم للمعرفة والبنية والنمو الطويل."
+                  : "Create, connect, and navigate your canon through a calm, elegant system designed for lore, structure, and long-term growth."}
               </motion.p>
             </motion.div>
 
             <motion.div variants={riseVariants} className="flex flex-wrap gap-3">
-              <CtaLink href="/dashboard">Open Dashboard</CtaLink>
+              <CtaLink href="/dashboard">{t(locale, "openDashboard")}</CtaLink>
               <CtaLink href="/browse" variant="secondary">
-                Browse Universe
+                {t(locale, "browseUniverse")}
               </CtaLink>
             </motion.div>
 
@@ -205,8 +212,12 @@ export default function SplashPage() {
             <div className="relative overflow-hidden rounded-[2rem] border border-border bg-background/70 p-6 shadow-2xl backdrop-blur-xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-muted-foreground">Universe at a glance</p>
-                  <p className="mt-1 text-2xl font-semibold">Connected, searchable, alive</p>
+                  <p className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لمحة عن الكون" : "Universe at a glance"}
+                  </p>
+                  <p className="mt-1 text-2xl font-semibold">
+                    {locale === "ar" ? "مترابط، قابل للبحث، حيّ" : "Connected, searchable, alive"}
+                  </p>
                 </div>
                 <div className="rounded-full border border-border px-3 py-1 text-xs text-muted-foreground">
                   V1
@@ -232,9 +243,13 @@ export default function SplashPage() {
                 variants={riseVariants}
                 className="mt-6 rounded-3xl border border-border bg-foreground p-5 text-background"
               >
-                <p className="text-sm/6 text-background/75">A calm threshold before the workspace</p>
+                <p className="text-sm/6 text-background/75">
+                  {locale === "ar"
+                    ? "عتبة هادئة قبل دخول مساحة العمل"
+                    : "A calm threshold before the workspace"}
+                </p>
                 <p className="mt-2 text-xl font-semibold tracking-tight">
-                  Step inside when you are ready.
+                  {locale === "ar" ? "ادخل عندما تكون جاهزًا." : "Step inside when you are ready."}
                 </p>
               </motion.div>
             </div>

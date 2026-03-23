@@ -38,7 +38,7 @@ export default async function RootLayout({
       <body
         className={`${inter.variable} ${cormorant.variable} min-h-screen bg-background text-foreground antialiased`}
       >
-        <LocaleProvider initialLocale={locale}>
+        <LocaleProvider key={locale} initialLocale={locale}>
           <SiteNav />
           {children}
         </LocaleProvider>

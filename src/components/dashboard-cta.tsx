@@ -3,9 +3,11 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
+import { useLocale } from "@/components/locale-provider";
 
 export function DashboardCta() {
   const reduceMotion = useReducedMotion();
+  const { locale } = useLocale();
 
   return (
     <motion.div
@@ -31,7 +33,7 @@ export function DashboardCta() {
           }}
         />
         <span className="relative z-10 flex items-center gap-2">
-          Create New
+          {locale === "ar" ? "أنشئ جديدًا" : "Create New"}
           <ArrowRight className="h-4 w-4" />
         </span>
       </Link>

@@ -3,7 +3,9 @@ import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { EntityForm } from "@/components/entity-form";
 import { Reveal } from "@/components/reveal";
-import { EntityStatus, EntityType, Visibility } from "@/generated/prisma/client";
+import { getEntityTypeLabel } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
+import { EntityStatus, Visibility } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -27,19 +29,8 @@ function splitList(value: FormDataEntryValue | null) {
     .filter(Boolean);
 }
 
-const typeLabels: Record<EntityType, string> = {
-  CHARACTER: "Character",
-  STORY: "Story",
-  INSTITUTION: "Institution",
-  LOCATION: "Location",
-  DOCTRINE: "Doctrine",
-  EVENT: "Event",
-  TERM: "Term",
-  ARTIFACT: "Artifact",
-  OTHER: "Other",
-};
-
 export default async function EditEntityPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
@@ -50,11 +41,11 @@ export default async function EditEntityPage({ params }: PageProps) {
 
   async function updateEntity(formData: FormData) {
     "use server";
-  if (!entity) return;
+    if (!entity) return;
 
     const title = String(formData.get("title") ?? "").trim();
     if (!title) return;
-    
+
     const slugInput = String(formData.get("slug") ?? "").trim();
     const nextSlug = slugInput || slugify(title);
     const summary = String(formData.get("summary") ?? "").trim();
@@ -112,13 +103,19 @@ export default async function EditEntityPage({ params }: PageProps) {
     redirect(`/entities/${updated.slug}`);
   }
 
+  const typeLabel = getEntityTypeLabel(locale, entity.type);
+
   return (
     <Reveal>
       <EntityForm
         mode="edit"
-        title={`Edit ${typeLabels[entity.type]}`}
-        description="Update this entity and keep the universe connected."
-        submitLabel="Save Changes"
+        title={locale === "ar" ? `تعديل ${typeLabel}` : `Edit ${typeLabel}`}
+        description={
+          locale === "ar"
+            ? "حدّث هذا العنصر مع الحفاظ على ترابط الكون."
+            : "Update this entity and keep the universe connected."
+        }
+        submitLabel={locale === "ar" ? "حفظ التغييرات" : "Save Changes"}
         onSubmit={updateEntity}
         values={{
           title: entity.title,

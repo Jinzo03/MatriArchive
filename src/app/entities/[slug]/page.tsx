@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import {
+  getEntityStatusLabel,
+  getEntityTypeLabel,
+  getVisibilityLabel,
+  t,
+} from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
 
@@ -11,6 +18,7 @@ type PageProps = {
 };
 
 export default async function EntityPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
@@ -35,9 +43,9 @@ export default async function EntityPage({ params }: PageProps) {
         <Reveal>
           <section className="ms-panel">
             <PageHeader
-              eyebrow={entity.type}
+              eyebrow={getEntityTypeLabel(locale, entity.type)}
               title={entity.title}
-              description={entity.summary || "No summary yet."}
+              description={entity.summary || t(locale, "noSummaryYet")}
               framed={false}
             />
 
@@ -46,40 +54,40 @@ export default async function EntityPage({ params }: PageProps) {
                 href={`/entities/${entity.slug}/edit`}
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
               >
-                Edit
+                {t(locale, "edit")}
               </Link>
               <Link
                 href={`/entities/${entity.slug}/relationships`}
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
               >
-                Relationships
+                {t(locale, "relationships")}
               </Link>
               <Link
                 href={`/entities/${entity.slug}/archive`}
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
               >
-                Archive
+                {t(locale, "archive")}
               </Link>
               <Link
                 href={`/entities/${entity.slug}/history`}
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
               >
-                History
+                {t(locale, "history")}
               </Link>
               <Link
                 href={`/entities/${entity.slug}/delete`}
                 className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
               >
-                Delete
+                {t(locale, "delete")}
               </Link>
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
               <span className="rounded-full border border-border px-3 py-1">
-                {entity.status}
+                {getEntityStatusLabel(locale, entity.status)}
               </span>
               <span className="rounded-full border border-border px-3 py-1">
-                {entity.visibility}
+                {getVisibilityLabel(locale, entity.visibility)}
               </span>
               {entity.tags.map((tag) => (
                 <span key={tag} className="rounded-full border border-border px-3 py-1">
@@ -93,35 +101,35 @@ export default async function EntityPage({ params }: PageProps) {
         <div className="grid gap-6 lg:grid-cols-3">
           <Reveal delay={0.08} className="lg:col-span-2">
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Content</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "contentSection")}</h2>
               <div className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
-                {entity.body || "No body content yet."}
+                {entity.body || t(locale, "noBodyYet")}
               </div>
             </section>
           </Reveal>
 
           <Reveal delay={0.14}>
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Details</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "details")}</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 <div>
-                  <dt className="text-muted-foreground">Slug</dt>
+                  <dt className="text-muted-foreground">{t(locale, "slug")}</dt>
                   <dd>{entity.slug}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Aliases</dt>
-                  <dd>{entity.aliases.length > 0 ? entity.aliases.join(", ") : "None"}</dd>
+                  <dt className="text-muted-foreground">{t(locale, "aliases")}</dt>
+                  <dd>{entity.aliases.length > 0 ? entity.aliases.join(", ") : t(locale, "none")}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Search Keywords</dt>
+                  <dt className="text-muted-foreground">{t(locale, "searchKeywords")}</dt>
                   <dd>
                     {entity.searchKeywords.length > 0
                       ? entity.searchKeywords.join(", ")
-                      : "None"}
+                      : t(locale, "none")}
                   </dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Version</dt>
+                  <dt className="text-muted-foreground">{t(locale, "version")}</dt>
                   <dd>{entity.version}</dd>
                 </div>
               </dl>
@@ -132,7 +140,7 @@ export default async function EntityPage({ params }: PageProps) {
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.18}>
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Incoming Relationships</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "incomingRelationships")}</h2>
               <div className="mt-4 space-y-3">
                 {entity.incomingRelationships.length > 0 ? (
                   entity.incomingRelationships.map((relationship) => (
@@ -146,7 +154,9 @@ export default async function EntityPage({ params }: PageProps) {
                     </Link>
                   ))
                 ) : (
-                  <p className="text-sm text-muted-foreground">No incoming relationships yet.</p>
+                  <p className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد علاقات واردة بعد." : "No incoming relationships yet."}
+                  </p>
                 )}
               </div>
             </section>
@@ -154,7 +164,7 @@ export default async function EntityPage({ params }: PageProps) {
 
           <Reveal delay={0.24}>
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Outgoing Relationships</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "outgoingRelationships")}</h2>
               <div className="mt-4 space-y-3">
                 {entity.outgoingRelationships.length > 0 ? (
                   entity.outgoingRelationships.map((relationship) => (
@@ -168,7 +178,9 @@ export default async function EntityPage({ params }: PageProps) {
                     </Link>
                   ))
                 ) : (
-                  <p className="text-sm text-muted-foreground">No outgoing relationships yet.</p>
+                  <p className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد علاقات صادرة بعد." : "No outgoing relationships yet."}
+                  </p>
                 )}
               </div>
             </section>

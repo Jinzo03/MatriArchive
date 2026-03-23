@@ -2,6 +2,8 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { t } from "@/lib/locale";
+import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
 import { RelationshipType } from "@/generated/prisma/client";
 
@@ -28,7 +30,25 @@ const relationshipOptions: RelationshipType[] = [
   RelationshipType.RELATED_TO,
 ];
 
+const relationshipLabels: Record<RelationshipType, { en: string; ar: string }> = {
+  BELONGS_TO: { en: "Belongs to", ar: "ينتمي إلى" },
+  APPEARS_IN: { en: "Appears in", ar: "يظهر في" },
+  LOCATED_IN: { en: "Located in", ar: "يقع في" },
+  RULES_OVER: { en: "Rules over", ar: "يحكم" },
+  CREATED_BY: { en: "Created by", ar: "أنشأه" },
+  PRECEDES: { en: "Precedes", ar: "يسبق" },
+  FOLLOWS: { en: "Follows", ar: "يتبع" },
+  OPPOSES: { en: "Opposes", ar: "يعارض" },
+  SUPPORTS: { en: "Supports", ar: "يدعم" },
+  REFERENCES: { en: "References", ar: "يشير إلى" },
+  AFFILIATED_WITH: { en: "Affiliated with", ar: "منتسب إلى" },
+  IS_A: { en: "Is a", ar: "هو" },
+  PART_OF: { en: "Part of", ar: "جزء من" },
+  RELATED_TO: { en: "Related to", ar: "مرتبط بـ" },
+};
+
 export default async function EntityRelationshipsPage({ params }: PageProps) {
+  const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
@@ -55,7 +75,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
     const target = await prisma.entity.findUnique({ where: { slug: targetSlug } });
     if (!target) return;
     if (!entity) return;
-    
+
     await prisma.relationship.create({
       data: {
         type: relationshipType,
@@ -72,7 +92,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
   async function removeRelationship(formData: FormData) {
     "use server";
-  if (!entity) return;
+    if (!entity) return;
 
     const relationshipId = String(formData.get("relationshipId") ?? "").trim();
     if (!relationshipId) return;
@@ -91,11 +111,11 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
           <section className="ms-panel">
-            <p className="text-sm text-muted-foreground">Relationships</p>
+            <p className="text-sm text-muted-foreground">{t(locale, "relationships")}</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
             <div className="mt-4 flex gap-3">
               <Link href={`/entities/${entity.slug}`} className="text-sm underline">
-                Back to entity
+                {t(locale, "backToEntity")}
               </Link>
             </div>
           </section>
@@ -103,11 +123,11 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
         <Reveal delay={0.08}>
           <section className="ms-panel">
-            <h2 className="text-lg font-semibold">Add Relationship</h2>
+            <h2 className="text-lg font-semibold">{t(locale, "addRelationship")}</h2>
             <form action={addRelationship} className="mt-4 space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
                 <label className="space-y-2">
-                  <span className="text-sm font-medium">Relationship Type</span>
+                  <span className="text-sm font-medium">{t(locale, "relationshipType")}</span>
                   <select
                     name="relationshipType"
                     defaultValue="RELATED_TO"
@@ -115,38 +135,35 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                   >
                     {relationshipOptions.map((option) => (
                       <option key={option} value={option}>
-                        {option}
+                        {relationshipLabels[option][locale]}
                       </option>
                     ))}
                   </select>
                 </label>
 
                 <label className="space-y-2">
-                  <span className="text-sm font-medium">Target Entity Slug</span>
+                  <span className="text-sm font-medium">{t(locale, "targetEntitySlug")}</span>
                   <input
                     name="targetSlug"
                     className="ms-input"
-                    placeholder="the-target-entity"
+                    placeholder={locale === "ar" ? "معرّف-العنصر-الهدف" : "the-target-entity"}
                   />
                 </label>
               </div>
 
               <label className="block space-y-2">
-                <span className="text-sm font-medium">Notes</span>
+                <span className="text-sm font-medium">{t(locale, "notes")}</span>
                 <textarea
                   name="notes"
                   rows={3}
                   className="ms-textarea"
-                  placeholder="Optional context for this relationship"
+                  placeholder={t(locale, "optionalRelationshipContext")}
                 />
               </label>
 
               <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="ms-button"
-                >
-                  Add Relationship
+                <button type="submit" className="ms-button">
+                  {t(locale, "addRelationship")}
                 </button>
               </div>
             </form>
@@ -156,7 +173,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.12}>
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Outgoing</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "outgoing")}</h2>
               <div className="mt-4 space-y-3">
                 {entity.outgoingRelationships.length > 0 ? (
                   entity.outgoingRelationships.map((relationship, index) => (
@@ -165,7 +182,9 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                         <Link href={`/entities/${relationship.targetEntity.slug}`}>
                           <p className="font-medium">{relationship.targetEntity.title}</p>
                         </Link>
-                        <p className="text-sm text-muted-foreground">{relationship.type}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {relationshipLabels[relationship.type][locale]}
+                        </p>
                         {relationship.notes ? (
                           <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
                         ) : null}
@@ -173,14 +192,16 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                         <form action={removeRelationship} className="mt-3">
                           <input type="hidden" name="relationshipId" value={relationship.id} />
                           <button type="submit" className="text-sm text-red-500 underline">
-                            Remove
+                            {t(locale, "remove")}
                           </button>
                         </form>
                       </div>
                     </Reveal>
                   ))
                 ) : (
-                  <p className="text-sm text-muted-foreground">No outgoing relationships yet.</p>
+                  <p className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد علاقات صادرة بعد." : "No outgoing relationships yet."}
+                  </p>
                 )}
               </div>
             </section>
@@ -188,7 +209,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
           <Reveal delay={0.18}>
             <section className="ms-panel">
-              <h2 className="text-lg font-semibold">Incoming</h2>
+              <h2 className="text-lg font-semibold">{t(locale, "incoming")}</h2>
               <div className="mt-4 space-y-3">
                 {entity.incomingRelationships.length > 0 ? (
                   entity.incomingRelationships.map((relationship, index) => (
@@ -197,7 +218,9 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                         <Link href={`/entities/${relationship.sourceEntity.slug}`}>
                           <p className="font-medium">{relationship.sourceEntity.title}</p>
                         </Link>
-                        <p className="text-sm text-muted-foreground">{relationship.type}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {relationshipLabels[relationship.type][locale]}
+                        </p>
                         {relationship.notes ? (
                           <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
                         ) : null}
@@ -205,14 +228,16 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                         <form action={removeRelationship} className="mt-3">
                           <input type="hidden" name="relationshipId" value={relationship.id} />
                           <button type="submit" className="text-sm text-red-500 underline">
-                            Remove
+                            {t(locale, "remove")}
                           </button>
                         </form>
                       </div>
                     </Reveal>
                   ))
                 ) : (
-                  <p className="text-sm text-muted-foreground">No incoming relationships yet.</p>
+                  <p className="text-sm text-muted-foreground">
+                    {locale === "ar" ? "لا توجد علاقات واردة بعد." : "No incoming relationships yet."}
+                  </p>
                 )}
               </div>
             </section>
