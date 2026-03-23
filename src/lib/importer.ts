@@ -1,12 +1,13 @@
 import { readFile } from "fs/promises";
 import path from "path";
 import { prisma } from "@/lib/prisma";
+import { UniversePackageSchema, type UniversePackage } from "@/lib/import-schema";
 import {
-  MediaAssetSchema,
-  RelationshipTypeSchema,
-  UniversePackageSchema,
-  type UniversePackage,
-} from "@/lib/import-schema";
+  buildImportIndexes,
+  flattenPackage,
+  resolveMediaAsset,
+  resolveTargetEntity,
+} from "@/lib/import-resolver";
 
 type CreateUpdateSkip = {
   create: number;
@@ -39,107 +40,30 @@ export type ImportPreview = {
   items: ImportPreviewItem[];
 };
 
-type NormalizedEntityRecord = {
-  slug: string;
-  title: string;
-  type: UniversePackage["characters"][number]["type"];
-  summary?: string | null;
-  body?: string | null;
-  status: string;
-  visibility: string;
-  aliases: string[];
-  tags: string[];
-  searchKeywords: string[];
-  metadata?: Record<string, unknown>;
-  relations: UniversePackage["characters"][number]["relations"];
-  media: UniversePackage["characters"][number]["media"];
-};
+type NormalizedEntity = UniversePackage["characters"][number] |
+  UniversePackage["stories"][number] |
+  UniversePackage["lore"][number] |
+  UniversePackage["timeline"][number];
 
-type NormalizedMediaRecord = {
-  slug: string;
-  title: string;
-  summary?: string | null;
-  src: string;
-  alt?: string | null;
-  mimeType?: string | null;
-  width?: number;
-  height?: number;
-  credit?: string | null;
-  tags: string[];
-  metadata?: Record<string, unknown>;
-  type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
-};
+type NormalizedMedia = UniversePackage["media"][number];
 
-type ExistingEntity = {
-  id: string;
-  slug: string;
-  title: string;
-  type: string;
-  summary: string | null;
-  body: string | null;
-  status: string;
-  visibility: string;
-  aliases: string[];
-  tags: string[];
-  searchKeywords: string[];
-  featuredImage: string | null;
-};
-
-type ExistingMedia = {
-  id: string;
-  slug: string;
-  title: string;
-  summary: string | null;
-  src: string;
-  alt: string | null;
-  mimeType: string | null;
-  width: number | null;
-  height: number | null;
-  credit: string | null;
-  tags: string[];
-  metadata: unknown;
-  type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
-};
-
-type ExistingEntityMedia = {
-  id: string;
-  entity: { slug: string };
-  mediaAsset: { slug: string };
-  role: string;
-  primary: boolean;
-  sortOrder: number;
-  alt: string | null;
-};
-
-type ExistingRelationship = {
-  id: string;
-  type: string;
-  sourceEntity: { slug: string };
-  targetEntity: { slug: string };
-  notes: string | null;
-  directionality: string | null;
-};
-
-type DryRunContext = {
-  packageData: UniversePackage;
-  sourcePath?: string;
-};
-
-function normalizeStringArray(values: string[]) {
-  return [...values].map((v) => v.trim()).filter(Boolean);
+function normalizeStrings(values: string[] = []) {
+  return values.map((v) => v.trim()).filter(Boolean);
 }
 
-function canonicalizeStrings(values: string[]) {
-  return normalizeStringArray(values).sort((a, b) => a.localeCompare(b));
+function canonicalizeStrings(values: string[] = []) {
+  return normalizeStrings(values).sort((a, b) => a.localeCompare(b));
 }
 
-function sameStringArray(a: string[], b: string[]) {
-  const aa = canonicalizeStrings(a);
-  const bb = canonicalizeStrings(b);
-  return JSON.stringify(aa) === JSON.stringify(bb);
+function sameStringArray(a: string[] = [], b: string[] = []) {
+  return JSON.stringify(canonicalizeStrings(a)) === JSON.stringify(canonicalizeStrings(b));
 }
 
-function entityPayload(entity: NormalizedEntityRecord) {
+function sameJson(a: unknown, b: unknown) {
+  return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+}
+
+function entityPayload(entity: NormalizedEntity) {
   return {
     title: entity.title,
     type: entity.type,
@@ -147,73 +71,48 @@ function entityPayload(entity: NormalizedEntityRecord) {
     body: entity.body ?? null,
     status: entity.status,
     visibility: entity.visibility,
-    aliases: canonicalizeStrings(entity.aliases),
-    tags: canonicalizeStrings(entity.tags),
-    searchKeywords: canonicalizeStrings(entity.searchKeywords),
+    aliases: canonicalizeStrings(entity.aliases ?? []),
+    tags: canonicalizeStrings(entity.tags ?? []),
+    searchKeywords: canonicalizeStrings(entity.searchKeywords ?? []),
   };
 }
 
-function mediaPayload(media: NormalizedMediaRecord) {
+function mediaPayload(asset: NormalizedMedia) {
   return {
-    title: media.title,
-    summary: media.summary ?? null,
-    src: media.src,
-    alt: media.alt ?? null,
-    mimeType: media.mimeType ?? null,
-    width: media.width ?? null,
-    height: media.height ?? null,
-    credit: media.credit ?? null,
-    tags: canonicalizeStrings(media.tags),
-    type: media.type,
+    title: asset.title,
+    summary: asset.summary ?? null,
+    src: asset.src,
+    alt: asset.alt ?? null,
+    mimeType: asset.mimeType ?? null,
+    width: asset.width ?? null,
+    height: asset.height ?? null,
+    credit: asset.credit ?? null,
+    tags: canonicalizeStrings(asset.tags ?? []),
+    metadata: asset.metadata ?? null,
+    type: asset.type,
   };
-}
-
-function entityMediaKey(entitySlug: string, assetSlug: string, role: string) {
-  return `${entitySlug}::${assetSlug}::${role}`;
 }
 
 function relationshipKey(sourceSlug: string, type: string, targetSlug: string) {
   return `${sourceSlug}::${type}::${targetSlug}`;
 }
 
-function flattenPackage(packageData: UniversePackage) {
-  const entities: NormalizedEntityRecord[] = [
-    ...packageData.characters,
-    ...packageData.stories,
-    ...packageData.lore,
-    ...packageData.timeline,
-  ].map((item) => ({
-    slug: item.slug,
-    title: item.title,
-    type: item.type,
-    summary: item.summary ?? null,
-    body: item.body ?? null,
-    status: item.status,
-    visibility: item.visibility,
-    aliases: item.aliases ?? [],
-    tags: item.tags ?? [],
-    searchKeywords: item.searchKeywords ?? [],
-    metadata: item.metadata as Record<string, unknown> | undefined,
-    relations: item.relations ?? [],
-    media: item.media ?? [],
-  }));
+function entityMediaKey(entitySlug: string, assetSlug: string, role: string) {
+  return `${entitySlug}::${assetSlug}::${role}`;
+}
 
-  const media: NormalizedMediaRecord[] = packageData.media.map((item) => ({
-    slug: item.slug,
-    title: item.title,
-    summary: item.summary ?? null,
-    src: item.src,
-    alt: item.alt ?? null,
-    mimeType: item.mimeType ?? null,
-    width: item.width,
-    height: item.height,
-    credit: item.credit ?? null,
-    tags: item.tags ?? [],
-    metadata: item.metadata as Record<string, unknown> | undefined,
-    type: item.type,
-  }));
+function resolveRelationTargetSlug(
+  targetId: string,
+  indexes: ReturnType<typeof buildImportIndexes>
+) {
+  return resolveTargetEntity(targetId, indexes)?.slug ?? targetId;
+}
 
-  return { entities, media };
+function resolveMediaAssetSlug(
+  assetId: string,
+  indexes: ReturnType<typeof buildImportIndexes>
+) {
+  return resolveMediaAsset(assetId, indexes)?.slug ?? assetId;
 }
 
 export async function loadUniversePackage(input: string | UniversePackage) {
@@ -227,123 +126,140 @@ export async function loadUniversePackage(input: string | UniversePackage) {
   return UniversePackageSchema.parse(parsed);
 }
 
+export async function loadPackageFromFile(filePath: string) {
+  return loadUniversePackage(filePath);
+}
+
 export async function dryRunImport(
   input: string | UniversePackage,
   sourcePath?: string
 ): Promise<ImportPreview> {
-  const packageData = typeof input === "string" ? await loadUniversePackage(input) : input;
+  const packageData = await loadUniversePackage(input);
   const validated = UniversePackageSchema.parse(packageData);
+  const indexes = buildImportIndexes(validated);
   const { entities, media } = flattenPackage(validated);
 
   const warnings: string[] = [];
   const items: ImportPreviewItem[] = [];
 
-  const entitySlugs = [...new Set(entities.map((e) => e.slug))];
-  const mediaSlugs = [...new Set(media.map((m) => m.slug))];
+  const entitySlugs = [...new Set(entities.map((entity) => entity.slug))];
+  const mediaSlugs = [...new Set(media.map((asset) => asset.slug))];
 
-  const existingEntities = await prisma.entity.findMany({
-    where: { slug: { in: entitySlugs } },
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      type: true,
-      summary: true,
-      body: true,
-      status: true,
-      visibility: true,
-      aliases: true,
-      tags: true,
-      searchKeywords: true,
-      featuredImage: true,
-    },
-  });
+  const relationTargetSlugs = new Set<string>();
+  const entityMediaAssetSlugs = new Set<string>();
 
-  const existingMedia = await prisma.mediaAsset.findMany({
-    where: { slug: { in: mediaSlugs } },
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-      summary: true,
-      src: true,
-      alt: true,
-      mimeType: true,
-      width: true,
-      height: true,
-      credit: true,
-      tags: true,
-      metadata: true,
-      type: true,
-    },
-  });
-
-  const existingEntityMap = new Map(existingEntities.map((item) => [item.slug, item]));
-  const existingMediaMap = new Map(existingMedia.map((item) => [item.slug, item]));
-
-  const relationTargets = new Set<string>();
   for (const entity of entities) {
-    for (const relation of entity.relations) {
-      relationTargets.add(relation.targetId);
+    for (const relation of entity.relations ?? []) {
+      relationTargetSlugs.add(resolveRelationTargetSlug(relation.targetId, indexes));
+    }
+
+    for (const link of entity.media ?? []) {
+      entityMediaAssetSlugs.add(resolveMediaAssetSlug(link.assetId, indexes));
     }
   }
 
-  const allReferencedSlugs = [...new Set([...entitySlugs, ...relationTargets])];
-  const referencedEntities = await prisma.entity.findMany({
-    where: { slug: { in: allReferencedSlugs } },
-    select: {
-      id: true,
-      slug: true,
-      title: true,
-    },
-  });
-  const referencedEntityMap = new Map(referencedEntities.map((item) => [item.slug, item]));
+  const [existingEntities, existingMedia, existingTargetEntities, existingTargetMedia] =
+    await Promise.all([
+      prisma.entity.findMany({
+        where: { slug: { in: entitySlugs } },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          type: true,
+          summary: true,
+          body: true,
+          status: true,
+          visibility: true,
+          aliases: true,
+          tags: true,
+          searchKeywords: true,
+          featuredImage: true,
+        },
+      }),
+      prisma.mediaAsset.findMany({
+        where: { slug: { in: mediaSlugs } },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          summary: true,
+          src: true,
+          alt: true,
+          mimeType: true,
+          width: true,
+          height: true,
+          credit: true,
+          tags: true,
+          metadata: true,
+          type: true,
+        },
+      }),
+      prisma.entity.findMany({
+        where: { slug: { in: [...relationTargetSlugs] } },
+        select: {
+          id: true,
+          slug: true,
+          title: true,
+          version: true,
+          type: true,
+        },
+      }),
+      prisma.mediaAsset.findMany({
+        where: { slug: { in: [...entityMediaAssetSlugs] } },
+        select: {
+          id: true,
+          slug: true,
+        },
+      }),
+    ]);
+
+  const existingEntityMap = new Map(existingEntities.map((item) => [item.slug, item]));
+  const existingMediaMap = new Map(existingMedia.map((item) => [item.slug, item]));
+  const existingTargetEntityMap = new Map(existingTargetEntities.map((item) => [item.slug, item]));
+  const existingTargetMediaMap = new Map(existingTargetMedia.map((item) => [item.slug, item]));
 
   const existingRelationships = await prisma.relationship.findMany({
     where: {
-      OR: [
-        { sourceEntity: { slug: { in: entitySlugs } } },
-        { targetEntity: { slug: { in: [...relationTargets] } } },
-      ],
+      sourceEntity: { slug: { in: entitySlugs } },
+      targetEntity: { slug: { in: [...relationTargetSlugs] } },
     },
     select: {
       id: true,
       type: true,
-      notes: true,
-      directionality: true,
       sourceEntity: { select: { slug: true } },
       targetEntity: { select: { slug: true } },
+      notes: true,
+      directionality: true,
     },
   });
 
-  const existingRelationshipMap = new Map<string, ExistingRelationship>();
-  for (const rel of existingRelationships as ExistingRelationship[]) {
+  const existingEntityMedia = await prisma.entityMedia.findMany({
+    where: {
+      entity: { slug: { in: entitySlugs } },
+      mediaAsset: { slug: { in: [...entityMediaAssetSlugs] } },
+    },
+    select: {
+      id: true,
+      entity: { select: { slug: true } },
+      mediaAsset: { select: { slug: true } },
+      role: true,
+      primary: true,
+      sortOrder: true,
+      alt: true,
+    },
+  });
+
+  const existingRelationshipMap = new Map<string, (typeof existingRelationships)[number]>();
+  for (const rel of existingRelationships) {
     existingRelationshipMap.set(
       relationshipKey(rel.sourceEntity.slug, rel.type, rel.targetEntity.slug),
       rel
     );
   }
 
-  const existingEntityMedia = await prisma.entityMedia.findMany({
-    where: {
-      OR: [
-        { entity: { slug: { in: entitySlugs } } },
-        { mediaAsset: { slug: { in: mediaSlugs } } },
-      ],
-    },
-    select: {
-      id: true,
-      role: true,
-      primary: true,
-      sortOrder: true,
-      alt: true,
-      entity: { select: { slug: true } },
-      mediaAsset: { select: { slug: true } },
-    },
-  });
-
-  const existingEntityMediaMap = new Map<string, ExistingEntityMedia>();
-  for (const link of existingEntityMedia as ExistingEntityMedia[]) {
+  const existingEntityMediaMap = new Map<string, (typeof existingEntityMedia)[number]>();
+  for (const link of existingEntityMedia) {
     existingEntityMediaMap.set(
       entityMediaKey(link.entity.slug, link.mediaAsset.slug, link.role),
       link
@@ -357,6 +273,7 @@ export async function dryRunImport(
 
   for (const entity of entities) {
     const existing = existingEntityMap.get(entity.slug);
+    const next = entityPayload(entity);
 
     if (!existing) {
       entityCounts.create += 1;
@@ -371,15 +288,15 @@ export async function dryRunImport(
     }
 
     const changed =
-      existing.title !== entityPayload(entity).title ||
-      existing.type !== entityPayload(entity).type ||
-      existing.summary !== entityPayload(entity).summary ||
-      existing.body !== entityPayload(entity).body ||
-      existing.status !== entityPayload(entity).status ||
-      existing.visibility !== entityPayload(entity).visibility ||
-      !sameStringArray(existing.aliases, entityPayload(entity).aliases) ||
-      !sameStringArray(existing.tags, entityPayload(entity).tags) ||
-      !sameStringArray(existing.searchKeywords, entityPayload(entity).searchKeywords);
+      existing.type !== next.type ||
+      existing.title !== next.title ||
+      existing.summary !== next.summary ||
+      existing.body !== next.body ||
+      existing.status !== next.status ||
+      existing.visibility !== next.visibility ||
+      !sameStringArray(existing.aliases, next.aliases) ||
+      !sameStringArray(existing.tags, next.tags) ||
+      !sameStringArray(existing.searchKeywords, next.searchKeywords);
 
     if (changed) {
       entityCounts.update += 1;
@@ -404,6 +321,7 @@ export async function dryRunImport(
 
   for (const asset of media) {
     const existing = existingMediaMap.get(asset.slug);
+    const next = mediaPayload(asset);
 
     if (!existing) {
       mediaCounts.create += 1;
@@ -418,16 +336,17 @@ export async function dryRunImport(
     }
 
     const changed =
-      existing.title !== mediaPayload(asset).title ||
-      existing.summary !== mediaPayload(asset).summary ||
-      existing.src !== mediaPayload(asset).src ||
-      existing.alt !== mediaPayload(asset).alt ||
-      existing.mimeType !== mediaPayload(asset).mimeType ||
-      existing.width !== mediaPayload(asset).width ||
-      existing.height !== mediaPayload(asset).height ||
-      existing.credit !== mediaPayload(asset).credit ||
-      existing.type !== mediaPayload(asset).type ||
-      !sameStringArray(existing.tags, mediaPayload(asset).tags);
+      existing.title !== next.title ||
+      existing.summary !== next.summary ||
+      existing.src !== next.src ||
+      existing.alt !== next.alt ||
+      existing.mimeType !== next.mimeType ||
+      existing.width !== next.width ||
+      existing.height !== next.height ||
+      existing.credit !== next.credit ||
+      existing.type !== next.type ||
+      !sameStringArray(existing.tags, next.tags) ||
+      !sameJson(existing.metadata, next.metadata);
 
     if (changed) {
       mediaCounts.update += 1;
@@ -451,14 +370,10 @@ export async function dryRunImport(
   }
 
   for (const entity of entities) {
-    const source = referencedEntityMap.get(entity.slug);
-    if (!source) {
-      warnings.push(`Entity "${entity.slug}" was not found in reference map; relationship preview may be incomplete.`);
-      continue;
-    }
+    for (const relation of entity.relations ?? []) {
+      const targetSlug = resolveRelationTargetSlug(relation.targetId, indexes);
+      const target = existingTargetEntityMap.get(targetSlug);
 
-    for (const relation of entity.relations) {
-      const target = referencedEntityMap.get(relation.targetId);
       if (!target) {
         warnings.push(
           `Relation target "${relation.targetId}" referenced by "${entity.slug}" was not found in the package or database.`
@@ -466,7 +381,7 @@ export async function dryRunImport(
         continue;
       }
 
-      const key = relationshipKey(entity.slug, relation.type, relation.targetId);
+      const key = relationshipKey(entity.slug, relation.type, target.slug);
       const existing = existingRelationshipMap.get(key);
 
       if (!existing) {
@@ -474,7 +389,7 @@ export async function dryRunImport(
         items.push({
           kind: "relationship",
           key,
-          title: `${entity.slug} → ${relation.targetId}`,
+          title: `${entity.slug} → ${target.slug}`,
           action: "CREATE",
           reason: `Missing relationship ${relation.type}.`,
         });
@@ -490,7 +405,7 @@ export async function dryRunImport(
         items.push({
           kind: "relationship",
           key,
-          title: `${entity.slug} → ${relation.targetId}`,
+          title: `${entity.slug} → ${target.slug}`,
           action: "UPDATE",
           reason: "Existing relationship notes or directionality differs.",
         });
@@ -499,7 +414,7 @@ export async function dryRunImport(
         items.push({
           kind: "relationship",
           key,
-          title: `${entity.slug} → ${relation.targetId}`,
+          title: `${entity.slug} → ${target.slug}`,
           action: "SKIP",
           reason: "Relationship already matches imported content.",
         });
@@ -507,7 +422,17 @@ export async function dryRunImport(
     }
 
     for (const link of entity.media ?? []) {
-      const key = entityMediaKey(entity.slug, link.assetId, link.role);
+      const assetSlug = resolveMediaAssetSlug(link.assetId, indexes);
+      const asset = existingTargetMediaMap.get(assetSlug);
+
+      if (!asset) {
+        warnings.push(
+          `Media asset "${link.assetId}" referenced by "${entity.slug}" was not found in the package or database.`
+        );
+        continue;
+      }
+
+      const key = entityMediaKey(entity.slug, asset.slug, link.role);
       const existing = existingEntityMediaMap.get(key);
 
       if (!existing) {
@@ -515,7 +440,7 @@ export async function dryRunImport(
         items.push({
           kind: "entityMedia",
           key,
-          title: `${entity.slug} ↔ ${link.assetId} (${link.role})`,
+          title: `${entity.slug} ↔ ${asset.slug} (${link.role})`,
           action: "CREATE",
           reason: "Missing entity-media link.",
         });
@@ -532,7 +457,7 @@ export async function dryRunImport(
         items.push({
           kind: "entityMedia",
           key,
-          title: `${entity.slug} ↔ ${link.assetId} (${link.role})`,
+          title: `${entity.slug} ↔ ${asset.slug} (${link.role})`,
           action: "UPDATE",
           reason: "Existing media link differs from imported content.",
         });
@@ -541,7 +466,7 @@ export async function dryRunImport(
         items.push({
           kind: "entityMedia",
           key,
-          title: `${entity.slug} ↔ ${link.assetId} (${link.role})`,
+          title: `${entity.slug} ↔ ${asset.slug} (${link.role})`,
           action: "SKIP",
           reason: "Media link already matches imported content.",
         });
@@ -563,13 +488,6 @@ export async function dryRunImport(
     warnings,
     items,
   };
-}
-
-export async function loadPackageFromFile(filePath: string) {
-  const absolutePath = path.resolve(filePath);
-  const raw = await readFile(absolutePath, "utf8");
-  const parsed = JSON.parse(raw);
-  return UniversePackageSchema.parse(parsed);
 }
 
 export async function previewPackageFile(filePath: string) {
