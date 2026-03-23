@@ -6,6 +6,10 @@ import { AdminIndexNav } from "@/components/admin-index-nav";
 export const dynamic = "force-dynamic";
 
 export default async function AdminAnalyticsPage() {
+  // This page is request-time analytics, so the query intentionally uses "now".
+  // eslint-disable-next-line react-hooks/purity
+  const oneWeekAgo = new Date(Date.now() - 1000 * 60 * 60 * 24 * 7);
+
   const [
     entityCount,
     archivedCount,
@@ -20,7 +24,7 @@ export default async function AdminAnalyticsPage() {
     prisma.entity.count({
       where: {
         updatedAt: {
-          gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
+          gte: oneWeekAgo,
         },
       },
     }),
@@ -38,7 +42,7 @@ export default async function AdminAnalyticsPage() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">Admin / Analytics</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">Analytics</h1>
             <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
@@ -59,7 +63,7 @@ export default async function AdminAnalyticsPage() {
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {metrics.map((metric, index) => (
             <Reveal key={metric.label} delay={index * 0.03}>
-              <div className="rounded-2xl border border-border p-5 shadow-sm">
+              <div className="ms-panel-soft">
                 <p className="text-sm text-muted-foreground">{metric.label}</p>
                 <p className="mt-2 text-3xl font-semibold">{metric.value}</p>
               </div>
@@ -68,7 +72,7 @@ export default async function AdminAnalyticsPage() {
         </section>
 
         <Reveal delay={0.12}>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <h2 className="text-lg font-semibold">What this page is for</h2>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
               This is the first analytics layer: counts, activity, and basic health signals.

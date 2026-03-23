@@ -6,6 +6,7 @@ type PageHeaderProps = {
   description: string;
   actionHref?: string;
   actionLabel?: string;
+  framed?: boolean;
 };
 
 export function PageHeader({
@@ -14,21 +15,19 @@ export function PageHeader({
   description,
   actionHref,
   actionLabel,
+  framed = true,
 }: PageHeaderProps) {
   return (
-    <section className="space-y-4">
+    <section className={framed ? "ms-panel" : ""}>
       <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-        <div>
+        <div className="space-y-2">
           <p className="text-sm text-muted-foreground">{eyebrow}</p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight">{title}</h1>
-          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">{description}</p>
+          <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+          <p className="max-w-2xl text-sm text-muted-foreground">{description}</p>
         </div>
 
         {actionHref && actionLabel ? (
-          <Link
-            href={actionHref}
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
-          >
+          <Link href={actionHref} className="ms-button">
             {actionLabel}
           </Link>
         ) : null}

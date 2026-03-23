@@ -68,11 +68,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               name="q"
               defaultValue={query}
               placeholder="Search the universe..."
-              className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:ring-2 focus:ring-ring"
+              className="ms-input"
             />
             <button
               type="submit"
-              className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
+              className="ms-button"
             >
               Search
             </button>
@@ -81,7 +81,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         {query ? (
           <Reveal delay={0.1}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <div className="flex items-center justify-between gap-4">
                 <h2 className="text-lg font-semibold">Results</h2>
                 <span className="text-sm text-muted-foreground">{results.length} found</span>
@@ -124,7 +124,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           </Reveal>
         ) : (
           <Reveal delay={0.1}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm text-sm text-muted-foreground">
+            <section className="ms-panel text-sm text-muted-foreground">
               Enter a search term to begin, or{" "}
               <Link href="/browse" className="underline">
                 browse the universe

@@ -62,7 +62,7 @@ export default async function AdminPage() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">Admin Panel</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">Maintenance Hub</h1>
             <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
@@ -79,7 +79,7 @@ export default async function AdminPage() {
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {stats.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 0.03}>
-              <div className="rounded-2xl border border-border p-4 shadow-sm">
+              <div className="ms-panel-soft">
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
                 <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
               </div>
@@ -92,7 +92,7 @@ export default async function AdminPage() {
             <Reveal key={section.href} delay={index * 0.03}>
               <Link
                 href={section.href}
-                className="block rounded-2xl border border-border p-5 shadow-sm transition hover:bg-accent"
+                className="block ms-panel-soft transition hover:bg-accent"
               >
                 <p className="text-lg font-semibold">{section.title}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{section.description}</p>

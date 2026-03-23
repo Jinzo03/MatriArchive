@@ -83,7 +83,7 @@ export default async function ImportExportPage() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">Admin / Import & Export</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">Import / Export</h1>
             <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
@@ -100,7 +100,7 @@ export default async function ImportExportPage() {
 
         <section className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.08}>
-            <div className="rounded-2xl border border-border p-6 shadow-sm">
+            <div className="ms-panel">
               <h2 className="text-lg font-semibold">Export JSON</h2>
               <p className="mt-2 text-sm text-muted-foreground">
                 Copy this JSON to keep a backup of the current universe.
@@ -114,7 +114,7 @@ export default async function ImportExportPage() {
           </Reveal>
 
           <Reveal delay={0.14}>
-            <div className="rounded-2xl border border-border p-6 shadow-sm">
+            <div className="ms-panel">
               <h2 className="text-lg font-semibold">Import JSON</h2>
               <p className="mt-2 text-sm text-muted-foreground">
                 Paste a full export bundle here. This replaces the current data.
@@ -131,7 +131,7 @@ export default async function ImportExportPage() {
                 <div className="flex justify-end">
                   <button
                     type="submit"
-                    className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
+                    className="ms-button"
                   >
                     Import Universe
                   </button>

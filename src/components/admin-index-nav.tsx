@@ -54,14 +54,14 @@ export function AdminIndexNav() {
               className={[
                 "relative inline-flex items-center justify-center overflow-hidden rounded-full border px-4 py-2 text-sm transition",
                 isActive
-                  ? "border-foreground/20 text-foreground"
-                  : "border-border hover:bg-accent",
+                  ? "border-border/80 text-foreground"
+                  : "border-border/70 text-muted-foreground hover:bg-accent hover:text-foreground",
               ].join(" ")}
             >
               {isActive ? (
                 <motion.span
                   layoutId="admin-active-pill"
-                  className="absolute inset-0 rounded-full bg-accent shadow-sm"
+                  className="absolute inset-0 rounded-full bg-accent/80 shadow-sm"
                   transition={{ type: "spring", stiffness: 500, damping: 40 }}
                 />
               ) : null}

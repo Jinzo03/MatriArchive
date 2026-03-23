@@ -32,7 +32,7 @@ export default async function TimelinePage() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <div className="flex items-center justify-between gap-4">
               <h2 className="text-lg font-semibold">Events</h2>
               <span className="text-sm text-muted-foreground">{events.length} total</span>

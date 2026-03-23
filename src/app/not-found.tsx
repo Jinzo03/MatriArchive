@@ -14,7 +14,7 @@ export default function NotFound() {
 
         <Link
           href="/dashboard"
-          className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
+          className="ms-button"
         >
           Return to Dashboard
         </Link>

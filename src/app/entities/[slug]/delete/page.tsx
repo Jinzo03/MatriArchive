@@ -44,7 +44,7 @@ export default async function DeleteEntityPage({ params }: PageProps) {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">Delete Entity</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
             <p className="mt-3 text-sm text-muted-foreground">Type: {entity.type}</p>

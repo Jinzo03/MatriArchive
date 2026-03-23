@@ -93,7 +93,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">History</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
             <p className="mt-3 text-sm text-muted-foreground">Type: {entity.type}</p>
@@ -107,7 +107,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <h2 className="text-lg font-semibold">Revisions</h2>
 
             <div className="mt-4 space-y-4">

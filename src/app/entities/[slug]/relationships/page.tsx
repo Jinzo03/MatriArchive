@@ -90,7 +90,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <p className="text-sm text-muted-foreground">Relationships</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">{entity.title}</h1>
             <div className="mt-4 flex gap-3">
@@ -102,7 +102,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <h2 className="text-lg font-semibold">Add Relationship</h2>
             <form action={addRelationship} className="mt-4 space-y-4">
               <div className="grid gap-4 md:grid-cols-2">
@@ -111,7 +111,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                   <select
                     name="relationshipType"
                     defaultValue="RELATED_TO"
-                    className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:ring-2 focus:ring-ring"
+                    className="ms-input"
                   >
                     {relationshipOptions.map((option) => (
                       <option key={option} value={option}>
@@ -125,7 +125,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                   <span className="text-sm font-medium">Target Entity Slug</span>
                   <input
                     name="targetSlug"
-                    className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition focus:ring-2 focus:ring-ring"
+                    className="ms-input"
                     placeholder="the-target-entity"
                   />
                 </label>
@@ -136,7 +136,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                 <textarea
                   name="notes"
                   rows={3}
-                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-sm outline-none transition focus:ring-2 focus:ring-ring"
+                  className="ms-textarea"
                   placeholder="Optional context for this relationship"
                 />
               </label>
@@ -144,7 +144,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
+                  className="ms-button"
                 >
                   Add Relationship
                 </button>
@@ -155,7 +155,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.12}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Outgoing</h2>
               <div className="mt-4 space-y-3">
                 {entity.outgoingRelationships.length > 0 ? (
@@ -187,7 +187,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
           </Reveal>
 
           <Reveal delay={0.18}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Incoming</h2>
               <div className="mt-4 space-y-3">
                 {entity.incomingRelationships.length > 0 ? (

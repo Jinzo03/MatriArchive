@@ -67,7 +67,7 @@ export default async function BrowsePage() {
             <div className="mt-5">
               <Link
                 href="/create"
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-foreground px-5 text-sm font-medium text-background transition hover:opacity-90"
+                className="ms-button"
               >
                 Create First Entity
               </Link>
@@ -78,7 +78,7 @@ export default async function BrowsePage() {
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {typeOrder.map((type, index) => (
             <Reveal key={type} delay={index * 0.03}>
-              <div className="rounded-2xl border border-border p-4 shadow-sm">
+              <div className="ms-panel-soft">
                 <p className="text-sm text-muted-foreground">{typeLabels[type]}</p>
                 <p className="mt-2 text-2xl font-semibold">{grouped[type]?.length ?? 0}</p>
               </div>
@@ -87,11 +87,11 @@ export default async function BrowsePage() {
         </section>
 
         <section className="space-y-8">
-          {typeOrder.map((type, typeIndex) => {
+          {typeOrder.map((type) => {
             const items = grouped[type] ?? [];
 
             return (
-              <div key={type} className="rounded-2xl border border-border p-6 shadow-sm">
+              <div key={type} className="ms-panel">
                 <div className="flex items-center justify-between gap-4">
                   <h2 className="text-lg font-semibold">{typeLabels[type]}</h2>
                   <span className="text-sm text-muted-foreground">{items.length} items</span>

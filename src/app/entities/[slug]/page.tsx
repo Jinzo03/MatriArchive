@@ -33,11 +33,12 @@ export default async function EntityPage({ params }: PageProps) {
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="rounded-2xl border border-border p-6 shadow-sm">
+          <section className="ms-panel">
             <PageHeader
               eyebrow={entity.type}
               title={entity.title}
               description={entity.summary || "No summary yet."}
+              framed={false}
             />
 
             <div className="mt-4 flex flex-wrap gap-2">
@@ -91,7 +92,7 @@ export default async function EntityPage({ params }: PageProps) {
 
         <div className="grid gap-6 lg:grid-cols-3">
           <Reveal delay={0.08} className="lg:col-span-2">
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Content</h2>
               <div className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
                 {entity.body || "No body content yet."}
@@ -100,7 +101,7 @@ export default async function EntityPage({ params }: PageProps) {
           </Reveal>
 
           <Reveal delay={0.14}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Details</h2>
               <dl className="mt-4 space-y-3 text-sm">
                 <div>
@@ -130,7 +131,7 @@ export default async function EntityPage({ params }: PageProps) {
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.18}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Incoming Relationships</h2>
               <div className="mt-4 space-y-3">
                 {entity.incomingRelationships.length > 0 ? (
@@ -152,7 +153,7 @@ export default async function EntityPage({ params }: PageProps) {
           </Reveal>
 
           <Reveal delay={0.24}>
-            <section className="rounded-2xl border border-border p-6 shadow-sm">
+            <section className="ms-panel">
               <h2 className="text-lg font-semibold">Outgoing Relationships</h2>
               <div className="mt-4 space-y-3">
                 {entity.outgoingRelationships.length > 0 ? (

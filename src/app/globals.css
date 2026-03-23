@@ -35,39 +35,53 @@
 
 @layer base {
   :root {
-  --background: 224 30% 8%;
-  --foreground: 42 35% 95%;
+    --background: 224 30% 8%;
+    --foreground: 42 35% 95%;
 
-  --card: 224 24% 11%;
-  --card-foreground: 42 35% 95%;
+    --card: 224 24% 11%;
+    --card-foreground: 42 35% 95%;
 
-  --popover: 224 24% 11%;
-  --popover-foreground: 42 35% 95%;
+    --popover: 224 24% 11%;
+    --popover-foreground: 42 35% 95%;
 
-  --primary: 36 46% 65%;
-  --primary-foreground: 224 30% 10%;
+    --primary: 36 46% 65%;
+    --primary-foreground: 224 30% 10%;
 
-  --secondary: 224 18% 16%;
-  --secondary-foreground: 42 35% 95%;
+    --secondary: 224 18% 16%;
+    --secondary-foreground: 42 35% 95%;
 
-  --muted: 224 18% 16%;
-  --muted-foreground: 42 14% 68%;
+    --muted: 224 18% 16%;
+    --muted-foreground: 42 14% 68%;
 
-  --accent: 224 18% 18%;
-  --accent-foreground: 42 35% 95%;
+    --accent: 224 18% 18%;
+    --accent-foreground: 42 35% 95%;
 
-  --border: 224 16% 22%;
-  --input: 224 16% 22%;
-  --ring: 36 46% 65%;
-}
+    --destructive: 0 68% 55%;
+
+    --border: 224 16% 22%;
+    --input: 224 16% 22%;
+    --ring: 36 46% 65%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 224 26% 10%;
+    --sidebar-foreground: 42 35% 95%;
+    --sidebar-primary: 36 46% 65%;
+    --sidebar-primary-foreground: 224 30% 10%;
+    --sidebar-accent: 224 18% 18%;
+    --sidebar-accent-foreground: 42 35% 95%;
+    --sidebar-border: 224 16% 22%;
+    --sidebar-ring: 36 46% 65%;
+  }
+
   .dark {
     --background: 224 30% 8%;
     --foreground: 42 35% 95%;
 
-    --card: 224 26% 11%;
+    --card: 224 24% 11%;
     --card-foreground: 42 35% 95%;
 
-    --popover: 224 26% 11%;
+    --popover: 224 24% 11%;
     --popover-foreground: 42 35% 95%;
 
     --primary: 36 46% 65%;
@@ -109,8 +123,9 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-body);
+    line-height: 1.6;
     background:
-      radial-gradient(circle at top, hsl(var(--primary) / 0.08), transparent 28%),
+      radial-gradient(circle at top, hsl(var(--primary) / 0.10), transparent 30%),
       radial-gradient(circle at bottom right, hsl(var(--ring) / 0.08), transparent 26%),
       linear-gradient(to bottom, hsl(var(--background)), hsl(var(--background)));
     background-attachment: fixed;
@@ -123,11 +138,122 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+    line-height: 1.1;
     letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p,
+  li,
+  dd {
+    line-height: 1.65;
+    text-wrap: pretty;
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.18);
+    background: hsl(var(--primary) / 0.22);
     color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .ms-panel {
+    border-radius: 1rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--card) / 0.92);
+    color: hsl(var(--card-foreground));
+    padding: clamp(1rem, 0.9rem + 0.6vw, 1.5rem);
+    box-shadow: 0 20px 60px -40px rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(18px);
+  }
+
+  .ms-panel-soft {
+    border-radius: 1rem;
+    border: 1px solid hsl(var(--border) / 0.6);
+    background: hsl(var(--background) / 0.4);
+    color: hsl(var(--foreground));
+    padding: clamp(1rem, 0.9rem + 0.4vw, 1.25rem);
+    box-shadow: 0 18px 44px -36px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(18px);
+  }
+
+  .ms-panel-strong {
+    border-radius: 1.25rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--card) / 0.95);
+    color: hsl(var(--card-foreground));
+    padding: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+    box-shadow: 0 30px 90px -55px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(18px);
+  }
+
+  .ms-input {
+    height: 2.75rem;
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--background) / 0.7);
+    padding: 0 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    outline: none;
+    transition: box-shadow 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  }
+
+  .ms-input:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.35);
+    border-color: hsl(var(--ring));
+  }
+
+  .ms-textarea {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    background: hsl(var(--background) / 0.7);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    outline: none;
+    transition: box-shadow 150ms ease, border-color 150ms ease, background-color 150ms ease;
+  }
+
+  .ms-textarea:focus {
+    box-shadow: 0 0 0 2px hsl(var(--ring) / 0.35);
+    border-color: hsl(var(--ring));
+  }
+
+  .ms-button {
+    display: inline-flex;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    background: hsl(var(--foreground));
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: hsl(var(--background));
+    transition: opacity 150ms ease, transform 150ms ease, background-color 150ms ease;
+  }
+
+  .ms-button:hover {
+    opacity: 0.92;
+  }
+
+  .ms-button-ghost {
+    display: inline-flex;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    border: 1px solid hsl(var(--border) / 0.7);
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+  }
+
+  .ms-button-ghost:hover {
+    background: hsl(var(--accent));
   }
 }

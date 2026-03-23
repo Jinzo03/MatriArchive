@@ -30,7 +30,7 @@ export default function CreateIndexPage() {
             <Link
               key={option.href}
               href={option.href}
-              className="rounded-2xl border border-border p-5 shadow-sm transition hover:bg-accent"
+              className="ms-panel-soft transition hover:bg-accent"
             >
               <p className="text-lg font-semibold">{option.label}</p>
               <p className="mt-2 text-sm text-muted-foreground">Create a new {option.label.toLowerCase()}.</p>

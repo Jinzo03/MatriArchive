@@ -6,15 +6,6 @@ import { DashboardCta } from "@/components/dashboard-cta";
 
 export const dynamic = "force-dynamic";
 
-const statVariants = {
-  hidden: { opacity: 0, y: 14 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.45, delay: 0.05 * i },
-  }),
-};
-
 export default async function DashboardPage() {
   const [characters, stories, institutions, locations, recentItems] = await Promise.all([
     prisma.entity.count({ where: { type: "CHARACTER" } }),
@@ -64,10 +55,10 @@ export default async function DashboardPage() {
       </div>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {quickStats.map((stat, i) => (
+        {quickStats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl border border-border p-4 shadow-sm"
+            className="ms-panel-soft"
           >
             <p className="text-sm text-muted-foreground">{stat.label}</p>
             <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
@@ -76,7 +67,7 @@ export default async function DashboardPage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-3">
-        <div className="rounded-2xl border border-border p-5 shadow-sm lg:col-span-2">
+        <div className="ms-panel-soft lg:col-span-2">
           <div className="flex items-center justify-between gap-4">
             <h2 className="text-lg font-semibold">Recent Items</h2>
             <Link href="/browse" className="text-sm text-muted-foreground hover:underline">
@@ -101,7 +92,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border p-5 shadow-sm">
+        <div className="ms-panel-soft">
           <h2 className="text-lg font-semibold">Quick Actions</h2>
           <div className="mt-4 flex flex-col gap-3">
             {quickActions.map((action) => (
