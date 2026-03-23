@@ -29,7 +29,8 @@ model Entity {
   incomingRelationships Relationship[] @relation("TargetEntity")
 
   revisions     EntityRevision[]
-
+  mediaLinks    EntityMedia[]
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   version   Int      @default(1)
@@ -122,4 +123,124 @@ enum RelationshipType {
   IS_A
   PART_OF
   RELATED_TO
+}
+
+enum MediaRole {
+  PORTRAIT
+  COVER
+  ICON
+  SCENE
+  GALLERY
+  TIMELINE_ART
+  EMBLEM
+  THUMBNAIL
+}
+
+enum MediaKind {
+  IMAGE
+  VIDEO
+  AUDIO
+  OTHER
+}
+
+enum ImportJobStatus {
+  DRAFT
+  RUNNING
+  SUCCEEDED
+  FAILED
+  PARTIAL
+}
+
+enum ImportLogLevel {
+  DEBUG
+  INFO
+  WARN
+  ERROR
+}
+
+model MediaAsset {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  type      MediaKind @default(IMAGE)
+  title     String
+  summary   String?
+  src       String
+  alt       String?
+  mimeType  String?
+  width     Int?
+  height    Int?
+  credit    String?
+  tags      String[] @default([])
+  metadata  Json?
+
+  entityLinks EntityMedia[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([type])
+}
+
+model EntityMedia {
+  id          String    @id @default(cuid())
+  entityId    String
+  mediaAssetId String
+  role        MediaRole
+  primary     Boolean   @default(false)
+  sortOrder   Int       @default(0)
+  alt         String?
+
+  entity      Entity     @relation(fields: [entityId], references: [id], onDelete: Cascade)
+  mediaAsset  MediaAsset @relation(fields: [mediaAssetId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([entityId, mediaAssetId, role])
+  @@index([entityId])
+  @@index([mediaAssetId])
+  @@index([role])
+}
+
+model ImportJob {
+  id            String          @id @default(cuid())
+  packageId     String
+  packageVersion String
+  title         String
+  sourcePath    String?
+  status        ImportJobStatus @default(DRAFT)
+  dryRun        Boolean         @default(true)
+
+  createdCount  Int             @default(0)
+  updatedCount  Int             @default(0)
+  skippedCount  Int             @default(0)
+  failedCount   Int             @default(0)
+
+  startedAt     DateTime        @default(now())
+  finishedAt    DateTime?
+  summary       Json?
+
+  logs          ImportLog[]
+
+  @@index([packageId])
+  @@index([status])
+  @@index([startedAt])
+}
+
+model ImportLog {
+  id          String         @id @default(cuid())
+  importJobId String
+  level       ImportLogLevel @default(INFO)
+  stage       String?
+  message     String
+  entitySlug  String?
+  details     Json?
+  createdAt   DateTime       @default(now())
+
+  importJob   ImportJob      @relation(fields: [importJobId], references: [id], onDelete: Cascade)
+
+  @@index([importJobId])
+  @@index([level])
+  @@index([stage])
 }
