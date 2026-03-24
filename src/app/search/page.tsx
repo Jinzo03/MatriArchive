@@ -2,7 +2,6 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
-import { t } from "@/lib/locale";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +22,26 @@ const typeLabels: Record<EntityType, string> = {
   OTHER: "Other",
 };
 
+type SearchEntity = {
+  id: string;
+  title: string;
+  slug: string;
+  type: EntityType;
+  summary: string | null;
+  metadata: unknown;
+  mediaLinks: Array<{
+    role: string;
+    primary: boolean;
+    sortOrder: number;
+    mediaAsset: {
+      src: string;
+      alt: string | null;
+      title: string;
+      type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
+    };
+  }>;
+};
+
 function hasExternalLinks(metadata: unknown): boolean {
   if (!metadata || typeof metadata !== "object") return false;
 
@@ -35,12 +54,49 @@ function hasExternalLinks(metadata: unknown): boolean {
   return typeof record.wattpad === "string" || typeof record.ao3 === "string";
 }
 
+function getPrimaryMedia(entity: SearchEntity) {
+  return (
+    entity.mediaLinks.find((link) => link.primary)?.mediaAsset ??
+    entity.mediaLinks[0]?.mediaAsset ??
+    null
+  );
+}
+
+function getPrimaryMediaRole(entity: SearchEntity) {
+  return entity.mediaLinks.find((link) => link.primary)?.role ?? entity.mediaLinks[0]?.role ?? null;
+}
+
+function getMediaRoleLabel(locale: string, role: string | null) {
+  if (!role) return null;
+
+  switch (role) {
+    case "PORTRAIT":
+      return locale === "ar" ? "صورة شخصية" : "Portrait";
+    case "COVER":
+      return locale === "ar" ? "غلاف" : "Cover";
+    case "ICON":
+      return locale === "ar" ? "أيقونة" : "Icon";
+    case "EMBLEM":
+      return locale === "ar" ? "شعار" : "Emblem";
+    case "SCENE":
+      return locale === "ar" ? "مشهد" : "Scene";
+    case "TIMELINE_ART":
+      return locale === "ar" ? "فن زمني" : "Timeline art";
+    case "THUMBNAIL":
+      return locale === "ar" ? "مصغّر" : "Thumbnail";
+    case "GALLERY":
+      return locale === "ar" ? "معرض" : "Gallery";
+    default:
+      return locale === "ar" ? "وسائط" : "Media";
+  }
+}
+
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const locale = await getRequestLocale();
   const { q } = await searchParams;
   const query = q?.trim() ?? "";
 
-  const results = query
+  const results = (query
     ? await prisma.entity.findMany({
         where: {
           OR: [
@@ -61,9 +117,25 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           type: true,
           summary: true,
           metadata: true,
+          mediaLinks: {
+            orderBy: [{ primary: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+            select: {
+              role: true,
+              primary: true,
+              sortOrder: true,
+              mediaAsset: {
+                select: {
+                  src: true,
+                  alt: true,
+                  title: true,
+                  type: true,
+                },
+              },
+            },
+          },
         },
       })
-    : [];
+    : []) as SearchEntity[];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -113,36 +185,60 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   results.map((item, index) => {
                     const storyHasExternalLinks =
                       item.type === EntityType.STORY && hasExternalLinks(item.metadata);
+                    const primaryMedia = getPrimaryMedia(item);
+                    const primaryMediaRole = getPrimaryMediaRole(item);
+                    const mediaRoleLabel = getMediaRoleLabel(locale, primaryMediaRole);
 
                     return (
                       <Reveal key={item.id} delay={index * 0.03}>
                         <Link
                           href={`/entities/${item.slug}`}
-                          className="block rounded-xl border border-border p-4 transition hover:bg-accent"
+                          className="block overflow-hidden rounded-xl border border-border transition hover:bg-accent"
                         >
-                          <div className="flex items-start justify-between gap-4">
-                            <div>
-                              <p className="font-medium">{item.title}</p>
-                              {storyHasExternalLinks ? (
+                          {primaryMedia && primaryMedia.type === "IMAGE" ? (
+                            <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-border/60 bg-muted/30">
+                              <img
+                                src={primaryMedia.src}
+                                alt={primaryMedia.alt || primaryMedia.title || item.title}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                          ) : null}
+
+                          <div className="p-4">
+                            <div className="flex items-start justify-between gap-4">
+                              <div>
+                                <p className="font-medium">{item.title}</p>
+
                                 <div className="mt-2 flex flex-wrap gap-2">
-                                  <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                                    {locale === "ar" ? "فصل معاينة" : "Preview chapter"}
-                                  </span>
-                                  <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                                    {locale === "ar" ? "قراءة خارجية" : "External reading"}
-                                  </span>
+                                  {primaryMedia && mediaRoleLabel ? (
+                                    <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
+                                      {mediaRoleLabel}
+                                    </span>
+                                  ) : null}
+
+                                  {storyHasExternalLinks ? (
+                                    <>
+                                      <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
+                                        {locale === "ar" ? "فصل معاينة" : "Preview chapter"}
+                                      </span>
+                                      <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
+                                        {locale === "ar" ? "قراءة خارجية" : "External reading"}
+                                      </span>
+                                    </>
+                                  ) : null}
                                 </div>
-                              ) : null}
+                              </div>
+
+                              <span className="text-xs text-muted-foreground">
+                                {typeLabels[item.type]}
+                              </span>
                             </div>
 
-                            <span className="text-xs text-muted-foreground">
-                              {typeLabels[item.type]}
-                            </span>
+                            {item.summary ? (
+                              <p className="mt-2 text-sm text-muted-foreground">{item.summary}</p>
+                            ) : null}
                           </div>
-
-                          {item.summary ? (
-                            <p className="mt-2 text-sm text-muted-foreground">{item.summary}</p>
-                          ) : null}
                         </Link>
                       </Reveal>
                     );
