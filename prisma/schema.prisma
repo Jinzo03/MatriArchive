@@ -58,7 +58,7 @@ model EntityRevision {
   aliases        String[]       @default([])
   tags           String[]       @default([])
   searchKeywords String[]       @default([])
-
+  metadata       Json?
   createdAt      DateTime       @default(now())
 
   @@index([entityId])

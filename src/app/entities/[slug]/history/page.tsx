@@ -59,6 +59,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           aliases: revision.aliases,
           tags: revision.tags,
           searchKeywords: revision.searchKeywords,
+          metadata: revision.metadata,
           version: { increment: 1 },
         },
       });
@@ -76,6 +77,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           aliases: updatedEntity.aliases,
           tags: updatedEntity.tags,
           searchKeywords: updatedEntity.searchKeywords,
+          metadata: updatedEntity.metadata,
         },
       });
 
