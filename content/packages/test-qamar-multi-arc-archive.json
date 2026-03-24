@@ -1,0 +1,445 @@
+{
+  "packageId": "pkg.test.qamar-multi-arc-archive",
+  "version": "1.0.0",
+  "title": "Test Qamar Multi-Arc Archive Package",
+  "description": "A large mixed package with two story chains, shared institutions, several events, and long-story previews with external reading links.",
+  "source": "manual test package",
+  "characters": [
+    {
+      "id": "char.sheikha-qamar-al-zahra",
+      "type": "CHARACTER",
+      "slug": "sheikha-qamar-al-zahra",
+      "title": "Sheikha Qamar al-Zahra",
+      "summary": "A central sheikha anchoring the first arc and connecting the archive together.",
+      "body": "Sheikha Qamar al-Zahra serves as the primary focal point of the archive. In this final test package, she bridges multiple story chains and anchors the institutional backbone of the canon.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Qamar", "Qamar al-Zahra"],
+      "tags": ["sheikha", "archive", "canonical", "test"],
+      "searchKeywords": ["qamar", "zahra", "sheikha qamar", "archive"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure",
+        "arc": "qamar-main-line"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts",
+          "notes": "Shared backbone institution."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-assembly",
+          "notes": "Appears in the opening arc."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-veiled-night",
+          "notes": "Appears in the second arc."
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar-archive.cover-01",
+          "role": "COVER",
+          "alt": "Cover art for Sheikha Qamar al-Zahra archive",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "char.sheikha-rahima-al-hanuf",
+      "type": "CHARACTER",
+      "slug": "sheikha-rahima-al-hanuf",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "A stabilizing companion figure who appears in both arcs.",
+      "body": "Rahima al-Hanuf is the interpretive and stabilizing companion figure, used here to ensure the archive can support recurring characters across multiple chains.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Rahima", "Rahima al-Hanuf"],
+      "tags": ["sheikha", "archive", "canonical", "test"],
+      "searchKeywords": ["rahima", "al hanuf", "sheikha rahima"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "supporting figure",
+        "arc": "qamar-main-line"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-assembly"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-veiled-night"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "char.iyed-al-qasr",
+      "type": "CHARACTER",
+      "slug": "iyed-al-qasr",
+      "title": "Iyed al-Qasr",
+      "summary": "A witness character that appears across the archive as an observing thread.",
+      "body": "Iyed al-Qasr is the archival witness, placed across both story chains to verify recurring character continuity and multi-arc linking.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Iyed"],
+      "tags": ["supporting", "witness", "archive", "test"],
+      "searchKeywords": ["iyed", "witness", "archive"],
+      "metadata": {
+        "importance": "supporting",
+        "importTest": true,
+        "role": "witness",
+        "arc": "cross-link"
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-assembly"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-veiled-night"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "char.nuriyya-al-hadi",
+      "type": "CHARACTER",
+      "slug": "nuriyya-al-hadi",
+      "title": "Sheikha Nuriyya al-Hadi",
+      "summary": "A second-arc supporting sheikha to strengthen the archive backbone.",
+      "body": "Nuriyya al-Hadi appears as a secondary stabilizing figure for the second chain, ensuring that the importer handles a broader cast in the same package.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Nuriyya al-Hadi", "Sheikha Nuriyya"],
+      "tags": ["sheikha", "archive", "canonical", "test"],
+      "searchKeywords": ["nuriyya", "al hadi", "sheikha nuriyya"],
+      "metadata": {
+        "importance": "supporting",
+        "importTest": true,
+        "role": "supporting figure",
+        "arc": "veiled-line"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-veiled-night"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "stories": [
+    {
+      "id": "story.qamar-morning-assembly",
+      "type": "STORY",
+      "slug": "qamar-morning-assembly",
+      "title": "The Morning Assembly",
+      "summary": "The opening chain of the archive, presented as a preview chapter for a long-form story.",
+      "body": "This is the preview chapter for the first long-form chain. It opens the archive with a formal assembly, establishing the tone, the setting, and the shared institutional order.\n\nThe chapter is intentionally written as a preview. If the reader wants the full arc, they can continue to the external reading link attached in the metadata.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Morning Assembly"],
+      "tags": ["story", "arc", "preview", "test"],
+      "searchKeywords": ["morning assembly", "qamar arc", "preview chapter"],
+      "metadata": {
+        "arc": "qamar-main-line",
+        "sequence": 1,
+        "previewType": "chapter-preview",
+        "externalLinks": {
+          "wattpad": "https://www.wattpad.com/your-qamar-arc-link",
+          "ao3": "https://archiveofourown.org/your-qamar-arc-link"
+        },
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.iyed-al-qasr"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-assembly-begins"
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar-archive.cover-01",
+          "role": "COVER",
+          "alt": "Cover art for The Morning Assembly",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "story.qamar-the-unwritten-gate",
+      "type": "STORY",
+      "slug": "qamar-the-unwritten-gate",
+      "title": "The Unwritten Gate",
+      "summary": "A second long-form preview chapter, linked to the first chain but building a different thread.",
+      "body": "The Unwritten Gate continues the archive in a different direction. It is another preview chapter for a longer work, designed to test how multiple story chains sit beside each other inside the same package.\n\nThe full reading experience can live externally, while the app keeps the canonical preview and the connective metadata.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Unwritten Gate"],
+      "tags": ["story", "arc", "preview", "test"],
+      "searchKeywords": ["unwritten gate", "qamar", "preview chapter"],
+      "metadata": {
+        "arc": "qamar-secondary-line",
+        "sequence": 1,
+        "previewType": "chapter-preview",
+        "externalLinks": {
+          "wattpad": "https://www.wattpad.com/your-secondary-link",
+          "ao3": "https://archiveofourown.org/your-secondary-link"
+        },
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.nuriyya-al-hadi"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-second-veil"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "lore": [
+    {
+      "id": "inst.sanctum-of-guardian-arts",
+      "type": "INSTITUTION",
+      "slug": "sanctum-of-guardian-arts",
+      "title": "The Sanctum of Guardian Arts",
+      "summary": "The shared institutional backbone for both story chains.",
+      "body": "The Sanctum of Guardian Arts acts as the archival and ceremonial backbone of the package. Both story chains pass through this institution, making it the anchor that ties the multi-arc package together.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sanctum of Guardian Arts", "Guardian Sanctum"],
+      "tags": ["institution", "lore", "archive", "test"],
+      "searchKeywords": ["sanctum", "guardian arts", "institution", "archive"],
+      "metadata": {
+        "category": "institution",
+        "importTest": true,
+        "role": "shared backbone"
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.nuriyya-al-hadi"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-morning-assembly"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-the-unwritten-gate"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.custodial-stillness",
+      "type": "DOCTRINE",
+      "slug": "custodial-stillness",
+      "title": "Custodial Stillness",
+      "summary": "A doctrine entry that remains visible across the archive.",
+      "body": "Custodial Stillness provides the conceptual frame that runs through both story chains. It is intentionally short, so the importer can show a lore item that stays stable while the narrative layer grows around it.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Doctrine of Custodial Stillness"],
+      "tags": ["doctrine", "lore", "archive", "test"],
+      "searchKeywords": ["custodial stillness", "doctrine", "archive"],
+      "metadata": {
+        "category": "doctrine",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "timeline": [
+    {
+      "id": "event.qamar-assembly-begins",
+      "type": "EVENT",
+      "slug": "qamar-assembly-begins",
+      "title": "The Assembly Begins",
+      "summary": "The first arc-opening event.",
+      "body": "This is the opening event that positions the first story chain inside the archive.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Assembly Begins"],
+      "tags": ["event", "timeline", "archive", "test"],
+      "searchKeywords": ["assembly begins", "qamar assembly"],
+      "metadata": {
+        "date": "1951 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 1,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-morning-assembly"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "event.qamar-convergence",
+      "type": "EVENT",
+      "slug": "qamar-convergence",
+      "title": "The Convergence",
+      "summary": "The midpoint event that links both story chains together.",
+      "body": "The convergence marks the point where both narrative chains intersect through the same institutional backbone.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Convergence"],
+      "tags": ["event", "timeline", "archive", "test"],
+      "searchKeywords": ["convergence", "qamar convergence"],
+      "metadata": {
+        "date": "1951 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 2,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-morning-assembly"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-the-unwritten-gate"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.nuriyya-al-hadi"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "event.qamar-second-veil",
+      "type": "EVENT",
+      "slug": "qamar-second-veil",
+      "title": "The Second Veil",
+      "summary": "The closing event for the secondary chain.",
+      "body": "The second veil is the closing moment of the second arc chain, confirming that the importer can carry separate story lines in one archive package.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Second Veil"],
+      "tags": ["event", "timeline", "archive", "test"],
+      "searchKeywords": ["second veil", "qamar second veil"],
+      "metadata": {
+        "date": "1952 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 3,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-the-unwritten-gate"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.nuriyya-al-hadi"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "media": [
+    {
+      "id": "media.qamar-archive.cover-01",
+      "slug": "qamar-archive-cover-01",
+      "type": "IMAGE",
+      "title": "Qamar Archive Cover",
+      "summary": "A shared cover image for the multi-arc archive package.",
+      "src": "/media/qamar/archive-cover-01.jpg",
+      "alt": "Cover image for the Qamar multi-arc archive",
+      "mimeType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "credit": "test",
+      "tags": ["cover", "archive", "story-art"],
+      "metadata": {
+        "usage": "archive cover",
+        "importTest": true
+      }
+    }
+  ],
+  "metadata": {
+    "importPurpose": "ultimate-archive-test",
+    "canonical": false
+  }
+}

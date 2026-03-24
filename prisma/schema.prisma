@@ -20,7 +20,8 @@ model Entity {
   tags           String[]       @default([])
   searchKeywords String[]       @default([])
   featuredImage  String?
-
+  metadata       Json?
+  
   parentId String?
   parent   Entity?  @relation("EntityHierarchy", fields: [parentId], references: [id])
   children Entity[] @relation("EntityHierarchy")

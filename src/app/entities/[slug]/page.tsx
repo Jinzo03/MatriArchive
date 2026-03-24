@@ -17,18 +17,71 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type ExternalLinks = {
+  wattpad?: string;
+  ao3?: string;
+};
+
+function getExternalLinks(metadata: unknown): ExternalLinks | null {
+  if (!metadata || typeof metadata !== "object") return null;
+
+  const value = metadata as Record<string, unknown>;
+  const links = value.externalLinks;
+
+  if (!links || typeof links !== "object") return null;
+
+  const record = links as Record<string, unknown>;
+  const wattpad = typeof record.wattpad === "string" ? record.wattpad : undefined;
+  const ao3 = typeof record.ao3 === "string" ? record.ao3 : undefined;
+
+  if (!wattpad && !ao3) return null;
+
+  return { wattpad, ao3 };
+}
+
 export default async function EntityPage({ params }: PageProps) {
   const locale = await getRequestLocale();
   const { slug } = await params;
 
   const entity = await prisma.entity.findUnique({
     where: { slug },
-    include: {
+    select: {
+      id: true,
+      type: true,
+      title: true,
+      slug: true,
+      summary: true,
+      body: true,
+      status: true,
+      visibility: true,
+      aliases: true,
+      tags: true,
+      searchKeywords: true,
+      metadata: true,
+      version: true,
       incomingRelationships: {
-        include: { sourceEntity: true },
+        select: {
+          id: true,
+          type: true,
+          sourceEntity: {
+            select: {
+              slug: true,
+              title: true,
+            },
+          },
+        },
       },
       outgoingRelationships: {
-        include: { targetEntity: true },
+        select: {
+          id: true,
+          type: true,
+          targetEntity: {
+            select: {
+              slug: true,
+              title: true,
+            },
+          },
+        },
       },
     },
   });
@@ -36,6 +89,8 @@ export default async function EntityPage({ params }: PageProps) {
   if (!entity) {
     notFound();
   }
+
+  const externalLinks = getExternalLinks(entity.metadata);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -95,6 +150,38 @@ export default async function EntityPage({ params }: PageProps) {
                 </span>
               ))}
             </div>
+
+            {entity.type === "STORY" && externalLinks ? (
+              <div className="mt-6 ms-panel-soft p-5">
+                <p className="text-sm text-muted-foreground">
+                  {locale === "ar" ? "متابعة القراءة" : "Continue reading"}
+                </p>
+
+                <div className="mt-3 flex flex-wrap gap-3">
+                  {externalLinks.wattpad ? (
+                    <a
+                      href={externalLinks.wattpad}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                    >
+                      {locale === "ar" ? "متابعة على Wattpad" : "Continue on Wattpad"}
+                    </a>
+                  ) : null}
+
+                  {externalLinks.ao3 ? (
+                    <a
+                      href={externalLinks.ao3}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                    >
+                      {locale === "ar" ? "متابعة على AO3" : "Continue on AO3"}
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
           </section>
         </Reveal>
 
@@ -155,7 +242,9 @@ export default async function EntityPage({ params }: PageProps) {
                   ))
                 ) : (
                   <p className="text-sm text-muted-foreground">
-                    {locale === "ar" ? "لا توجد علاقات واردة بعد." : "No incoming relationships yet."}
+                    {locale === "ar"
+                      ? "لا توجد علاقات واردة بعد."
+                      : "No incoming relationships yet."}
                   </p>
                 )}
               </div>
@@ -179,7 +268,9 @@ export default async function EntityPage({ params }: PageProps) {
                   ))
                 ) : (
                   <p className="text-sm text-muted-foreground">
-                    {locale === "ar" ? "لا توجد علاقات صادرة بعد." : "No outgoing relationships yet."}
+                    {locale === "ar"
+                      ? "لا توجد علاقات صادرة بعد."
+                      : "No outgoing relationships yet."}
                   </p>
                 )}
               </div>

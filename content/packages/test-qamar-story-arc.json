@@ -1,0 +1,410 @@
+{
+  "packageId": "pkg.test.qamar-story-arc",
+  "version": "1.0.0",
+  "title": "Test Qamar Story Arc Package",
+  "description": "A story-heavy package with multiple story entries, several timeline events, and a small arc structure.",
+  "source": "manual test package",
+  "characters": [
+    {
+      "id": "char.sheikha-qamar-al-zahra",
+      "type": "CHARACTER",
+      "slug": "sheikha-qamar-al-zahra",
+      "title": "Sheikha Qamar al-Zahra",
+      "summary": "The central sheikha around whom the story arc turns.",
+      "body": "Qamar al-Zahra stands at the center of this story-heavy test arc. The purpose of this record is to verify that the importer can keep a main character stable while multiple stories and events attach to her canonical network.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Qamar", "Qamar al-Zahra"],
+      "tags": ["sheikha", "arc", "test", "canonical"],
+      "searchKeywords": ["qamar", "zahra", "sheikha qamar", "qamar al zahra"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts",
+          "notes": "Main institution for this arc."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-council-opening",
+          "notes": "Appears in the opening chapter."
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-summons-prologue",
+          "notes": "Linked to the opening event."
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar.story-cover-01",
+          "role": "COVER",
+          "alt": "Cover art for the Qamar story arc",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "char.sheikha-rahima-al-hanuf",
+      "type": "CHARACTER",
+      "slug": "sheikha-rahima-al-hanuf",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "A supporting sheikha who helps carry the arc across multiple stories.",
+      "body": "Rahima al-Hanuf enters this package as the interpretive counterweight to Qamar. She is used here to verify that supporting characters remain connected across a chain of story records and events.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Rahima", "Rahima al-Hanuf"],
+      "tags": ["sheikha", "supporting", "test", "canonical"],
+      "searchKeywords": ["rahima", "al hanuf", "sheikha rahima"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "supporting figure"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-council-closing"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "char.iyed-al-qasr",
+      "type": "CHARACTER",
+      "slug": "iyed-al-qasr",
+      "title": "Iyed al-Qasr",
+      "summary": "A witness-character used to verify narrative continuity across the arc.",
+      "body": "Iyed al-Qasr is used here as the observing witness in the story chain. His presence ensures the importer can handle a third character with links into multiple arc entries.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Iyed"],
+      "tags": ["supporting", "test", "canonical"],
+      "searchKeywords": ["iyed", "qasr", "witness"],
+      "metadata": {
+        "importance": "supporting",
+        "importTest": true,
+        "role": "witness"
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-interlude"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-council-interlude"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "stories": [
+    {
+      "id": "story.qamar-council-opening",
+      "type": "STORY",
+      "slug": "qamar-council-opening",
+      "title": "The Council Opening",
+      "summary": "The arc begins with a formal gathering and the first narrative turn.",
+      "body": "This is the opening story of the arc. It establishes the central atmosphere, introduces the key players, and begins the continuity chain for the package.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Opening Council"],
+      "tags": ["story", "arc", "opening", "test"],
+      "searchKeywords": ["council opening", "arc opening"],
+      "metadata": {
+        "arc": "qamar-story-arc",
+        "sequence": 1,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.iyed-al-qasr"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-summons-prologue"
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar.story-cover-01",
+          "role": "COVER",
+          "alt": "Cover image for The Council Opening",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "story.qamar-interlude",
+      "type": "STORY",
+      "slug": "qamar-interlude",
+      "title": "The Quiet Interlude",
+      "summary": "A smaller mid-arc story that verifies story sequencing and continuity.",
+      "body": "The interlude moves the arc forward without resolving it. It helps test a multi-story bundle where the narrative structure is not a single isolated scene.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Interlude"],
+      "tags": ["story", "arc", "interlude", "test"],
+      "searchKeywords": ["quiet interlude", "qamar interlude"],
+      "metadata": {
+        "arc": "qamar-story-arc",
+        "sequence": 2,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.iyed-al-qasr"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-midpoint-mark"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "story.qamar-council-closing",
+      "type": "STORY",
+      "slug": "qamar-council-closing",
+      "title": "The Council Closing",
+      "summary": "The final story in the test arc, closing the narrative and tying the bundle together.",
+      "body": "The closing story completes the arc and helps verify that the importer handles a larger story-heavy package with several linked pieces of canon.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Closing Council"],
+      "tags": ["story", "arc", "closing", "test"],
+      "searchKeywords": ["council closing", "qamar closing"],
+      "metadata": {
+        "arc": "qamar-story-arc",
+        "sequence": 3,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-conclusion-oath"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "lore": [
+    {
+      "id": "inst.sanctum-of-guardian-arts",
+      "type": "INSTITUTION",
+      "slug": "sanctum-of-guardian-arts",
+      "title": "The Sanctum of Guardian Arts",
+      "summary": "The supporting institution for the arc.",
+      "body": "This institution acts as the stable setting that links the arc's stories and events together.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sanctum of Guardian Arts", "Guardian Sanctum"],
+      "tags": ["institution", "lore", "test"],
+      "searchKeywords": ["sanctum", "guardian arts", "institution"],
+      "metadata": {
+        "category": "institution",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-council-opening"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.custodial-stillness",
+      "type": "DOCTRINE",
+      "slug": "custodial-stillness",
+      "title": "Custodial Stillness",
+      "summary": "A doctrine entry that remains present throughout the arc.",
+      "body": "This doctrine adds depth to the arc by giving the package at least one conceptual/lore anchor beyond people and stories.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Doctrine of Custodial Stillness"],
+      "tags": ["doctrine", "lore", "test"],
+      "searchKeywords": ["custodial stillness", "doctrine"],
+      "metadata": {
+        "category": "doctrine",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "timeline": [
+    {
+      "id": "event.qamar-summons-prologue",
+      "type": "EVENT",
+      "slug": "qamar-summons-prologue",
+      "title": "The Prologue Summons",
+      "summary": "The event that opens the arc and sets the historical tone.",
+      "body": "This timeline event anchors the beginning of the story arc.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Summons Prologue"],
+      "tags": ["event", "timeline", "test"],
+      "searchKeywords": ["qamar summons prologue", "timeline event"],
+      "metadata": {
+        "date": "1951 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 1,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-council-opening"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "event.qamar-midpoint-mark",
+      "type": "EVENT",
+      "slug": "qamar-midpoint-mark",
+      "title": "The Midpoint Mark",
+      "summary": "A middle event that verifies timeline sequencing.",
+      "body": "This event marks the center of the arc and checks that multiple timeline entries import correctly.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Midpoint Mark"],
+      "tags": ["event", "timeline", "test"],
+      "searchKeywords": ["midpoint mark", "qamar midpoint"],
+      "metadata": {
+        "date": "1951 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 2,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-interlude"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.iyed-al-qasr"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "event.qamar-conclusion-oath",
+      "type": "EVENT",
+      "slug": "qamar-conclusion-oath",
+      "title": "The Conclusion Oath",
+      "summary": "The final event that closes the arc.",
+      "body": "This event closes the narrative bundle and gives the importer one last timeline entry to connect.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Conclusion Oath"],
+      "tags": ["event", "timeline", "test"],
+      "searchKeywords": ["conclusion oath", "qamar conclusion"],
+      "metadata": {
+        "date": "1951 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 3,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-council-closing"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "media": [
+    {
+      "id": "media.qamar.story-cover-01",
+      "slug": "qamar-story-cover-01",
+      "type": "IMAGE",
+      "title": "Qamar Story Arc Cover",
+      "summary": "Cover artwork for the story-heavy Qamar arc.",
+      "src": "/media/qamar/story-cover-01.jpg",
+      "alt": "Cover image for the Qamar story arc",
+      "mimeType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "credit": "test",
+      "tags": ["cover", "story-art", "character-art"],
+      "metadata": {
+        "usage": "arc cover",
+        "importTest": true
+      }
+    }
+  ],
+  "metadata": {
+    "importPurpose": "smoke-test-story-heavy",
+    "canonical": false
+  }
+}

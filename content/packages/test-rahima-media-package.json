@@ -24,7 +24,7 @@
       "relations": [
         {
           "type": "RELATED_TO",
-          "targetId": "doctrine.custodial-flesh",
+          "targetId": "doctrine.ritual-stillness",
           "notes": "Linked for import testing."
         },
         {

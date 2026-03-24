@@ -1,0 +1,277 @@
+{
+  "packageId": "pkg.test.qamar-arc",
+  "version": "1.0.0",
+  "title": "Test Qamar Arc Package",
+  "description": "A larger import test package with multiple characters, one institution, one story arc, one event, and optional cover art.",
+  "source": "manual test package",
+  "characters": [
+    {
+      "id": "char.sheikha-qamar-al-zahra",
+      "type": "CHARACTER",
+      "slug": "sheikha-qamar-al-zahra",
+      "title": "Sheikha Qamar al-Zahra",
+      "summary": "A major sheikha at the center of this test story arc.",
+      "body": "Sheikha Qamar al-Zahra stands as a measured, luminous authority in this test package. Her role here is to anchor the arc and drive the relational graph across the imported bundle.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Qamar", "Qamar al-Zahra"],
+      "tags": ["sheikha", "arc", "test", "canonical"],
+      "searchKeywords": ["qamar", "zahra", "sheikha qamar", "qamar al zahra"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts",
+          "notes": "Primary institution in the test arc."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-council",
+          "notes": "Central story arc involvement."
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar.cover-01",
+          "role": "COVER",
+          "alt": "Cover art for Sheikha Qamar al-Zahra",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "char.sheikha-rahima-al-hanuf",
+      "type": "CHARACTER",
+      "slug": "sheikha-rahima-al-hanuf",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "A supporting sheikha used to verify multi-character relational imports.",
+      "body": "Sheikha Rahima al-Hanuf enters the arc as the stabilizing and interpretive counterpart to Qamar, helping establish a broader canonical network.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Rahima", "Rahima al-Hanuf"],
+      "tags": ["sheikha", "supporting", "test", "canonical"],
+      "searchKeywords": ["rahima", "al hanuf", "sheikha rahima"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "supporting figure"
+      },
+      "relations": [
+        {
+          "type": "AFFILIATED_WITH",
+          "targetId": "inst.sanctum-of-guardian-arts",
+          "notes": "Shared institution for the test arc."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-council",
+          "notes": "Appears in the main arc story."
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "char.iyed-al-qasr",
+      "type": "CHARACTER",
+      "slug": "iyed-al-qasr",
+      "title": "Iyed al-Qasr",
+      "summary": "A supporting witness-character used to test a three-character arc.",
+      "body": "Iyed al-Qasr provides an outside perspective for the story arc, helping verify that the importer handles more than one character chain cleanly.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Iyed"],
+      "tags": ["supporting", "test", "canonical"],
+      "searchKeywords": ["iyed", "qasr", "witness"],
+      "metadata": {
+        "importance": "supporting",
+        "importTest": true,
+        "role": "witness"
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-morning-council"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "stories": [
+    {
+      "id": "story.qamar-morning-council",
+      "type": "STORY",
+      "slug": "qamar-morning-council",
+      "title": "The Morning Council of Qamar",
+      "summary": "A story arc bringing together Qamar, Rahima, and Iyed in a ceremonial test scenario.",
+      "body": "This story arc exists to verify that the importer can handle a larger canonical bundle with multiple characters, linked lore, and a coherent narrative unit.\n\nThe morning council marks a symbolic gathering, where the arc unfolds through discussion, observation, and ritual continuity. It is intentionally written as a test story rather than a permanent canon chapter.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Morning Council", "Qamar Council"],
+      "tags": ["story", "arc", "test", "canonical"],
+      "searchKeywords": ["morning council", "qamar council", "story arc"],
+      "metadata": {
+        "arc": "qamar-test-arc",
+        "sequence": 1,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.iyed-al-qasr"
+        },
+        {
+          "type": "LOCATED_IN",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "event.qamar-council-proclamation"
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.qamar.cover-01",
+          "role": "COVER",
+          "alt": "Story cover image for The Morning Council of Qamar",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    }
+  ],
+  "lore": [
+    {
+      "id": "inst.sanctum-of-guardian-arts",
+      "type": "INSTITUTION",
+      "slug": "sanctum-of-guardian-arts",
+      "title": "The Sanctum of Guardian Arts",
+      "summary": "A supporting institution for the test arc.",
+      "body": "The Sanctum of Guardian Arts serves as the narrative and administrative center of the test package. It is deliberately designed to support multiple characters and a single arc.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sanctum of Guardian Arts", "Guardian Sanctum"],
+      "tags": ["institution", "lore", "test"],
+      "searchKeywords": ["sanctum", "guardian arts", "institution"],
+      "metadata": {
+        "category": "institution",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-morning-council"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.custodial-stillness",
+      "type": "DOCTRINE",
+      "slug": "custodial-stillness",
+      "title": "Custodial Stillness",
+      "summary": "A small doctrine entry used to extend the package beyond just people and story.",
+      "body": "Custodial Stillness is a conceptual test entry added to verify that lore can sit beside the story arc without breaking the import pipeline.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Doctrine of Custodial Stillness"],
+      "tags": ["doctrine", "lore", "test"],
+      "searchKeywords": ["custodial stillness", "doctrine"],
+      "metadata": {
+        "category": "doctrine",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "timeline": [
+    {
+      "id": "event.qamar-council-proclamation",
+      "type": "EVENT",
+      "slug": "qamar-council-proclamation",
+      "title": "The Qamar Council Proclamation",
+      "summary": "A timeline event that anchors the story arc in a specific historical moment.",
+      "body": "The proclamation is the formal event that frames the test arc and verifies that event entries import correctly alongside characters and lore.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Council Proclamation"],
+      "tags": ["event", "timeline", "test"],
+      "searchKeywords": ["qamar council proclamation", "timeline event"],
+      "metadata": {
+        "date": "1952 A.H.",
+        "era": "Age of the Great Embrace",
+        "order": 1,
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "story.qamar-morning-council"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "inst.sanctum-of-guardian-arts"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "media": [
+    {
+      "id": "media.qamar.cover-01",
+      "slug": "qamar-cover-01",
+      "type": "IMAGE",
+      "title": "Qamar Arc Cover",
+      "summary": "Cover artwork for the Qamar test arc.",
+      "src": "/media/qamar/cover-01.jpg",
+      "alt": "Cover image for The Morning Council of Qamar",
+      "mimeType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "credit": "test",
+      "tags": ["cover", "character-art", "story-art"],
+      "metadata": {
+        "usage": "arc cover",
+        "importTest": true
+      }
+    }
+  ],
+  "metadata": {
+    "importPurpose": "smoke-test-arc",
+    "canonical": false
+  }
+}
