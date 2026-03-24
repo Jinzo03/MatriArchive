@@ -1,0 +1,92 @@
+{
+  "packageId": "pkg.test.sheikha-sample",
+  "version": "1.0.0",
+  "title": "Test Sheikha Sample Package",
+  "description": "A small import test package for dry-run and write validation.",
+  "source": "manual test package",
+  "characters": [
+    {
+      "id": "char.sheikha-qamar-al-zahra",
+      "type": "CHARACTER",
+      "slug": "sheikha-qamar-al-zahra",
+      "title": "Sheikha Qamar al-Zahra",
+      "summary": "A luminous and authoritative Sheikha used here as a test canonical character.",
+      "body": "This is a small canonical test biography for import validation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Qamar", "Qamar al-Zahra"],
+      "tags": ["sheikha", "test", "canonical"],
+      "searchKeywords": ["qamar", "zahra", "sheikha qamar"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.custodial-flesh",
+          "notes": "Linked for import testing."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.qamar-introduction",
+          "notes": "Linked to the sample story."
+        }
+      ],
+      "media": []
+    }
+  ],
+  "stories": [
+    {
+      "id": "story.qamar-introduction",
+      "type": "STORY",
+      "slug": "qamar-introduction",
+      "title": "Qamar Introduction",
+      "summary": "A short sample story for the first import test.",
+      "body": "This is a short story body used to verify the story import path.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Qamar Sample Scene"],
+      "tags": ["story", "test"],
+      "searchKeywords": ["qamar intro", "test story"],
+      "metadata": {
+        "arc": "test-import",
+        "sequence": 1
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "char.sheikha-qamar-al-zahra"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "lore": [
+    {
+      "id": "doctrine.custodial-flesh",
+      "type": "DOCTRINE",
+      "slug": "custodial-flesh",
+      "title": "Custodial Flesh",
+      "summary": "A sample doctrine entry for testing the lore pipeline.",
+      "body": "This doctrine exists only as a small import test entry.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Doctrine of Custodial Flesh"],
+      "tags": ["lore", "doctrine", "test"],
+      "searchKeywords": ["custodial flesh", "doctrine"],
+      "metadata": {
+        "category": "doctrine",
+        "importTest": true
+      },
+      "relations": [],
+      "media": []
+    }
+  ],
+  "timeline": [],
+  "media": [],
+  "metadata": {
+    "importPurpose": "smoke-test",
+    "canonical": false
+  }
+}

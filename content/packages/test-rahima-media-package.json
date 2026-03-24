@@ -1,0 +1,145 @@
+{
+  "packageId": "pkg.test.rahima-media",
+  "version": "1.0.0",
+  "title": "Test Rahima Media Package",
+  "description": "A second import test package that verifies optional media support.",
+  "source": "manual test package",
+  "characters": [
+    {
+      "id": "char.sheikha-rahima-al-hanuf",
+      "type": "CHARACTER",
+      "slug": "sheikha-rahima-al-hanuf",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "A serene and authoritative Sheikha used here as a media-linked import test.",
+      "body": "This is a canonical test biography for Rahima, used to verify portrait linking.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Sheikha Rahima", "Rahima al-Hanuf"],
+      "tags": ["sheikha", "test", "canonical"],
+      "searchKeywords": ["rahima", "al hanuf", "sheikha rahima"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.custodial-flesh",
+          "notes": "Linked for import testing."
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.rahima-dawn",
+          "notes": "Linked to the sample story."
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.rahima.portrait-01",
+          "role": "PORTRAIT",
+          "alt": "Portrait of Sheikha Rahima al-Hanuf",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "story.rahima-dawn",
+      "type": "STORY",
+      "slug": "rahima-dawn",
+      "title": "Rahima Dawn",
+      "summary": "A short sample story for media-linked import validation.",
+      "body": "This is a short story body used to verify the story import path with cover art.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Rahima Sample Scene"],
+      "tags": ["story", "test"],
+      "searchKeywords": ["rahima dawn", "test story"],
+      "metadata": {
+        "arc": "test-import",
+        "sequence": 2
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.rahima.cover-01",
+          "role": "COVER",
+          "alt": "Cover art for Rahima Dawn",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    }
+  ],
+  "lore": [
+    {
+      "id": "doctrine.ritual-stillness",
+      "type": "DOCTRINE",
+      "slug": "ritual-stillness",
+      "title": "Ritual Stillness",
+      "summary": "A sample lore entry with no media attached.",
+      "body": "This lore entry exists to confirm that media remains optional.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Doctrine of Stillness"],
+      "tags": ["lore", "doctrine", "test"],
+      "searchKeywords": ["ritual stillness", "doctrine"],
+      "metadata": {
+        "category": "doctrine",
+        "importTest": true
+      },
+      "relations": [],
+      "media": []
+    }
+  ],
+  "timeline": [],
+  "media": [
+    {
+      "id": "media.rahima.portrait-01",
+      "slug": "rahima-portrait-01",
+      "type": "IMAGE",
+      "title": "Sheikha Rahima Portrait",
+      "summary": "Portrait media asset for Rahima.",
+      "src": "/media/rahima/portrait-01.jpg",
+      "alt": "Portrait of Sheikha Rahima al-Hanuf",
+      "mimeType": "image/jpeg",
+      "width": 1024,
+      "height": 1536,
+      "credit": "test",
+      "tags": ["portrait", "character-art"],
+      "metadata": {
+        "usage": "character portrait",
+        "importTest": true
+      }
+    },
+    {
+      "id": "media.rahima.cover-01",
+      "slug": "rahima-cover-01",
+      "type": "IMAGE",
+      "title": "Rahima Story Cover",
+      "summary": "Cover media asset for Rahima's sample story.",
+      "src": "/media/rahima/cover-01.jpg",
+      "alt": "Cover art for Rahima Dawn",
+      "mimeType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "credit": "test",
+      "tags": ["cover", "story-art"],
+      "metadata": {
+        "usage": "story cover",
+        "importTest": true
+      }
+    }
+  ],
+  "metadata": {
+    "importPurpose": "smoke-test-media",
+    "canonical": false
+  }
+}
