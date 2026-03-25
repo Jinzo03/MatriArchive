@@ -2,8 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
-import { t } from "@/lib/locale";
 import { Reveal } from "@/components/reveal";
+import { BrowseSections } from "@/components/browse-sections";
 
 export const dynamic = "force-dynamic";
 
@@ -51,55 +51,6 @@ type BrowseEntity = {
   }>;
 };
 
-function hasExternalLinks(metadata: unknown): boolean {
-  if (!metadata || typeof metadata !== "object") return false;
-
-  const value = metadata as Record<string, unknown>;
-  const links = value.externalLinks;
-
-  if (!links || typeof links !== "object") return false;
-
-  const record = links as Record<string, unknown>;
-  return typeof record.wattpad === "string" || typeof record.ao3 === "string";
-}
-
-function getPrimaryMedia(entity: BrowseEntity) {
-  return (
-    entity.mediaLinks.find((link) => link.primary)?.mediaAsset ??
-    entity.mediaLinks[0]?.mediaAsset ??
-    null
-  );
-}
-
-function getPrimaryMediaRole(entity: BrowseEntity) {
-  return entity.mediaLinks.find((link) => link.primary)?.role ?? entity.mediaLinks[0]?.role ?? null;
-}
-
-function getMediaRoleLabel(locale: string, role: string | null) {
-  if (!role) return null;
-
-  switch (role) {
-    case "PORTRAIT":
-      return locale === "ar" ? "صورة شخصية" : "Portrait";
-    case "COVER":
-      return locale === "ar" ? "غلاف" : "Cover";
-    case "ICON":
-      return locale === "ar" ? "أيقونة" : "Icon";
-    case "EMBLEM":
-      return locale === "ar" ? "شعار" : "Emblem";
-    case "SCENE":
-      return locale === "ar" ? "مشهد" : "Scene";
-    case "TIMELINE_ART":
-      return locale === "ar" ? "فن زمني" : "Timeline art";
-    case "THUMBNAIL":
-      return locale === "ar" ? "مصغّر" : "Thumbnail";
-    case "GALLERY":
-      return locale === "ar" ? "معرض" : "Gallery";
-    default:
-      return locale === "ar" ? "وسائط" : "Media";
-  }
-}
-
 export default async function BrowsePage() {
   const locale = await getRequestLocale();
 
@@ -135,6 +86,26 @@ export default async function BrowsePage() {
     acc[type] = entities.filter((entity) => entity.type === type);
     return acc;
   }, {});
+
+  const browseSections = typeOrder.map((type) => {
+    const items = grouped[type] ?? [];
+    const typeLabel = typeLabels[type];
+    const hiddenCount = Math.max(items.length - 6, 0);
+
+    return {
+      type,
+      label: typeLabel,
+      itemsLabel: locale === "ar" ? "عنصر" : "items",
+      emptyLabel:
+        locale === "ar"
+          ? `لا توجد ${typeLabel.toLowerCase()} بعد.`
+          : `No ${typeLabel.toLowerCase()} yet.`,
+      showMoreLabel:
+        locale === "ar" ? `عرض ${hiddenCount} أخرى` : `Show ${hiddenCount} more`,
+      showLessLabel: locale === "ar" ? "عرض أقل" : "Show less",
+      items,
+    };
+  });
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -184,94 +155,7 @@ export default async function BrowsePage() {
           ))}
         </section>
 
-        <section className="space-y-8">
-          {typeOrder.map((type) => {
-            const items = grouped[type] ?? [];
-
-            return (
-              <div key={type} className="ms-panel p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-lg font-semibold">{typeLabels[type]}</h2>
-                  <span className="text-sm text-muted-foreground">{items.length} items</span>
-                </div>
-
-                {items.length > 0 ? (
-                  <div className="mt-4 grid gap-3 md:grid-cols-2">
-                    {items.map((item, itemIndex) => {
-                      const storyHasExternalLinks =
-                        item.type === EntityType.STORY && hasExternalLinks(item.metadata);
-                      const primaryMedia = getPrimaryMedia(item);
-                      const primaryMediaRole = getPrimaryMediaRole(item);
-                      const mediaRoleLabel = getMediaRoleLabel(locale, primaryMediaRole);
-
-                      return (
-                        <Reveal key={item.id} delay={itemIndex * 0.03}>
-                          <Link
-                            href={`/entities/${item.slug}`}
-                            className="block overflow-hidden rounded-xl border border-border transition hover:bg-accent"
-                          >
-                            {primaryMedia && primaryMedia.type === "IMAGE" ? (
-                              <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-border/60 bg-muted/30">
-                                <img
-                                  src={primaryMedia.src}
-                                  alt={primaryMedia.alt || primaryMedia.title || item.title}
-                                  className="h-full w-full object-cover"
-                                />
-                              </div>
-                            ) : null}
-
-                            <div className="p-4">
-                              <div className="flex items-start justify-between gap-4">
-                                <div>
-                                  <p className="font-medium">{item.title}</p>
-
-                                  <div className="mt-2 flex flex-wrap gap-2">
-                                    {primaryMedia && mediaRoleLabel ? (
-                                      <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                                        {mediaRoleLabel}
-                                      </span>
-                                    ) : null}
-
-                                    {storyHasExternalLinks ? (
-                                      <>
-                                        <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                                          {locale === "ar"
-                                            ? "فصل معاينة"
-                                            : "Preview chapter"}
-                                        </span>
-                                        <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                                          {locale === "ar"
-                                            ? "قراءة خارجية"
-                                            : "External reading"}
-                                        </span>
-                                      </>
-                                    ) : null}
-                                  </div>
-                                </div>
-                              </div>
-
-                              {item.summary ? (
-                                <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                                  {item.summary}
-                                </p>
-                              ) : null}
-                            </div>
-                          </Link>
-                        </Reveal>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="mt-4 rounded-xl border border-dashed border-border p-5 text-sm text-muted-foreground">
-                    {locale === "ar"
-                      ? `لا توجد ${typeLabels[type].toLowerCase()} بعد.`
-                      : `No ${typeLabels[type].toLowerCase()} yet.`}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </section>
+        <BrowseSections locale={locale} sections={browseSections} />
       </div>
     </main>
   );

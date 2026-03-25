@@ -10,7 +10,7 @@ export default async function CreateIndexPage() {
     { type: EntityType.CHARACTER, href: "/create/character" },
     { type: EntityType.STORY, href: "/create/story" },
     { type: EntityType.INSTITUTION, href: "/create/institution" },
-    { type: EntityType., href: "/create/" },
+    { type: EntityType.LOCATION, href: "/create/location" },
     { type: EntityType.DOCTRINE, href: "/create/doctrine" },
     { type: EntityType.EVENT, href: "/create/event" },
     { type: EntityType.TERM, href: "/create/term" },
