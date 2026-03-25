@@ -1,0 +1,2908 @@
+{
+  "packageId": "pkg.location",
+  "version": "1.0.0",
+  "title": "location package",
+  "description": "An import for all major locations",
+  "source": "manual package",
+  "lore": [
+    {
+      "id": "loc.haramayn",
+      "type": "LOCATION",
+      "slug": "haramayn",
+      "title": "Wilāyat al-Ḥaramayn",
+      "summary": "The Holy site of all the matriarchy.",
+      "body": "The center of the matriarchal world, the Haramayn is a vast, sacred complex that serves as the spiritual and political heart of the matriarchy. It is a place of pilgrimage, worship, and governance, where the most powerful sheikhas reside and where the most important rituals are performed. The Haramayn is also a symbol of the matriarchy's power and influence, and it is revered by all who live under its shadow.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "harmayn"
+      ],
+      "tags": [
+        "location",
+        "mecca",
+        "medina",
+        "mysterious",
+        "powerful"
+      ],
+      "searchKeywords": [
+        "haramayn",
+        "the haramayn",
+        "mecca",
+        "medina"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tihamat",
+      "type": "LOCATION",
+      "slug": "tihamat",
+      "title": "Wilāyat Tihāmat al-Baḥr",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tihamat",
+        "bahr"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.najd-ulya",
+      "type": "LOCATION",
+      "slug": "najd-ulya",
+      "title": "Wilāyat Najd al-ʿUlyā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "najd",
+        "najd alya",
+        "najd ulya"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.najd-sufla",
+      "type": "LOCATION",
+      "slug": "najd-sufla",
+      "title": "Wilāyat Najd al-Suflā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "najd",
+        "najd suhla",
+        "najd sufla"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.asir-jizan",
+      "type": "LOCATION",
+      "slug": "asir-jizan",
+      "title": "Wilāyat ʿAsīr wa Jīzān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "asir",
+        "jizan",
+        "asr jizan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.hadramawt",
+      "type": "LOCATION",
+      "slug": "hadramawt",
+      "title": "Wilāyat Ḥaḍramawt",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "hadramawt"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.oman-kubra",
+      "type": "LOCATION",
+      "slug": "oman-kubra",
+      "title": "Wilāyat ʿUmān al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "oman",
+        "oman kubra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.bahrayn-khaliji",
+      "type": "LOCATION",
+      "slug": "bahrayn-khaliji",
+      "title": "Wilāyat al-Baḥrayn al-Khalījī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "bahrayn",
+        "bahrain",
+        "khaleeji"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.ahsa",
+      "type": "LOCATION",
+      "slug": "ahsa",
+      "title": "Wilāyat al-Aḥsāʾ",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "ahsa",
+        "al ahsa"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kuwayt-basra",
+      "type": "LOCATION",
+      "slug": "kuwayt-basra",
+      "title": "Wilāyat al-Kuwayt wa al-Baṣra",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kuwayt",
+        "kuwait",
+        "basra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.baghdad-kubra",
+      "type": "LOCATION",
+      "slug": "baghdad-kubra",
+      "title": "Wilāyat Baghdād al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "baghdad",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "baghdad",
+        "baghdad kubra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.furat-aala",
+      "type": "LOCATION",
+      "slug": "furat-aala",
+      "title": "Wilāyat al-Furāt al-Aʿlā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "furat",
+        "upper euphrates"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.jazira",
+      "type": "LOCATION",
+      "slug": "jazira",
+      "title": "Wilāyat al-Jazīra",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "jazira",
+        "al jazira"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.halab",
+      "type": "LOCATION",
+      "slug": "halab",
+      "title": "Wilāyat Ḥalab",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "aleppo",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "halab",
+        "aleppo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.dimashq",
+      "type": "LOCATION",
+      "slug": "dimashq",
+      "title": "Wilāyat Dimashq",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "damascus",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "dimashq",
+        "damascus"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.filastin",
+      "type": "LOCATION",
+      "slug": "filastin",
+      "title": "Wilāyat Filasṭīn",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "jerusalem",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "filastin",
+        "palestine",
+        "jerusalem"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.urdunn",
+      "type": "LOCATION",
+      "slug": "urdunn",
+      "title": "Wilāyat al-Urdunn",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "urdunn",
+        "jordan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sina",
+      "type": "LOCATION",
+      "slug": "sina",
+      "title": "Wilāyat Sīnāʾ",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sina",
+        "sinai"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.qahira",
+      "type": "LOCATION",
+      "slug": "qahira",
+      "title": "Wilāyat al-Qāhira",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "cairo",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "qahira",
+        "cairo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.delta",
+      "type": "LOCATION",
+      "slug": "delta",
+      "title": "Wilāyat al-Delta",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "delta",
+        "nile delta"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.said",
+      "type": "LOCATION",
+      "slug": "said",
+      "title": "Wilāyat al-Ṣaʿīd",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "said",
+        "upper egypt"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.barqa",
+      "type": "LOCATION",
+      "slug": "barqa",
+      "title": "Wilāyat Barqa",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "barqa",
+        "cyrenaica"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tripoli-gharb",
+      "type": "LOCATION",
+      "slug": "tripoli-gharb",
+      "title": "Wilāyat Ṭarābulus al-Gharb",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "tripoli",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tripoli",
+        "tarabulus al gharb"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.ifriqiya",
+      "type": "LOCATION",
+      "slug": "ifriqiya",
+      "title": "Wilāyat Ifriqiya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "tunis",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "ifriqiya",
+        "tunis"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.algeria-kubra",
+      "type": "LOCATION",
+      "slug": "algeria-kubra",
+      "title": "Wilāyat al-Jazāʾir al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "algiers",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "jazair",
+        "algiers",
+        "algeria kubra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tilimsan",
+      "type": "LOCATION",
+      "slug": "tilimsan",
+      "title": "Wilāyat Tilimsān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tilimsan",
+        "tlemcen"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.maghrib-aqsa",
+      "type": "LOCATION",
+      "slug": "maghrib-aqsa",
+      "title": "Wilāyat al-Maghrib al-Aqṣā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "rabat",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "maghrib",
+        "rabat",
+        "far west"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sahara-kubra",
+      "type": "LOCATION",
+      "slug": "sahara-kubra",
+      "title": "Wilāyat al-Ṣaḥrāʾ al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sahara",
+        "great sahara"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.bosphorus",
+      "type": "LOCATION",
+      "slug": "bosphorus",
+      "title": "Wilāyat al-Busfūr",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "istanbul",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "bosphorus",
+        "istanbul"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.anadol-gharbi",
+      "type": "LOCATION",
+      "slug": "anadol-gharbi",
+      "title": "Wilāyat Anāḍūl al-Gharbī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "anatolia west",
+        "anadol gharbi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.anadol-wusta",
+      "type": "LOCATION",
+      "slug": "anadol-wusta",
+      "title": "Wilāyat Anāḍūl al-Wusṭā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "anatolia central",
+        "anadol wusta"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.anadol-sharqi",
+      "type": "LOCATION",
+      "slug": "anadol-sharqi",
+      "title": "Wilāyat Anāḍūl al-Sharqī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "anatolia east",
+        "anadol sharqi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.konya",
+      "type": "LOCATION",
+      "slug": "konya",
+      "title": "Wilāyat Qūniya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "konya",
+        "quniya"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.trabzon",
+      "type": "LOCATION",
+      "slug": "trabzon",
+      "title": "Wilāyat Ṭarābzūn",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "trabzon",
+        "tarabzon"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.diyar-bakr",
+      "type": "LOCATION",
+      "slug": "diyar-bakr",
+      "title": "Wilāyat Diyār Bakr",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "diyar bakr",
+        "diyarbakir"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kurdistan-ulya",
+      "type": "LOCATION",
+      "slug": "kurdistan-ulya",
+      "title": "Wilāyat Kurdistān al-ʿUlyā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kurdistan",
+        "upper kurdistan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tabriz",
+      "type": "LOCATION",
+      "slug": "tabriz",
+      "title": "Wilāyat Tabrīz",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tabriz"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tehran",
+      "type": "LOCATION",
+      "slug": "tehran",
+      "title": "Wilāyat Ṭihrān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "tehran",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tehran",
+        "tihraan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.isfahan",
+      "type": "LOCATION",
+      "slug": "isfahan",
+      "title": "Wilāyat Iṣfahān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "isfahan",
+        "esfahan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.shiraz",
+      "type": "LOCATION",
+      "slug": "shiraz",
+      "title": "Wilāyat Shīrāz",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "shiraz"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.khuzistan",
+      "type": "LOCATION",
+      "slug": "khuzistan",
+      "title": "Wilāyat Khūzistān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "khuzistan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.mazandaran",
+      "type": "LOCATION",
+      "slug": "mazandaran",
+      "title": "Wilāyat Māzandarān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "mazandaran"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.khorasan-kubra",
+      "type": "LOCATION",
+      "slug": "khorasan-kubra",
+      "title": "Wilāyat Khurāsān al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "khorasan",
+        "greater khorasan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.yerevan",
+      "type": "LOCATION",
+      "slug": "yerevan",
+      "title": "Wilāyat Yerevan",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "yerevan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tbilisi",
+      "type": "LOCATION",
+      "slug": "tbilisi",
+      "title": "Wilāyat Tbilisi",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tbilisi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.caucasus-shamali",
+      "type": "LOCATION",
+      "slug": "caucasus-shamali",
+      "title": "Wilāyat al-Qawqāz al-Shamālī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "caucasus",
+        "north caucasus"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.senegambia",
+      "type": "LOCATION",
+      "slug": "senegambia",
+      "title": "Wilāyat Senegāmbiyā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "senegambia"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.futa-toro",
+      "type": "LOCATION",
+      "slug": "futa-toro",
+      "title": "Wilāyat Fūtā Tūrō",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "futa toro",
+        "futa turo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.mali-kubra",
+      "type": "LOCATION",
+      "slug": "mali-kubra",
+      "title": "Wilāyat Mālī al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "mali",
+        "greater mali"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.timbuktu",
+      "type": "LOCATION",
+      "slug": "timbuktu",
+      "title": "Wilāyat Timbuktū",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "timbuktu"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.hausa",
+      "type": "LOCATION",
+      "slug": "hausa",
+      "title": "Wilāyat Ḥawsa",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "kano",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "hausa",
+        "kano"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.niger-awsat",
+      "type": "LOCATION",
+      "slug": "niger-awsat",
+      "title": "Wilāyat Nījir al-Awsaṭ",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "niger central",
+        "middle niger"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.chad-basin",
+      "type": "LOCATION",
+      "slug": "chad-basin",
+      "title": "Wilāyat Ḥawḍ Tchād",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "chad basin",
+        "lake chad"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.darfur",
+      "type": "LOCATION",
+      "slug": "darfur",
+      "title": "Wilāyat Dār Fūr",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "darfur"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.nile-azraq",
+      "type": "LOCATION",
+      "slug": "nile-azraq",
+      "title": "Wilāyat Nīl al-Azraq",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "blue nile"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.nile-abyad",
+      "type": "LOCATION",
+      "slug": "nile-abyad",
+      "title": "Wilāyat Nīl al-Abyad",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "white nile"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.horn-africa",
+      "type": "LOCATION",
+      "slug": "horn-africa",
+      "title": "Wilāyat al-Qarn al-Ifriqī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "horn of africa"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.somalia",
+      "type": "LOCATION",
+      "slug": "somalia",
+      "title": "Wilāyat Ṣūmāl",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "somalia",
+        "somal"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.afar",
+      "type": "LOCATION",
+      "slug": "afar",
+      "title": "Wilāyat ʿAfar",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "afar"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.habasha",
+      "type": "LOCATION",
+      "slug": "habasha",
+      "title": "Wilāyat al-Ḥabasha",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "addis ababa",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "habasha",
+        "ethiopia"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.zanzibar",
+      "type": "LOCATION",
+      "slug": "zanzibar",
+      "title": "Wilāyat Zanjibār",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "zanzibar"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.swahil",
+      "type": "LOCATION",
+      "slug": "swahil",
+      "title": "Wilāyat Sawāḥil",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mombasa",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "swahili coast",
+        "sawahil"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kilimanjaro",
+      "type": "LOCATION",
+      "slug": "kilimanjaro",
+      "title": "Wilāyat Kilimanjāro",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kilimanjaro"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.great-lakes",
+      "type": "LOCATION",
+      "slug": "great-lakes",
+      "title": "Wilāyat Buḥayrāt al-Kubrā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "great lakes"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.rwanda",
+      "type": "LOCATION",
+      "slug": "rwanda",
+      "title": "Wilāyat Ruwanda",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "rwanda"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.burundi",
+      "type": "LOCATION",
+      "slug": "burundi",
+      "title": "Wilāyat Būrūndī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "burundi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.north-congo",
+      "type": "LOCATION",
+      "slug": "north-congo",
+      "title": "Wilāyat Kongo al-Shamālī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "north congo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.south-congo",
+      "type": "LOCATION",
+      "slug": "south-congo",
+      "title": "Wilāyat Kongo al-Janūbī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "south congo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.luanda",
+      "type": "LOCATION",
+      "slug": "luanda",
+      "title": "Wilāyat Luanda",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "luanda"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.zambezi",
+      "type": "LOCATION",
+      "slug": "zambezi",
+      "title": "Wilāyat Zambīzī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "zambezi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.mozambique",
+      "type": "LOCATION",
+      "slug": "mozambique",
+      "title": "Wilāyat Mozambīq",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "mozambique"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.madagascar",
+      "type": "LOCATION",
+      "slug": "madagascar",
+      "title": "Wilāyat Madaghāshqar",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "madagascar"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.lahore",
+      "type": "LOCATION",
+      "slug": "lahore",
+      "title": "Wilāyat Lahūr",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "lahore",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "lahore",
+        "lahur"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.karachi",
+      "type": "LOCATION",
+      "slug": "karachi",
+      "title": "Wilāyat Karāchī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "karachi",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "karachi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sindh",
+      "type": "LOCATION",
+      "slug": "sindh",
+      "title": "Wilāyat Sindh",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sindh"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.balochistan",
+      "type": "LOCATION",
+      "slug": "balochistan",
+      "title": "Wilāyat Balochistān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "balochistan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kabul",
+      "type": "LOCATION",
+      "slug": "kabul",
+      "title": "Wilāyat Kābul",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "kabul",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kabul"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.hindukush",
+      "type": "LOCATION",
+      "slug": "hindukush",
+      "title": "Wilāyat Hindūkush",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "hindukush"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.delhi",
+      "type": "LOCATION",
+      "slug": "delhi",
+      "title": "Wilāyat Dihli",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "delhi",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "delhi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.gang-gharb",
+      "type": "LOCATION",
+      "slug": "gang-gharb",
+      "title": "Wilāyat Gang al-Gharb",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "western gangetic"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.gang-sharq",
+      "type": "LOCATION",
+      "slug": "gang-sharq",
+      "title": "Wilāyat Gang al-Sharq",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "eastern gangetic"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.dhaka",
+      "type": "LOCATION",
+      "slug": "dhaka",
+      "title": "Wilāyat Dhākkā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "dhaka",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "dhaka"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.assam",
+      "type": "LOCATION",
+      "slug": "assam",
+      "title": "Wilāyat Assam",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "assam"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.deccan",
+      "type": "LOCATION",
+      "slug": "deccan",
+      "title": "Wilāyat Dekkan",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "deccan"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.hyderabad",
+      "type": "LOCATION",
+      "slug": "hyderabad",
+      "title": "Wilāyat Ḥaydarābād",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "hyderabad",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "hyderabad"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.malabar",
+      "type": "LOCATION",
+      "slug": "malabar",
+      "title": "Wilāyat Malabār",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "malabar"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.karnataka",
+      "type": "LOCATION",
+      "slug": "karnataka",
+      "title": "Wilāyat Karnāṭaka",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "karnataka"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tamil",
+      "type": "LOCATION",
+      "slug": "tamil",
+      "title": "Wilāyat Tamil",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tamil"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kerala",
+      "type": "LOCATION",
+      "slug": "kerala",
+      "title": "Wilāyat Kerala",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kerala"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.silan",
+      "type": "LOCATION",
+      "slug": "silan",
+      "title": "Wilāyat Sīlān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "colombo",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "silan",
+        "sri lanka"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kashmir",
+      "type": "LOCATION",
+      "slug": "kashmir",
+      "title": "Wilāyat Kashmir",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kashmir"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.nepal",
+      "type": "LOCATION",
+      "slug": "nepal",
+      "title": "Wilāyat Nepāl",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "nepal"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.malacca",
+      "type": "LOCATION",
+      "slug": "malacca",
+      "title": "Wilāyat Malākkā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "kuala lumpur",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "malacca",
+        "melaka"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sumatra-west",
+      "type": "LOCATION",
+      "slug": "sumatra-west",
+      "title": "Wilāyat Sumātra al-Gharbiyya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "west sumatra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sumatra-east",
+      "type": "LOCATION",
+      "slug": "sumatra-east",
+      "title": "Wilāyat Sumātra al-Sharqiyya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "east sumatra"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.java-west",
+      "type": "LOCATION",
+      "slug": "java-west",
+      "title": "Wilāyat Jāwa al-Gharbiyya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "west java"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.java-east",
+      "type": "LOCATION",
+      "slug": "java-east",
+      "title": "Wilāyat Jāwa al-Sharqiyya",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "jakarta",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "east java",
+        "jakarta"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.borneo",
+      "type": "LOCATION",
+      "slug": "borneo",
+      "title": "Wilāyat Būrniyū",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "borneo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sulawesi",
+      "type": "LOCATION",
+      "slug": "sulawesi",
+      "title": "Wilāyat Sulawīsī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sulawesi"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.bali",
+      "type": "LOCATION",
+      "slug": "bali",
+      "title": "Wilāyat Bālī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "bali"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.mindanao",
+      "type": "LOCATION",
+      "slug": "mindanao",
+      "title": "Wilāyat Mindānāw",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "davao city",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "mindanao"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.luzon",
+      "type": "LOCATION",
+      "slug": "luzon",
+      "title": "Wilāyat Luzon",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "luzon"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.brunei",
+      "type": "LOCATION",
+      "slug": "brunei",
+      "title": "Wilāyat Brūnāy",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "brunei"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.southern-thailand",
+      "type": "LOCATION",
+      "slug": "southern-thailand",
+      "title": "Wilāyat Janūb Tailand",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "southern thailand"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.arakan",
+      "type": "LOCATION",
+      "slug": "arakan",
+      "title": "Wilāyat Arākān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "arakan",
+        "rakhaine"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.cham",
+      "type": "LOCATION",
+      "slug": "cham",
+      "title": "Wilāyat Cham",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "cham"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.tashkent",
+      "type": "LOCATION",
+      "slug": "tashkent",
+      "title": "Wilāyat Tashkent",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "tashkent",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "tashkent"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.samarkand",
+      "type": "LOCATION",
+      "slug": "samarkand",
+      "title": "Wilāyat Samarqand",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "samarkand",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "samarkand"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.bukhara",
+      "type": "LOCATION",
+      "slug": "bukhara",
+      "title": "Wilāyat Bukhārā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "bukhara"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.ferghana",
+      "type": "LOCATION",
+      "slug": "ferghana",
+      "title": "Wilāyat Fargāna",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "ferghana"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.khwarazm",
+      "type": "LOCATION",
+      "slug": "khwarazm",
+      "title": "Wilāyat Khwārazm",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "khwarazm"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.almaty",
+      "type": "LOCATION",
+      "slug": "almaty",
+      "title": "Wilāyat Almaty",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "almaty"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.steppe",
+      "type": "LOCATION",
+      "slug": "steppe",
+      "title": "Wilāyat Qazāq Steppe",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kazakh steppe"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.kashghar",
+      "type": "LOCATION",
+      "slug": "kashghar",
+      "title": "Wilāyat Kashghar",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "kashgar",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "kashgar"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.turkmen",
+      "type": "LOCATION",
+      "slug": "turkmen",
+      "title": "Wilāyat Turkmān",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "turkmen"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sarajevo",
+      "type": "LOCATION",
+      "slug": "sarajevo",
+      "title": "Wilāyat Sarāyīfū",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "sarajevo",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sarajevo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.balkans-south",
+      "type": "LOCATION",
+      "slug": "balkans-south",
+      "title": "Wilāyat Balkān al-Janūbī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "southern balkans"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.balkans-north",
+      "type": "LOCATION",
+      "slug": "balkans-north",
+      "title": "Wilāyat Balkān al-Shamālī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "northern balkans"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.france",
+      "type": "LOCATION",
+      "slug": "france",
+      "title": "Wilāyat Faransā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "paris",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "france",
+        "paris"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.britain",
+      "type": "LOCATION",
+      "slug": "britain",
+      "title": "Wilāyat Brīṭāniyā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "london",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "britain",
+        "london"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.germany",
+      "type": "LOCATION",
+      "slug": "germany",
+      "title": "Wilāyat Almāniyā",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "germany"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.new-york",
+      "type": "LOCATION",
+      "slug": "new-york",
+      "title": "Wilāyat Niyū Yūrk",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "new york city",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "new york",
+        "nyc"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.chicago",
+      "type": "LOCATION",
+      "slug": "chicago",
+      "title": "Wilāyat Shīkāghū",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "chicago",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "chicago"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sao-paulo",
+      "type": "LOCATION",
+      "slug": "sao-paulo",
+      "title": "Wilāyat Sāo Bāwlū",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "sao paulo",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sao paulo"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.caribbean",
+      "type": "LOCATION",
+      "slug": "caribbean",
+      "title": "Wilāyat Karīb",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "caribbean"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.darwin",
+      "type": "LOCATION",
+      "slug": "darwin",
+      "title": "Wilāyat Dārwin",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "darwin",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "darwin"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "loc.sydney",
+      "type": "LOCATION",
+      "slug": "sydney",
+      "title": "Wilāyat Sidnī",
+      "summary": null,
+      "body": null,
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [],
+      "tags": [
+        "location",
+        "sydney",
+        "mysterious"
+      ],
+      "searchKeywords": [
+        "sydney"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    }
+  ]
+}

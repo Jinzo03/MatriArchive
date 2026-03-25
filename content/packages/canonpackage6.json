@@ -1,0 +1,158 @@
+{
+  "packageId": "pkg.canon-package-6",
+  "version": "1.0.0",
+  "title": "Canon package 6",
+  "description": "the actual sixth canon package",
+  "source": "manual package",
+  "characters": [
+    {
+      "id": "char.sheikha-safiyya-al-tanuriyyah",
+      "type": "CHARACTER",
+      "slug": "sheikha-safiyya-al-tanuriyyah",
+      "title": "Sheikha Ṣafiyya al-Tanūriyyah",
+      "summary": "Safiyya is one of the protagonists of 'The Pact That Unmade The Boundary, she is the opposite of Zaynab",
+      "body": "\u1E62afiyya is the opposite of Zaynab. She is intuitive, gentle, and her power comes from her understanding of dreams, emotions, and the unseen. She is known for her \"dreamcraft, her laughter, her prophetic cruelty.\" She is fluid, warm, and associated with milk, water, and soft fabrics.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [" Sheikha Ṣafiyya al-Tanūriyyah", "Safiyya", "Tanūriyyah", "Sheikha","the First Womb"],
+      "tags": ["powerful","soft","warm"],
+      "searchKeywords": ["safiyya al-tanuriyyah", "safiyya", "tanuriyyah", "sheikha","zaynab","mother","three bodied womb"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-pact-that-unmade-the-boundary"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ala-ibn-lahm"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-zaynab-al-ajjala"
+        }
+      ],
+      "media": [
+        
+      ]
+    },
+    {
+      "id": "char.ala-ibn-lahm",       
+      "type": "CHARACTER",
+      "slug": "ala-ibn-lahm",
+      "title": "Ala ibn-Laḥm",
+      "summary": "Main protagonist of story 'The Pact That Unmade The Boundary' and the central figure of the sixth story chain.",
+      "body": "Ala begins the story as a \"liminal boy.\" He is defined by what he lacks: he is not wicked, but not sacred; compliant, but not \"possessed\" by divine will. He is gentle, quiet, and deeply conditioned to seek approval and avoid correction. His sisters call him a \"blanket, not a banner,\" highlighting his softness and passivity. He is a boy who doesn't know what to do with his own hands unless someone is telling him how to hold them.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Ala","boy","safiyya","zaynab"],
+      "tags": ["main", "witness","center"],
+      "searchKeywords": ["Ala","safiyya", "witness", "zaynab", "protagonist","son"],
+      "metadata": {
+        "importance": "major",
+        "role": "central figure"
+        
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-pact-that-unmade-the-boundary"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-safiyya-al-tanuriyyah"
+        },
+        {
+            "type": "RELATED_TO",
+            "targetId": "char.sheikha-zaynab-al-ajjala"
+        }
+       
+      ],
+      "media": []
+    },
+    {
+      "id": "char.sheikha-zaynab-al-ajjala",
+      "type": "CHARACTER",
+      "slug": "zaynab-al-ajjala",
+      "title": "Sheikha Zaynab al-ʿAjjāla",
+      "summary": "Zaynab is one of the protagonists of 'The Pact That Unmade The Boundary, she is the opposite of Safiyya",
+      "body": "Zaynab is the embodiment of structure, discipline, and law. She is severe, rigid, and believes that truth is found through punishment and correction. Her presence is described as \"geometry given breath,\" and her chamber is a sterile \"Hall of Arcs\" filled with diagrams of postures and punishments. She seeks \"symmetry,\" not softness.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [" Sheikha Zaynab al-Ajjala", "Zaynab", "Ajjala", "Sheikha","the Second Womb"],
+      "tags": ["powerful","firm","sharp","harsh"],
+      "searchKeywords": ["zaynab al-ajjala", "zaynab", "ajjala", "sheikha","safiyya","mother","three bodied womb"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-pact-that-unmade-the-boundary"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ala-ibn-lahm"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-safiyya-al-tanuriyyah"
+        }
+      ],
+      "media": []  
+    }
+    
+  ],
+  "stories": [
+    {
+      "id": "story.the-pact-that-unmade-the-boundary",
+      "type": "STORY",
+      "slug": "the-pact-that-unmade-the-boundary",
+      "title": "The Pact That Unmade The Boundary",
+      "summary": "The story, The Pact That Unmade the Boundary, is about a young boy named Ala who is considered \"liminal\"\u2014too soft for traditional masculine roles but not sacred enough for a holy one. In a matriarchal, highly ritualized society, he is given over in a sacred pact to two powerful and opposing Sheikhas, Zaynab and \u1E62afiyya, to form a \"Three-Bodied Womb.\"\r\nInitially, the two Sheikhas use Ala as a battleground for their conflicting ideologies of discipline (Zaynab) and mercy (\u1E62afiyya), nearly causing him to spiritually dissolve. The story tracks their journey from this dysfunctional, fractured triad to a genuine, loving, and supportive family. It is a slow, intimate exploration of power, control, vulnerability, and how a structure built for ownership can transform into a home built on freely-given love.",
+      "body": "The scent of musk and rosewater lingered in the hallway long after the guests had gone.\r\n\r\nIyed stood by the wash basin, wiping the rim with the corner of his sleeve, even though the housemaid had already done it twice. The brass was spotless, glowing like the rim of a new moon, but he kept polishing. Not because he thought it would please anyone. But because he didn't know what to do with his hands when they weren't being corrected.\r\n\r\nOutside, the last call of Maghrib hummed low against the sky. The courtyard had been stripped of cushions. The stone was still warm from the gathering\u2014a meeting of elder women from the School of Reclamation. They had sat in a circle for hours, speaking softly, sometimes glancing at him.\r\n\r\nHe hadn't been allowed in. He had knelt beside the water-jug stand, waiting for a command that never came.\r\n\r\nHe was not a wicked boy.\r\n\r\nBut he was not a sacred one either.\r\n\r\nNot like the other boys from his mother's bloodline\u2014the ones who had wept beneath scholars' thighs, who had survived the lash and fasted until they hallucinated divine hands above their groins. Iyed had tried. Truly.\r\n\r\nHe kept his body light, his voice quiet, his gaze down. He knew the angles of prayer postures better than he knew the corners of his own room. He let the elders hold his tongue between their fingers when they tested him for softness. He cried when they told him to, and sometimes even when they didn't.\r\n\r\nBut something in him remained unpierced.\r\n\r\n\"He is... compliant,\" they would say.\r\n\r\nA long pause.\r\n\r\n\"But not possessed.\"\r\n\r\nHis sisters had other words.\r\n\r\n\"He is a blanket, not a banner,\"\r\n\"He'd rather cry in a corner than fight for a blessing,\"\r\n\"You could wrap him in niqab and no one would notice.\"\r\n\r\nThey didn't hate him. They loved him like one loves a strange pet\u2014a cat that never claws, a boy that never asks. He fetched their oils. He held their mirrors. He sat still when they threaded white-gold ropes between his thighs during their rituals, pretending he was an altar, not a sibling.\r\n\r\nSometimes they laughed at him, and he joined in.\r\n\r\nBut his mother did not laugh.\r\n\r\nShe stood in the doorway now, watching him rub the same spot over and over, her arms folded across her chest. She had the kind of presence that made the room feel like it had forgotten its own name. Her robes were modest\u2014dark green with no embroidery. Her face was smooth, unpainted, but her eyes were lined with certainty.\r\n\r\n\"Iyed,\" she said softly, \"put that down.\"\r\n\r\nHe obeyed instantly. But he didn't turn to face her.\r\n\r\n\"Come here.\"\r\n\r\nHe came.\r\n\r\nShe cupped his chin and tilted it upward. Her fingers smelled faintly of sandalwood and ink.\r\n\r\n\"Do you know what they said?\"\r\n\r\nHe shook his head. His lips trembled, but not from fear.\r\n\r\nFrom hope.\r\n\r\nHope that maybe this time, finally, they had decided he could stay. That he was good enough. That he didn't need to be passed along like a question no one wanted to answer.\r\n\r\nShe studied him.\r\n\r\n\"One Sheikha said you're too delicate to serve.\"\r\n\"Another said you're too obedient to be punished.\"\r\n\"One asked if you were born without bones. Another called you the shadow of a boy.\"\r\n\r\nHer thumb grazed the corner of his mouth.\r\n\r\n\"And yet they all agreed on one thing.\"\r\n\"You are not wicked.\"\r\n\"You are not broken.\"\r\n\"But you are not... enough.\"\r\n\r\nHis face crumpled. Not with tears\u2014those would come later. This was the pre-tear silence. The inhale of shame. The dull ache of being almost loved.\r\n\r\n\"Mama, I\u2014\"\r\n\r\n\"Don't call me that.\"\r\n\r\nHer voice didn't rise. It never did. But it cut.\r\n\r\n\"Not tonight.\"\r\n\r\nHe knelt. Not out of instruction. But out of collapse.\r\n\r\nHer hand remained on his face, hovering. Not cruel. Not kind. Just... pausing.\r\n\r\n\"They offered a path,\" she said at last.\r\n\"One I would never have considered before Nufaysa. Before Rahima.\"\r\n\"There is talk of a Pact.\"\r\n\r\nHis breath caught.\r\n\r\n\"Not marriage.\"\r\n\"Not servitude.\"\r\n\"Something... older. Stranger.\"\r\n\"Two Sheikhas. One boy. A shared womb.\"\r\n\r\n\"You would not belong to them the way a disciple does.\"\r\n\"You would become the bond itself.\"\r\n\r\nShe crouched then, eye to eye. Her veil slipped slightly, revealing a silver thread at her hairline.\r\n\r\n\"But you must know, Iyed... if I accept this\u2014\"\r\n\"You will never be mine again.\"\r\n\r\nThe words struck with soft devastation.\r\n\r\nHe had always known he didn't belong.\r\n\r\nBut to know that he wouldn't even be hers?\r\n\r\n\"Would you... still think of me?\"\r\n\r\nShe didn't answer right away. She reached into the folds of her sleeve and withdrew a small pouch. Opened it. Inside was a folded cloth.\r\n\r\nShe unwrapped it with care. Inside, a thin silver medallion, marked with a symbol only Iyed had seen before: a crescent cradled within a breast.\r\n\r\n\"They told me to give this to the Sheikhas when I deliver you,\" she said.\r\n\"It's proof that your mother was willing. That the milk line has been blessed.\"\r\n\r\nShe didn't hand it to him.\r\n\r\nShe tied it around his neck herself.\r\n\r\nThat night, she let him sleep beside her one final time.\r\n\r\nBut not in her arms.\r\n\r\nAt her feet.\r\n\r\nHe wept quietly.\r\n\r\nShe did not tell him to stop.\r\n\r\nBecause for the first time in his life, his tears meant something.\r\n\r\nThey were not sorrow.\r\n\r\nThey were consent.\r\n\r\nThey were the first drops of a Pact that had not yet been spoken.\r\n\r\n",
+      "visibility": "PUBLIC",
+      "aliases": [" Sheikha Zaynab al-Ajjala","Ala","safiyya","womb","mother","son","judge"],
+      "tags": ["story", "arc", "preview", "canonical"],
+      "searchKeywords": ["sheikha", "zaynab", "preview chapter","ala", "three bodied womb","maryam","mother","son","Sheikha Nuriyya","love"],
+      "metadata": {
+        "sequence": 1,
+        "previewType": "chapter-preview",
+        "externalLinks": {
+          "wattpad": "https://www.wattpad.com/story/406623591-the-pact-that-unmade-the-boundary"
+          
+        },
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-zaynab-al-ajjala"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ala-ibn-lahm"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-safiyya-al-tanuriyyah"
+        }
+        
+      ],
+      "media": []
+    }
+  ],
+  
+  "metadata": {
+    "importPurpose": "canon package import",
+    "canonical": true
+}
+}

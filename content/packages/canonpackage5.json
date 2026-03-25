@@ -1,0 +1,183 @@
+{
+  "packageId": "pkg.canon-package-5",
+  "version": "1.0.0",
+  "title": "Canon package 5",
+  "description": "the actual fifth canon package",
+  "source": "manual package",
+  "characters": [
+    {
+      "id": "char.sheikha-rahima-al-hanuf",
+      "type": "CHARACTER",
+      "slug": "sheikha-rahima-al-hanuf",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "Rahima is the matriarch of the Clinic, the 'First Womb,' and Ayad's mentor. She is both the embodiment of this world's power and its central, unfolding tragedy. She is the gatekeeper, the guide, and ultimately, Ayad's most profound case.",
+      "body": "Sheikha Rahima al-Hanuf is arguably the most powerful and central figure in the story besides Ayad himself. She is the axis around which the world of the Clinic revolves. Here is a comprehensive breakdown of every useful piece of information about her, detailing her characteristics and what makes her so special.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [" Sheikha Rahima al-Hanuf", "Rahima", "Hanuf", "Sheikha","the First Womb"],
+      "tags": ["powerful","manipulative","genius"],
+      "searchKeywords": ["rahima al-hanuf", "rahima", "hanuf", "sheikha","clinic", "first womb","mother","three bodied womb"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-clinic-of-warm-flesh"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ayad-ibn-maryam"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.maryam-al-qusayri"
+        }
+      ],
+      "media": [
+        {
+          "assetId": "media.sheikha-rahima-al-hanuf-archive.portrait-01",
+          "role": "PORTRAIT",
+          "alt": "Portrait art for Sheikha Rahima al-Hanuf",
+          "primary": true,
+          "sortOrder": 0
+        }
+      ]
+    },
+    {
+      "id": "char.ayad-ibn-maryam",       
+      "type": "CHARACTER",
+      "slug": "ayad-ibn-maryam",
+      "title": "Ayad ibn Maryam",
+      "summary": "Main protagonist of story 'The Clinic of Warm Flesh' and the central figure of the fourth story chain.",
+      "body": "We meet Ayad as a shamed, insecure young man. He is physically unimpressive ('not tall, not muscular, not arousing') in a world that values presence and vitality. His own mother calls him a 'little ghost' and scorns his academic degree. He is defined by what he is not—he has never been 'sealed,' he is not a 'sex architect,' and his body is considered a failure. He is an outcast, burdened by a deep-seated feeling of inadequacy.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Ayad","doctor","engineer","architect","rahima","maryam"],
+      "tags": ["main", "witness","genius","engineer","center"],
+      "searchKeywords": ["Ayad","rahima", "witness", "maryam", "protagonist","son"],
+      "metadata": {
+        "importance": "major",
+        "role": "central figure"
+        
+      },
+      "relations": [
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-clinic-of-warm-flesh"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+            "type": "RELATED_TO",
+            "targetId": "char.maryam-al-qusayri"
+        }
+       
+      ],
+      "media": []
+    },
+    {
+      "id": "char.maryam-al-qusayri",
+      "type": "CHARACTER",
+      "slug": "maryam-al-qusayri",
+      "title": "Maryam al-Qusayri",
+      "summary": "Maryam is a key figure in the story, she is Ayad's biological mother. She plays a crucial role in the narrative, often serving as a counterpoint to the more dominant characters.",
+      "body": "Maryam al-Qusayri is a deeply complex and transformative character. She begins as the story's primary antagonist and evolves into a crucial, powerful ally. Her journey is one of deconstruction and reclamation, mirroring Ayad's own.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Maryam", "mother","ayad"],
+      "tags": ["powerful","manipulative","cruel","mother"],
+      "searchKeywords": ["maryam","mother","three bodied womb","ayad","rahima"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        
+        {
+          "type": "APPEARS_IN",
+          "targetId": "story.the-clinic-of-warm-flesh"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ayad-ibn-maryam"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        }
+      ],
+      "media": []  
+    }
+    
+  ],
+  "stories": [
+    {
+      "id": "story.the-clinic-of-warm-flesh",
+      "type": "STORY",
+      "slug": "the-clinic-of-warm-flesh",
+      "title": "The Clinic Of Warm Flesh",
+      "summary": "The Clinic of Warm Flesh, set in a unique, matriarchal, bio-spiritual world. The narrative follows Iyed, a young man who is considered a failure in a society where power is tied to female biology and spiritual-erotic prowess. He is not tall, muscular, or \"arousing,\" and his academic degree in \"Integrative Psycho-Somatic Theology\" is initially seen as useless by his family.\r\nThe story charts Iyed's journey from a shamed outcast to a vital, respected, and unique practitioner at the titular Clinic. He discovers that his perceived weaknesses\u2014his softness, his ability to listen without imposing, his deep empathy\u2014are actually his greatest strengths. He becomes a \"witness\" and a \"container\" for the complex, often traumatic, psycho-spiritual wounds of women, and in doing so, heals not only them but himself, ultimately redefining masculinity and healing in his world.",
+      "body":"Iyed had graduated three days ago.\r\nNot with pride. Not with joy.\r\nBut with a numbness that seemed to seep from the very paper of his diploma.\r\n\r\n\"Bachelor of Integrative Psycho-Somatic Theology.\"\r\n\r\nThat was the name of his degree\u2014an interdisciplinary, prestigious program housed in the upper sanctums of the University of the Womb and Word, a place where scholars studied the interrelations between sexual function, ritual purity, trace anatomy, and the sacred maps of divine arousal. It was a demanding program, difficult to enter and harder to survive. He had made it. He had passed. But the house he returned to did not smell of incense or celebration. It smelled of vinegar, old cumin, and the smoke of bitter eyes.\r\n\r\nHis mother hadn't even looked at the diploma.\r\n\r\nInstead, she'd muttered,\r\n\r\n\"So. You learned how to touch people without touching them. What now, little ghost?\"\r\n\r\nHe didn't reply. Iyed never replied when she used that tone\u2014half-sarcastic, half-regal, with that nasal drag that made every word sound like a curse wrapped in silk. She had once been proud of him\u2014when he was a boy, memorizing sacred anatomy charts, scoring high in pre-theological bio-ethics, dreaming of becoming a specialist in organo-spiritual dysfunction. But now that he was a man\u2014or what passed for one in a world ruled by titanic women, Qur'anic flesh, and sacred breasts that nursed entire provinces\u2014his victories felt like trivia.\r\n\r\nHe wasn't tall.\r\nHe wasn't muscular.\r\nHe wasn't arousing.\r\nAnd worse still\u2014he had never been sealed inside a Sheikha.\r\n\r\n\"Why didn't you become a sex architect?\"\r\n\"Why didn't you apply for trace engineering?\"\r\n\"Why didn't you at least look like your uncle Tahmid when he was your age?\"\r\n\r\nThe questions came from every corner. His aunts, his cousins, even the maid.\r\n\r\nBut the worst came from his younger sister, Lamis.\r\n\r\n\"So what exactly do you do, ya akhi?\r\nStroke scrolls while the rest of us shape nations with our wombs?\"\r\n\r\nThe laughter. The click of their tongues. The sound of the coffee cup being slammed on the marble counter\u2014his mother again.\r\n\r\n\"Wallahi, if I had known, I would've sealed you early and asked for another.\"\r\n\"Do you even have a trace anymore? Or has it fled your shame?\"\r\n\r\nHe spent his hours in his small, narrow room, lined with books on Neuro-Erotic Faith Failures, Symbolic Erectile Collapse, and the sacred work of Sheikha Qadria al-Baida, who once healed an entire village of impotent men with nothing but her sweat and her voice. Iyed studied their methods. He annotated their manuscripts. He dreamed of joining a research sanctuary\u2014like Dar al-Ilm wa-l-Jasad, or Bayt al-'Ara\u2014where the most complex cases of bodily failure and spiritual arousal were studied under the maternal guidance of high Sheikhat.\r\n\r\nBut nobody was hiring.\r\nHe sent out 47 letters. No answer.\r\n\r\nUntil yesterday.\r\n\r\nThe message had come via scented seal\u2014a thing almost unheard of. Only the elite Sheikhat still used them, their perfumes mixed with strands of divine milk and the faint chemical signature of their wombs.\r\n\r\nThe envelope was black, rimmed with gold, and heavy.\r\n\r\nIyed had trembled when he opened it. The parchment inside was soft, thick, and still warm.\r\n\r\nIt read:\r\n\r\nTo Iyed ibn Maryam al-Qusayri, graduate of Psycho-Somatic Theology,\r\nPeace and mercy upon your suffering.\r\nWe have read your thesis.\r\nWe are not unimpressed.\r\nReport to the Southern Gate of Bir Zala at the fourth hour after dawn.\r\nDo not tell your mother.\r\nDo not bring food.\r\nDo not bring pride.\r\n\r\n\u2014Sheikha Rahima al-Hanuf\r\nCustodian of Trace and Flesh\r\nFirst Womb of the Hidden Clinic\r\n\r\nHe read it ten times.\r\nHis hands smelled like the envelope all night.\r\nHe dreamed of nothing\u2014but heat, silence, and a voice he had never heard whispering,\r\n\r\n\"You've suffered enough. Now come. We need you.\"\r\n\r\n\r\n\r\nHe didn't sleep.\r\n\r\nThe letter lay beneath his pillow like a secret pulse, its warmth soaked into the sheets, its scent invading his breath every time he turned. His spine ached from lying too stiff, too afraid the paper might crumple beneath his weight.\r\n\r\nAt dawn, he rose. Not with purpose, but with the heavy inertia of someone pretending to have none.\r\n\r\nHe dressed simply: a soft ivory jubba, his old university shawl still bearing the faded emblem of the Faculty of Psycho-Somatic Theology\u2014a stylized vulva flanked by wings, a calligraphic s\u012Bn curled beneath it, marking sacred pleasure as divine knowledge.\r\n\r\nHe stepped into the kitchen.\r\nHis mother was already there.\r\n\r\nShe didn't look up from the stove. The skillet hissed. Oil popped. Eggs curled.\r\n\r\n\"Still here?\" she asked flatly.\r\n\r\nNo \"sabah al-khayr.\" No glance. Just the scent of eggs and the tightening of her jaw.\r\n\r\nIyed stood silently by the doorway, hands behind his back like a child caught in someone else's house.\r\n\r\n\"You didn't go out yesterday. Again. Not for prayers. Not for a job. Not for shame. Just stayed here. Like dust that refuses to be swept.\"\r\n\r\nHe swallowed. His voice came small and dry.\r\n\r\n\"I got a letter.\"\r\n\r\nShe paused, tongs still in her hand.\r\nThen, a bitter laugh.\r\n\r\n\"Did your cocks send it an apology for not working?\"\r\n\r\nHis face flushed.\r\nStill, he said:\r\n\r\n\"It was from a Sheikha.\"\r\n\r\nNow she turned. Slowly. Her face, always sharp, always beautifully lined, looked at him with something halfway between suspicion and pity.\r\n\r\n\"What kind of Sheikha sends letters to little boys who can't even harden when touched?\"\r\n\r\nHe held up the parchment.\r\n\r\nShe walked over\u2014her feet bare, her robe rich with the scent of musk and orange peel\u2014and snatched it from his fingers. She read quickly. Her lips twitched. Then went still.\r\n\r\nWhen she looked up at him, her voice had lowered.\r\n\r\n\"This place exists.\"\r\n\r\n\"I know.\"\r\n\r\n\"And you think you can work there? With her? You think she'll let you touch the kinds of wounds only sealed men should touch?\"\r\n\r\n\"She didn't ask for a sealed man,\" he said quietly. \"She asked for me.\"\r\n\r\nSilence.\r\nThen:\r\n\r\n\"Then go.\"\r\n\r\nShe shoved the letter back into his chest.\r\n\r\n\"But don't return here. Not after this. Not after placing your name beside hers.\"\r\n\r\nHe took the parchment.\r\nHe nodded.\r\nBut before he turned away, he said\u2014barely above a whisper:\r\n\r\n\"You raised me to know the sacred body.\r\nBut you never let me offer mine.\"\r\n\r\nShe blinked. And for a moment\u2014just one\u2014there was the ghost of regret on her face.\r\n\r\n\"And whose fault is that?\"\r\n\r\nHe passed by Lamis's room before leaving. The door was cracked. She never locked it\u2014not from him.\r\n\r\nShe was curled in bed, uncovered, breathing softly. Her sheets were pale rose, littered with handwritten scrolls of her anatomy coursework. A diagram of milk-vein curvature hung above her desk, annotated in her precise, beautiful script.\r\n\r\nHe watched her sleep, remembering when they studied together, argued about the neuro-symbolic link between semen dreams and misdirected salawat.\r\n\r\nHe stepped inside.\r\n\r\nHe reached for a scroll and scribbled three words on the back of one of her diagrams.\r\n\r\n\"I forgive you.\"\r\n\u2014Iyed\r\n\r\nHe paused.\r\nThen added,\r\n\r\n\"Try to forgive me too.\"\r\n\r\nHe left it on her pillow, next to her sleeping cheek.\r\nShe stirred. Her lips moved.\r\nBut didn't wake.\r\n\r\nThe sun was rising now\u2014melting pink across the courtyard walls.\r\n\r\nHe stepped into the still morning, wrapped in shame, parchment, and faint hope.\r\n\r\nHe walked toward the Southern Gate of Bir Zala,\r\nwhere Sheikha Rahima was waiting.\r\nAnd behind him, nothing called his name.",
+      "visibility": "PUBLIC",
+      "aliases": [" Sheikha Rahima al-Hanuf","Ayad","maryam","womb","case","mother","son","doctor"],
+      "tags": ["story", "arc", "preview", "canonical"],
+      "searchKeywords": ["sheikha", "rahima", "preview chapter","ayad", "three bodied womb","maryam","mother","son"],
+      "metadata": {
+        "sequence": 1,
+        "previewType": "chapter-preview",
+        "externalLinks": {
+          "wattpad": "https://www.wattpad.com/story/401414681-the-clinic-of-warm-flesh"
+          
+        },
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-rahima-al-hanuf"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.ayad-ibn-maryam"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.maryam-al-qusayri"
+        }
+        
+      ],
+      "media": []
+    }
+  ],
+  
+  "media": [
+    {
+      "id": "media.sheikha-rahima-al-hanuf-archive.cover-01",
+      "slug": "sheikha-rahima-al-hanuf-archive-cover-01",
+      "type": "IMAGE",
+      "title": "Sheikha Rahima al-Hanuf",
+      "summary": "A shared cover image for the multi-arc archive package.",
+      "src": "/media/rahima-al-hanuf/archive-cover-01.jpg",
+      "alt": "Cover image for the Sheikha Rahima al-Hanuf archive",
+      "mimeType": "image/jpeg",
+      "width": 1600,
+      "height": 900,
+      "tags": ["cover", "archive", "story-art"],
+      "metadata": {
+        "usage": "archive cover ",
+        "importTest": true
+      }
+    }
+  ],
+  "metadata": {
+    "importPurpose": "canon package import",
+    "canonical": true
+}
+}
