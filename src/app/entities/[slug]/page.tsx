@@ -23,6 +23,52 @@ type ExternalLinks = {
   ao3?: string;
 };
 
+function renderLongFormBody(body: string) {
+  const blocks = body
+    .split(/\r?\n\r?\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  if (blocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-5">
+      {blocks.map((block, index) => {
+        const isSectionBreak =
+          block.startsWith("PART ") ||
+          block.startsWith("Chapter ") ||
+          block.startsWith("Chapter I") ||
+          block.startsWith("Chapter II") ||
+          block.startsWith("Chapter III") ||
+          block.startsWith("Chapter IV") ||
+          block.startsWith("Chapter V") ||
+          block.startsWith("Chapter VI") ||
+          block.startsWith("Chapter VII") ||
+          block.startsWith("THE FATWA") ||
+          block.startsWith("Opening Verse") ||
+          block.startsWith("Closing Addendum");
+
+        return (
+          <div
+            key={`${index}-${block.slice(0, 24)}`}
+            className={
+              isSectionBreak
+                ? "rounded-2xl border border-border/60 bg-background/40 px-4 py-3"
+                : undefined
+            }
+          >
+            <p className="whitespace-pre-wrap break-words text-[15px] leading-8 text-foreground/95 sm:text-base">
+              {block}
+            </p>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function getExternalLinks(metadata: unknown): ExternalLinks | null {
   if (!metadata || typeof metadata !== "object") return null;
 
@@ -136,9 +182,15 @@ export default async function EntityPage({ params }: PageProps) {
     entity.mediaLinks[0]?.role ??
     null;
 
+  const isLongFormArtifact = entity.type === "ARTIFACT";
+
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
+      <div
+        className={`mx-auto flex w-full flex-col gap-8 px-6 py-8 ${
+          isLongFormArtifact ? "max-w-6xl" : "max-w-5xl"
+        }`}
+      >
         <Reveal>
           <section className="ms-panel overflow-hidden">
             {primaryMedia ? (
@@ -296,46 +348,97 @@ export default async function EntityPage({ params }: PageProps) {
           </section>
         </Reveal>
 
-        <div className="grid gap-6 lg:grid-cols-3">
-          <Reveal delay={0.08} className="lg:col-span-2">
-            <section className="ms-panel p-6">
-              <h2 className="text-lg font-semibold">{t(locale, "contentSection")}</h2>
-              <div className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
-                {entity.body || t(locale, "noBodyYet")}
-              </div>
-            </section>
-          </Reveal>
+        {isLongFormArtifact ? (
+          <>
+            <Reveal delay={0.08}>
+              <section className="ms-panel-strong p-6">
+                <div className="flex flex-col gap-3 border-b border-border/60 pb-4">
+                  <h2 className="text-lg font-semibold">{t(locale, "contentSection")}</h2>
+                  <p className="max-w-3xl text-sm text-muted-foreground">
+                    {locale === "ar"
+                      ? "عرض تجريبي كامل للنص الطويل كما تم استيراده، حتى يمكن تقييم ما إذا كان هذا الشكل مناسباً."
+                      : "Experimental full display of the imported long-form text so you can judge whether showing it all at once is worth keeping."}
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {entity.body ? `${entity.body.length.toLocaleString(locale === "ar" ? "ar" : "en")} characters` : null}
+                  </p>
+                </div>
+                <div className="mt-6">
+                  {entity.body ? renderLongFormBody(entity.body) : t(locale, "noBodyYet")}
+                </div>
+              </section>
+            </Reveal>
 
-          <Reveal delay={0.14}>
-            <section className="ms-panel p-6">
-              <h2 className="text-lg font-semibold">{t(locale, "details")}</h2>
-              <dl className="mt-4 space-y-3 text-sm">
-                <div>
-                  <dt className="text-muted-foreground">{t(locale, "slug")}</dt>
-                  <dd>{entity.slug}</dd>
+            <Reveal delay={0.14}>
+              <section className="ms-panel p-6">
+                <h2 className="text-lg font-semibold">{t(locale, "details")}</h2>
+                <dl className="mt-4 grid gap-4 text-sm md:grid-cols-2">
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "slug")}</dt>
+                    <dd>{entity.slug}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "version")}</dt>
+                    <dd>{entity.version}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "aliases")}</dt>
+                    <dd>{entity.aliases.length > 0 ? entity.aliases.join(", ") : t(locale, "none")}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "searchKeywords")}</dt>
+                    <dd>
+                      {entity.searchKeywords.length > 0
+                        ? entity.searchKeywords.join(", ")
+                        : t(locale, "none")}
+                    </dd>
+                  </div>
+                </dl>
+              </section>
+            </Reveal>
+          </>
+        ) : (
+          <div className="grid gap-6 lg:grid-cols-3">
+            <Reveal delay={0.08} className="lg:col-span-2">
+              <section className="ms-panel p-6">
+                <h2 className="text-lg font-semibold">{t(locale, "contentSection")}</h2>
+                <div className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
+                  {entity.body || t(locale, "noBodyYet")}
                 </div>
-                <div>
-                  <dt className="text-muted-foreground">{t(locale, "aliases")}</dt>
-                  <dd>
-                    {entity.aliases.length > 0 ? entity.aliases.join(", ") : t(locale, "none")}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground">{t(locale, "searchKeywords")}</dt>
-                  <dd>
-                    {entity.searchKeywords.length > 0
-                      ? entity.searchKeywords.join(", ")
-                      : t(locale, "none")}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-muted-foreground">{t(locale, "version")}</dt>
-                  <dd>{entity.version}</dd>
-                </div>
-              </dl>
-            </section>
-          </Reveal>
-        </div>
+              </section>
+            </Reveal>
+
+            <Reveal delay={0.14}>
+              <section className="ms-panel p-6">
+                <h2 className="text-lg font-semibold">{t(locale, "details")}</h2>
+                <dl className="mt-4 space-y-3 text-sm">
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "slug")}</dt>
+                    <dd>{entity.slug}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "aliases")}</dt>
+                    <dd>
+                      {entity.aliases.length > 0 ? entity.aliases.join(", ") : t(locale, "none")}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "searchKeywords")}</dt>
+                    <dd>
+                      {entity.searchKeywords.length > 0
+                        ? entity.searchKeywords.join(", ")
+                        : t(locale, "none")}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt className="text-muted-foreground">{t(locale, "version")}</dt>
+                    <dd>{entity.version}</dd>
+                  </div>
+                </dl>
+              </section>
+            </Reveal>
+          </div>
+        )}
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.18}>

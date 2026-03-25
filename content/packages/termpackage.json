@@ -1,0 +1,1666 @@
+{
+  "packageId": "pkg.term",
+  "version": "1.0.0",
+  "title": "term package",
+  "description": "An import for all major terms",
+  "source": "manual package",
+  "lore": [
+    {
+      "id": "term.sheikha",
+      "type": "TERM",
+      "slug": "sheikha-term",
+      "title": "Sheikha",
+      "summary": null,
+      "body": "A woman who holds religious, social, and often absolute authority within the matriarchal order.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "sheikha"
+      ],
+      "tags": [
+        "sheikha",
+        "term",
+        "authority",
+        "matriarch"
+      ],
+      "searchKeywords": [
+        "authority",
+        "matriarch",
+        "sheikha",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.matriarch",
+      "type": "TERM",
+      "slug": "matriarch-term",
+      "title": "Matriarch",
+      "summary": null,
+      "body": "An elder woman who holds recognized authority, especially over a household, institution, or community.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "matriarch"
+      ],
+      "tags": [
+        "matriarch",
+        "term",
+        "authority",
+        "elder"
+      ],
+      "searchKeywords": [
+        "authority",
+        "elder",
+        "matriarch",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.mother",
+      "type": "TERM",
+      "slug": "mother-term",
+      "title": "Mother",
+      "summary": null,
+      "body": "A female parent or maternal figure within the world.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "mother"
+      ],
+      "tags": [
+        "mother",
+        "term",
+        "parent",
+        "maternal"
+      ],
+      "searchKeywords": [
+        "maternal",
+        "mother",
+        "parent",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.son",
+      "type": "TERM",
+      "slug": "son-term",
+      "title": "Son",
+      "summary": null,
+      "body": "A male child in relation to a parent.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "son"
+      ],
+      "tags": [
+        "son",
+        "term",
+        "child",
+        "male"
+      ],
+      "searchKeywords": [
+        "child",
+        "male",
+        "son",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.majlis",
+      "type": "TERM",
+      "slug": "majlis-term",
+      "title": "Majlis",
+      "summary": null,
+      "body": "A formal council where authority is exercised and decisions are made.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "majlis"
+      ],
+      "tags": [
+        "majlis",
+        "term",
+        "council",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "council",
+        "majlis",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.majlis-al-ummahat-al-kubra",
+      "type": "TERM",
+      "slug": "majlis-al-ummahat-al-kubra-term",
+      "title": "Majlis al-Ummahat al-Kubrā",
+      "summary": null,
+      "body": "The supreme council of matriarchs that defines doctrine and governs the entire system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "majlis al-ummahat al-kubra",
+        "great matriarchal council"
+      ],
+      "tags": [
+        "majlis",
+        "council",
+        "supreme",
+        "matriarchs"
+      ],
+      "searchKeywords": [
+        "council",
+        "great matriarchal council",
+        "majlis",
+        "majlis al ummahat al kubra",
+        "majlis al-ummahat al-kubra",
+        "matriarchs",
+        "supreme",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.wilaya",
+      "type": "TERM",
+      "slug": "wilaya-term",
+      "title": "Wilaya",
+      "summary": null,
+      "body": "A governed region under the authority of a Sheikha or council.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "wilaya"
+      ],
+      "tags": [
+        "wilaya",
+        "term",
+        "region",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "region",
+        "term",
+        "wilaya"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.order",
+      "type": "TERM",
+      "slug": "order-term",
+      "title": "Order",
+      "summary": null,
+      "body": "A structured group organized around a shared function, discipline, or doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "order"
+      ],
+      "tags": [
+        "order",
+        "term",
+        "structure",
+        "group"
+      ],
+      "searchKeywords": [
+        "group",
+        "order",
+        "structure",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.ummah",
+      "type": "TERM",
+      "slug": "ummah-term",
+      "title": "Ummah",
+      "summary": null,
+      "body": "A collective bound by shared doctrine and submission to the matriarchal system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "ummah"
+      ],
+      "tags": [
+        "ummah",
+        "term",
+        "collective",
+        "doctrine"
+      ],
+      "searchKeywords": [
+        "collective",
+        "doctrine",
+        "term",
+        "ummah"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.subject",
+      "type": "TERM",
+      "slug": "subject-term",
+      "title": "Subject",
+      "summary": null,
+      "body": "An individual living under the authority of the system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "subject"
+      ],
+      "tags": [
+        "subject",
+        "term",
+        "authority",
+        "person"
+      ],
+      "searchKeywords": [
+        "authority",
+        "person",
+        "subject",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.disciple",
+      "type": "TERM",
+      "slug": "disciple-term",
+      "title": "Disciple",
+      "summary": null,
+      "body": "A person undergoing guidance, discipline, or instruction under a Sheikha.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "disciple"
+      ],
+      "tags": [
+        "disciple",
+        "term",
+        "guidance",
+        "student"
+      ],
+      "searchKeywords": [
+        "disciple",
+        "guidance",
+        "student",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.witness",
+      "type": "TERM",
+      "slug": "witness-term",
+      "title": "Witness",
+      "summary": null,
+      "body": "An individual assigned to observe or validate an act, ritual, or event.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "witness"
+      ],
+      "tags": [
+        "witness",
+        "term",
+        "observe",
+        "validate"
+      ],
+      "searchKeywords": [
+        "observe",
+        "term",
+        "validate",
+        "witness"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.custodian",
+      "type": "TERM",
+      "slug": "custodian-term",
+      "title": "Custodian",
+      "summary": null,
+      "body": "A person responsible for maintaining, enforcing, or preserving a system or space.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "custodian"
+      ],
+      "tags": [
+        "custodian",
+        "term",
+        "guard",
+        "preserve"
+      ],
+      "searchKeywords": [
+        "custodian",
+        "guard",
+        "preserve",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.bearer",
+      "type": "TERM",
+      "slug": "bearer-term",
+      "title": "Bearer",
+      "summary": null,
+      "body": "An individual designated to carry a function, role, or symbolic responsibility.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "bearer"
+      ],
+      "tags": [
+        "bearer",
+        "term",
+        "role",
+        "responsibility"
+      ],
+      "searchKeywords": [
+        "bearer",
+        "responsibility",
+        "role",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.doctrine",
+      "type": "TERM",
+      "slug": "doctrine-term",
+      "title": "Doctrine",
+      "summary": null,
+      "body": "A system of beliefs, laws, and teachings that governs the world.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "doctrine"
+      ],
+      "tags": [
+        "doctrine",
+        "term",
+        "belief",
+        "law"
+      ],
+      "searchKeywords": [
+        "belief",
+        "doctrine",
+        "law",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.fitrah",
+      "type": "TERM",
+      "slug": "fitrah-term",
+      "title": "Fitrah",
+      "summary": null,
+      "body": "The defined natural state of a being as established by doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "fitrah"
+      ],
+      "tags": [
+        "fitrah",
+        "term",
+        "nature",
+        "doctrine"
+      ],
+      "searchKeywords": [
+        "doctrine",
+        "fitrah",
+        "nature",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.correction",
+      "type": "TERM",
+      "slug": "correction-term",
+      "title": "Correction",
+      "summary": null,
+      "body": "The process of enforcing alignment with doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "correction"
+      ],
+      "tags": [
+        "correction",
+        "term",
+        "alignment",
+        "discipline"
+      ],
+      "searchKeywords": [
+        "alignment",
+        "correction",
+        "discipline",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.deviation",
+      "type": "TERM",
+      "slug": "deviation-term",
+      "title": "Deviation",
+      "summary": null,
+      "body": "A state of misalignment from doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "deviation"
+      ],
+      "tags": [
+        "deviation",
+        "term",
+        "misalignment",
+        "error"
+      ],
+      "searchKeywords": [
+        "deviation",
+        "error",
+        "misalignment",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.purification",
+      "type": "TERM",
+      "slug": "purification-term",
+      "title": "Purification",
+      "summary": null,
+      "body": "The process of removing deviation and restoring alignment.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "purification"
+      ],
+      "tags": [
+        "purification",
+        "term",
+        "restoration",
+        "cleanse"
+      ],
+      "searchKeywords": [
+        "cleanse",
+        "purification",
+        "restoration",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.alignment",
+      "type": "TERM",
+      "slug": "alignment-term",
+      "title": "Alignment",
+      "summary": null,
+      "body": "A state of full conformity with doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "alignment"
+      ],
+      "tags": [
+        "alignment",
+        "term",
+        "conformity",
+        "order"
+      ],
+      "searchKeywords": [
+        "alignment",
+        "conformity",
+        "order",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.submission",
+      "type": "TERM",
+      "slug": "submission-term",
+      "title": "Submission",
+      "summary": null,
+      "body": "The act of yielding will, body, or authority to a higher power.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "submission"
+      ],
+      "tags": [
+        "submission",
+        "term",
+        "yielding",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "submission",
+        "term",
+        "yielding"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.obedience",
+      "type": "TERM",
+      "slug": "obedience-term",
+      "title": "Obedience",
+      "summary": null,
+      "body": "The act of following commands issued by authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "obedience"
+      ],
+      "tags": [
+        "obedience",
+        "term",
+        "follow",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "follow",
+        "obedience",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.ritual",
+      "type": "TERM",
+      "slug": "ritual-term",
+      "title": "Ritual",
+      "summary": null,
+      "body": "A prescribed act performed according to doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "ritual"
+      ],
+      "tags": [
+        "ritual",
+        "term",
+        "prescribed",
+        "practice"
+      ],
+      "searchKeywords": [
+        "practice",
+        "prescribed",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.rite",
+      "type": "TERM",
+      "slug": "rite-term",
+      "title": "Rite",
+      "summary": null,
+      "body": "A formalized ritual marking a transition, status, or function.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "rite"
+      ],
+      "tags": [
+        "rite",
+        "term",
+        "formal",
+        "transition"
+      ],
+      "searchKeywords": [
+        "formal",
+        "rite",
+        "term",
+        "transition"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.invocation",
+      "type": "TERM",
+      "slug": "invocation-term",
+      "title": "Invocation",
+      "summary": null,
+      "body": "A spoken or enacted act that initiates a ritual or authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "invocation"
+      ],
+      "tags": [
+        "invocation",
+        "term",
+        "initiation",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "initiation",
+        "invocation",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.seal",
+      "type": "TERM",
+      "slug": "seal-term",
+      "title": "Seal",
+      "summary": null,
+      "body": "An act or mechanism that restricts, binds, or finalizes a state.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "seal"
+      ],
+      "tags": [
+        "seal",
+        "term",
+        "bind",
+        "finalize"
+      ],
+      "searchKeywords": [
+        "bind",
+        "finalize",
+        "seal",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.binding",
+      "type": "TERM",
+      "slug": "binding-term",
+      "title": "Binding",
+      "summary": null,
+      "body": "The act of imposing restriction or obligation through doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "binding"
+      ],
+      "tags": [
+        "binding",
+        "term",
+        "restriction",
+        "obligation"
+      ],
+      "searchKeywords": [
+        "binding",
+        "obligation",
+        "restriction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.offering",
+      "type": "TERM",
+      "slug": "offering-term",
+      "title": "Offering",
+      "summary": null,
+      "body": "An act of giving performed within a ritual context.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "offering"
+      ],
+      "tags": [
+        "offering",
+        "term",
+        "gift",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "gift",
+        "offering",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.recitation",
+      "type": "TERM",
+      "slug": "recitation-term",
+      "title": "Recitation",
+      "summary": null,
+      "body": "The formal repetition of words with doctrinal significance.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "recitation"
+      ],
+      "tags": [
+        "recitation",
+        "term",
+        "speech",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "recitation",
+        "ritual",
+        "speech",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.sanctum",
+      "type": "TERM",
+      "slug": "sanctum-term",
+      "title": "Sanctum",
+      "summary": null,
+      "body": "A controlled or sacred space where doctrine is enacted.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "sanctum"
+      ],
+      "tags": [
+        "sanctum",
+        "term",
+        "sacred",
+        "space"
+      ],
+      "searchKeywords": [
+        "sacred",
+        "sanctum",
+        "space",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.chamber",
+      "type": "TERM",
+      "slug": "chamber-term",
+      "title": "Chamber",
+      "summary": null,
+      "body": "An enclosed space designated for a specific function or ritual.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "chamber"
+      ],
+      "tags": [
+        "chamber",
+        "term",
+        "room",
+        "space"
+      ],
+      "searchKeywords": [
+        "chamber",
+        "room",
+        "space",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.hall",
+      "type": "TERM",
+      "slug": "hall-term",
+      "title": "Hall",
+      "summary": null,
+      "body": "A large formal space used for gatherings or ceremonies.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "hall"
+      ],
+      "tags": [
+        "hall",
+        "term",
+        "gathering",
+        "space"
+      ],
+      "searchKeywords": [
+        "gathering",
+        "hall",
+        "space",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.domain",
+      "type": "TERM",
+      "slug": "domain-term",
+      "title": "Domain",
+      "summary": null,
+      "body": "A space under the control of a specific authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "domain"
+      ],
+      "tags": [
+        "domain",
+        "term",
+        "control",
+        "space"
+      ],
+      "searchKeywords": [
+        "control",
+        "domain",
+        "space",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.threshold",
+      "type": "TERM",
+      "slug": "threshold-term",
+      "title": "Threshold",
+      "summary": null,
+      "body": "A boundary marking entry into a different state or space.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "threshold"
+      ],
+      "tags": [
+        "threshold",
+        "term",
+        "boundary",
+        "entry"
+      ],
+      "searchKeywords": [
+        "boundary",
+        "entry",
+        "term",
+        "threshold"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.chastity",
+      "type": "TERM",
+      "slug": "chastity-term",
+      "title": "Chastity",
+      "summary": null,
+      "body": "A controlled state of restriction imposed on the body.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "chastity"
+      ],
+      "tags": [
+        "chastity",
+        "term",
+        "restriction",
+        "body"
+      ],
+      "searchKeywords": [
+        "body",
+        "chastity",
+        "restriction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.restraint",
+      "type": "TERM",
+      "slug": "restraint-term",
+      "title": "Restraint",
+      "summary": null,
+      "body": "The limitation of movement, action, or function.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "restraint"
+      ],
+      "tags": [
+        "restraint",
+        "term",
+        "limit",
+        "control"
+      ],
+      "searchKeywords": [
+        "control",
+        "limit",
+        "restraint",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.discipline",
+      "type": "TERM",
+      "slug": "discipline-term",
+      "title": "Discipline",
+      "summary": null,
+      "body": "The enforcement of order through control and correction.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "discipline"
+      ],
+      "tags": [
+        "discipline",
+        "term",
+        "order",
+        "control"
+      ],
+      "searchKeywords": [
+        "control",
+        "discipline",
+        "order",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.state",
+      "type": "TERM",
+      "slug": "state-term",
+      "title": "State",
+      "summary": null,
+      "body": "A defined condition of body, mind, or status.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "state"
+      ],
+      "tags": [
+        "state",
+        "term",
+        "condition",
+        "status"
+      ],
+      "searchKeywords": [
+        "condition",
+        "state",
+        "status",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.conditioning",
+      "type": "TERM",
+      "slug": "conditioning-term",
+      "title": "Conditioning",
+      "summary": null,
+      "body": "The process of shaping behavior through repetition and control.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "conditioning"
+      ],
+      "tags": [
+        "conditioning",
+        "term",
+        "behavior",
+        "training"
+      ],
+      "searchKeywords": [
+        "behavior",
+        "conditioning",
+        "term",
+        "training"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.term",
+      "type": "TERM",
+      "slug": "term-term",
+      "title": "Term",
+      "summary": null,
+      "body": "A word or expression with a defined meaning in the system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "term"
+      ],
+      "tags": [
+        "term",
+        "term",
+        "definition",
+        "word"
+      ],
+      "searchKeywords": [
+        "definition",
+        "term",
+        "word"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.designation",
+      "type": "TERM",
+      "slug": "designation-term",
+      "title": "Designation",
+      "summary": null,
+      "body": "An assigned name, role, or status.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "designation"
+      ],
+      "tags": [
+        "designation",
+        "term",
+        "name",
+        "role"
+      ],
+      "searchKeywords": [
+        "designation",
+        "name",
+        "role",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.inscription",
+      "type": "TERM",
+      "slug": "inscription-term",
+      "title": "Inscription",
+      "summary": null,
+      "body": "Written or engraved content with formal significance.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "inscription"
+      ],
+      "tags": [
+        "inscription",
+        "term",
+        "written",
+        "record"
+      ],
+      "searchKeywords": [
+        "inscription",
+        "record",
+        "term",
+        "written"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.record",
+      "type": "TERM",
+      "slug": "record-term",
+      "title": "Record",
+      "summary": null,
+      "body": "A preserved account of events, rulings, or individuals.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "record"
+      ],
+      "tags": [
+        "record",
+        "term",
+        "archive",
+        "account"
+      ],
+      "searchKeywords": [
+        "account",
+        "archive",
+        "record",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.archive",
+      "type": "TERM",
+      "slug": "archive-term",
+      "title": "Archive",
+      "summary": null,
+      "body": "A structured collection of records and knowledge.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "archive"
+      ],
+      "tags": [
+        "archive",
+        "term",
+        "collection",
+        "record"
+      ],
+      "searchKeywords": [
+        "archive",
+        "collection",
+        "record",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.artifact",
+      "type": "TERM",
+      "slug": "artifact-term",
+      "title": "Artifact",
+      "summary": null,
+      "body": "A physical object or document with significance.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "artifact"
+      ],
+      "tags": [
+        "artifact",
+        "term",
+        "object",
+        "document"
+      ],
+      "searchKeywords": [
+        "artifact",
+        "document",
+        "object",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.relic",
+      "type": "TERM",
+      "slug": "relic-term",
+      "title": "Relic",
+      "summary": null,
+      "body": "An artifact preserved for its historical or symbolic value.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "relic"
+      ],
+      "tags": [
+        "relic",
+        "term",
+        "artifact",
+        "symbolic"
+      ],
+      "searchKeywords": [
+        "artifact",
+        "relic",
+        "symbolic",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.text",
+      "type": "TERM",
+      "slug": "text-term",
+      "title": "Text",
+      "summary": null,
+      "body": "A written work containing doctrine, rulings, or knowledge.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "text"
+      ],
+      "tags": [
+        "text",
+        "term",
+        "writing",
+        "knowledge"
+      ],
+      "searchKeywords": [
+        "knowledge",
+        "term",
+        "text",
+        "writing"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.scroll",
+      "type": "TERM",
+      "slug": "scroll-term",
+      "title": "Scroll",
+      "summary": null,
+      "body": "A physical document used for formal or sacred writing.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "scroll"
+      ],
+      "tags": [
+        "scroll",
+        "term",
+        "document",
+        "sacred"
+      ],
+      "searchKeywords": [
+        "document",
+        "sacred",
+        "scroll",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.event",
+      "type": "TERM",
+      "slug": "event-term",
+      "title": "Event",
+      "summary": null,
+      "body": "A defined occurrence in time.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "event"
+      ],
+      "tags": [
+        "event",
+        "term",
+        "occurrence",
+        "time"
+      ],
+      "searchKeywords": [
+        "event",
+        "occurrence",
+        "term",
+        "time"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.ceremony",
+      "type": "TERM",
+      "slug": "ceremony-term",
+      "title": "Ceremony",
+      "summary": null,
+      "body": "A formal event structured by ritual.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "ceremony"
+      ],
+      "tags": [
+        "ceremony",
+        "term",
+        "formal",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "ceremony",
+        "formal",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.procession",
+      "type": "TERM",
+      "slug": "procession-term",
+      "title": "Procession",
+      "summary": null,
+      "body": "A structured movement of individuals as part of a ritual or event.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "procession"
+      ],
+      "tags": [
+        "procession",
+        "term",
+        "movement",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "movement",
+        "procession",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.judgment",
+      "type": "TERM",
+      "slug": "judgment-term",
+      "title": "Judgment",
+      "summary": null,
+      "body": "An official decision issued by authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "judgment"
+      ],
+      "tags": [
+        "judgment",
+        "term",
+        "decision",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "decision",
+        "judgment",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.decree",
+      "type": "TERM",
+      "slug": "decree-term",
+      "title": "Decree",
+      "summary": null,
+      "body": "A binding command issued by a Sheikha or council.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "decree"
+      ],
+      "tags": [
+        "decree",
+        "term",
+        "command",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "command",
+        "decree",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.command",
+      "type": "TERM",
+      "slug": "command-term",
+      "title": "Command",
+      "summary": null,
+      "body": "An instruction issued by authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "command"
+      ],
+      "tags": [
+        "command",
+        "term",
+        "instruction",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "command",
+        "instruction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.enforcement",
+      "type": "TERM",
+      "slug": "enforcement-term",
+      "title": "Enforcement",
+      "summary": null,
+      "body": "The act of ensuring obedience to doctrine or command.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "enforcement"
+      ],
+      "tags": [
+        "enforcement",
+        "term",
+        "obey",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "enforcement",
+        "obey",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.authorization",
+      "type": "TERM",
+      "slug": "authorization-term",
+      "title": "Authorization",
+      "summary": null,
+      "body": "The granting of permission or legitimacy.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "authorization"
+      ],
+      "tags": [
+        "authorization",
+        "term",
+        "permission",
+        "legitimacy"
+      ],
+      "searchKeywords": [
+        "authorization",
+        "legitimacy",
+        "permission",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.sanction",
+      "type": "TERM",
+      "slug": "sanction-term",
+      "title": "Sanction",
+      "summary": null,
+      "body": "An imposed consequence for deviation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "sanction"
+      ],
+      "tags": [
+        "sanction",
+        "term",
+        "consequence",
+        "discipline"
+      ],
+      "searchKeywords": [
+        "consequence",
+        "discipline",
+        "sanction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    }
+  ]
+}
