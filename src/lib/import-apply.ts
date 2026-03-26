@@ -100,11 +100,20 @@ function entityMediaKey(entitySlug: string, assetSlug: string, role: string) {
   return `${entitySlug}::${assetSlug}::${role}`;
 }
 
-function resolveRelationTargetSlug(
-  targetId: string,
-  indexes: ReturnType<typeof buildImportIndexes>
-) {
-  return resolveTargetEntity(targetId, indexes)?.slug ?? targetId;
+function indexEntitiesByIdAndSlug<
+  T extends {
+    id: string;
+    slug: string;
+  },
+>(items: T[]) {
+  const map = new Map<string, T>();
+
+  for (const item of items) {
+    map.set(item.id, item);
+    map.set(item.slug, item);
+  }
+
+  return map;
 }
 
 function resolveMediaAssetSlug(
@@ -185,12 +194,12 @@ export async function applyUniverseImport(
 
       const mediaRecordBySlug = new Map<string, { id: string; slug: string }>();
 
-      const relationTargetSlugs = new Set<string>();
+      const relationTargetRefs = new Set<string>();
       const entityMediaAssetSlugs = new Set<string>();
 
       for (const entity of entities) {
         for (const relation of entity.relations ?? []) {
-          relationTargetSlugs.add(resolveRelationTargetSlug(relation.targetId, indexes));
+          relationTargetRefs.add(relation.targetId);
         }
 
         for (const link of entity.media ?? []) {
@@ -430,7 +439,12 @@ export async function applyUniverseImport(
       }
 
       const existingTargetEntities = await tx.entity.findMany({
-        where: { slug: { in: [...relationTargetSlugs] } },
+        where: {
+          OR: [
+            { id: { in: [...relationTargetRefs] } },
+            { slug: { in: [...relationTargetRefs] } },
+          ],
+        },
         select: {
           id: true,
           slug: true,
@@ -439,9 +453,20 @@ export async function applyUniverseImport(
           type: true,
         },
       });
-      const existingTargetEntityMap = new Map(
-        existingTargetEntities.map((item) => [item.slug, item])
-      );
+      const existingTargetEntityMap = indexEntitiesByIdAndSlug(existingTargetEntities);
+
+      const relationTargetSlugs = new Set<string>();
+      for (const entity of entities) {
+        for (const relation of entity.relations ?? []) {
+          const packageTarget = resolveTargetEntity(relation.targetId, indexes);
+          const databaseTarget = existingTargetEntityMap.get(relation.targetId);
+          const resolvedSlug = packageTarget?.slug ?? databaseTarget?.slug;
+
+          if (resolvedSlug) {
+            relationTargetSlugs.add(resolvedSlug);
+          }
+        }
+      }
 
       const existingTargetMedia = await tx.mediaAsset.findMany({
         where: { slug: { in: [...entityMediaAssetSlugs] } },
@@ -512,10 +537,12 @@ export async function applyUniverseImport(
 
         for (const relation of entity.relations ?? []) {
           const targetPackageEntity = resolveTargetEntity(relation.targetId, indexes);
-          const targetSlug = targetPackageEntity?.slug ?? relation.targetId;
-
           const targetRecord =
-            entityRecordBySlug.get(targetSlug) ?? existingTargetEntityMap.get(targetSlug);
+            (targetPackageEntity
+              ? entityRecordBySlug.get(targetPackageEntity.slug) ??
+                existingTargetEntityMap.get(targetPackageEntity.slug)
+              : undefined) ?? existingTargetEntityMap.get(relation.targetId);
+          const targetSlug = targetRecord?.slug ?? targetPackageEntity?.slug ?? relation.targetId;
 
           if (!targetRecord) {
             warnings.push(

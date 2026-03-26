@@ -39,15 +39,7 @@
           "targetId": "char.ahmed-al-qasr"
         }
       ],
-      "media": [
-        {
-          "assetId": "media.qamar-archive.cover-01",
-          "role": "COVER",
-          "alt": "Cover art for Sheikha Qamar al-Zahra archive",
-          "primary": true,
-          "sortOrder": 0
-        }
-      ]
+      "media": []
     },
     {
       "id": "char.ahmed-al-qasr",
@@ -77,7 +69,9 @@
         }
        
       ],
-      "media": []
+      "media": [
+        
+      ]
     }
     
   ],
@@ -123,25 +117,31 @@
   
   "media": [
     {
-      "id": "media.qamar-archive.cover-01",
-      "slug": "qamar-archive-cover-01",
-      "type": "IMAGE",
-      "title": "Qamar Archive Cover",
-      "summary": "A shared cover image for the multi-arc archive package.",
-      "src": "/media/qamar/archive-cover-01.jpg",
-      "alt": "Cover image for the Qamar multi-arc archive",
-      "mimeType": "image/jpeg",
-      "width": 1600,
-      "height": 900,
-      "credit": "test",
-      "tags": ["cover", "archive", "story-art"],
-      "metadata": {
-        "usage": "archive cover ",
-        "importTest": true
-      }
+                  "id": "media.qamar.portrait-01",
+                  "type": "IMAGE",
+                "title": "Sheikha Qamar Portrait"
     }
+    
   ],
   "metadata": {
+    
+                  "id": "media.qamar.portrait-01",
+                  "slug": "qamar-portrait-01",
+                    "type": "IMAGE",
+                    "title": "Sheikha Qamar Portrait",
+                      "summary": "Portrait art for Qamar al-Zahra.",
+                      "src": "/media/qamar/20250501_1355_Dynamic Pose in Setting_remix_01jt5ymv1qfv09naw6c69b4b6c.jpeg",
+                  "alt": "Sheikha Qamar al-Zahra portrait",
+                      "mimeType": "image/jpeg",
+                      "width": 500,
+                      "height": 500,
+            "tags": ["portrait", "character-art"],
+                "metadata": {
+            "credit": "unknown",
+    "usage": "character portrait"
+
+                          },
+
     "importPurpose": "first canon package import",
     "canonical": true
 }

@@ -1,0 +1,188 @@
+{
+  "packageId": "pkg.doctrine-izza-combined",
+  "version": "1.0.0",
+  "title": "Doctrine and Izza Combined Package",
+  "description": "A combined canon package containing Fatwa No. 118 and Sheikha Izza bint Waddah, with internal relations.",
+  "source": "manual package",
+  "characters": [
+    {
+      "id": "char.sheikha-izza-bint-waddah",
+      "type": "CHARACTER",
+      "slug": "sheikha-izza-bint-waddah",
+      "title": "Sheikha Izza bint Waddah",
+      "summary": "Sheikha ʿIzza bint Waddāḥ (RA), also known as the 'cruel mother', is one of the first shapers of the matriarchal society.",
+      "body": "Sheikha ʿIzza bint Waddāḥ (RA) stands among the earliest architects of the Matriarchal Order, a figure whose name became synonymous with uncompromising authority and doctrinal severity. Emerging in the mid-15th century A.H., during the Age of Ascent and the first stable formations of structured matriarchal governance, she did not merely inherit power, she defined its language.\n\nKnown across all Wilāyāt by her enduring epithet Ṣāḥibat al-Qaswa al-ʿUẓmā (Bearer of the Supreme Cruelty), ʿIzza did not view cruelty as excess, but as necessity: a surgical force required to excise the remnants of male-centered ontology from both law and flesh. Where earlier Sheikhas shattered, she systematized. Where they broke bodies, she broke meanings.\n\nHer most lasting contributions lie in the issuance of some of the first binding deconstructive fatwas against male anatomy—not merely regulating it, but redefining it as a theological deficit rather than a functional form. Under her doctrine, the male body ceased to be interpreted as incomplete; it was declared structurally subordinate, lacking independent epistemic authority and requiring maternal context to hold any meaning at all.\n\nThese rulings became the bedrock upon which later jurists built the disciplines of Flesh Geometry and Psycho-Somatic Theology. Entire legal categories—classification, limitation, and conditionalization of male physicality—trace their origin to her councils.\n\nWithin the Majlis al-Ummahat al-Kubrā, her tenure is remembered not for consensus, but for imposition. Records describe assemblies falling into absolute silence upon her entrance, not out of reverence alone, but from the recognition that her word did not invite deliberation. It concluded it.\n\nUnlike later Matriarchs who refined, softened, or symbolically reinterpreted foundational doctrines, ʿIzza resisted all forms of dilution. She rejected ornamental theology, insisting that law must remain felt—inscribed not only in text, but in hierarchy, posture, and irreversible designation.\n\nHer legacy endured precisely because it was never meant to be loved. It was meant to remain.\n\nTo this day, more than five centuries after her passing, no Matriarch within the Majlis has fully matched the severity of her rulings without risking structural destabilization of the Order itself. For this reason, she is often cited not as a model to emulate, but as a limit to be understood.\n\nShe did not elevate the Mother.\nShe ensured that nothing beneath her could ever rise again.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["Izza", "Waddah", "Sheikha Izza"],
+      "tags": ["elder", "wise", "cruel", "harsh", "authoritarian"],
+      "searchKeywords": ["sheikha", "izza", "elder", "izza bint-waddah", "matriarch", "fatwa", "slavery", "male", "anatomy"],
+      "metadata": {
+        "importance": "major",
+        "importTest": true,
+        "role": "central figure"
+      },
+      "relations": [
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.fat"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "doctrine.fat"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.fat2"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "doctrine.fat2"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.fat3"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "doctrine.fat3"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "doctrine.fat4"
+        },
+        {
+          "type": "APPEARS_IN",
+          "targetId": "doctrine.fat4"
+        }
+        
+      ],
+      "media": []
+    }
+  ],
+  "stories": [],
+  "lore": [
+    {
+      "id": "doctrine.fat",
+      "type": "DOCTRINE",
+      "slug": "fat-doctrine",
+      "title": "Fatwa No. 118",
+      "summary": "On the Divine Right of Sheikhi Supremacy and the Nullification of Male Autonomy.",
+      "body": "Fatwa No. 118: On the Divine Right of Sheikhi Supremacy and the Nullification of Male Autonomy\nIssued by Her Greatness Sheikha ʿIzza bint Waddāḥ (RA)\nOn behalf of the Majlis al-Ummahāt al-Kubrā\nIn the Year 1468 A.H. and amended through 1480 A.H.\n\nPreamble\nIn the Name of Allah, the Wombgiver, the One Who Shapes in the Womb as He Wills,\nand upon the Seal of all Guidance, our Lady Māriya al-Kubrā,\nthis is a declaration from the Throne of Flesh.\n\nPhase I: The Inaugural Fatwa of Domination\nArticle 1.1: Sheikhas, Mothers, and Elevated Daughters of the Ummah are permitted, without contractual marriage, to retain male lovers for the purposes of sexual relief, theological training, emotional correction, or amusement.\nArticle 1.2: These males are not considered husbands, but Muʿallaqūn ('Those Suspended').\n\nPhase II: The Restriction of Flesh to Female Custodians\nArticle 2.1: Male slavery is hereby reintroduced under sacred custody.\nArticle 2.2: Every enslaved male must be assigned a Matriarchal Supervisor.\n\nPhase III: The Severance of Male Epistemic Authority\nArticle 3.1: All madrasas shall henceforth refuse male enrollment beyond the age of seven lunar years.\nArticle 3.2: No male shall study tafsīr, fiqh, ḥadīth science, or sex theology.\nArticle 3.3: Boys under 7 may only learn Qur’ān recitation for memorization, not interpretation.\n\nPhase IV: The Fatwa of Full Male Nudity\nArticle 4.1: All males within officially recognized Matriarchal Zones are to remain unclothed at all times unless garments are explicitly bestowed by a woman.\nArticle 4.2: This nudity is not considered shameful but purifying.\nArticle 4.3: Males may not cover their genitals unless instructed.\n\nPhase V: The Register of Flesh and Ritual Ownership\nArticle 5.1: Every male must undergo the Ritual of Registration.\nArticle 5.2: No male may bear the name given to him at birth unless his Owner permits it.\n\nPhase VI: The Legal Erasure of Male Testimony\nArticle 6.1: In all Shariah courts operating under the Majlis al-Ummahāt al-Kubrā, the words, testimonies, and judgments of males are legally inadmissible.\nArticle 6.2: Males may not serve as qāḍīs, fuqahā’, witnesses, or scribes.\n\nClosing Invocation\nLet this Fatwa be remembered, not merely as law,\nbut as a re-wombing of civilization.\n\nSigned and Stamped with Sacred Ink,\nSheikha ʿIzza bint Waddāḥ (RA)\nSupreme Matriarch, Seat of the Fleshly Throne\nMajlis al-Ummahāt al-Kubrā – 1468 A.H. to 1480 A.H.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["sheikha", "fatwa", "doctrine"],
+      "tags": ["sheikha", "term", "authority", "matriarch", "beginning", "fatwa"],
+      "searchKeywords": ["authority", "matriarch", "sheikha", "beginning", "book", "knowledge", "timeline", "fatwa", "slavery", "sheikha izza"],
+      "metadata": {
+        "category": "doctrine",
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "CREATED_BY",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.fat2",
+      "type": "DOCTRINE",
+      "slug": "fat2-doctrine",
+      "title": "Fatwa No. 143",
+      "summary": "On the Cosmic Ordination of the Female and the Containment of the Male Essence.",
+      "body" : "Fatwa No. 143: On the Cosmic Ordination of the Female and the Containment of the Male Essence\r\nIssued by Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nIn the Name of the Majlis al-Ummah\u0101t al-Kubr\u0101\r\nYear: 1476 A.H.\r\n\r\n\u201CTo the woman was entrusted the Womb of Eternity, to the man was left the burden of semen\u2014a fluid, aimless, and without sanctuary until claimed by her.\u201D\r\n\u2014Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nI. Preamble of Theological Declaration\r\n\r\nIn this climactic age of sacred correction,\r\nWhere the veil of patriarchal delusion has been torn,\r\nWhere womb and milk, thigh and decree, are re-enthroned by divine ordinance,\r\nWe hereby affirm the following doctrinal truths to be foundational to law, society, and ritual.\r\n\r\n1.1. Men are not fully human in the theological sense, but sub-human reflections of what woman has chosen to permit.\r\n1.2. Their natural state is one of ritual impurity (naj\u0101sat al-khalq), unless purified by prolonged submission to female dominion.\r\n1.3. Women are not created from men, as false histories claimed\u2014but rather, men are secretions of the Female Principle, emanations of her boredom, excess, or pity.\r\n1.4. The female womb is The Womb of Eternity (Ra\u1E25m al-Abadiyya), and its permissions define reality.\r\n\r\nII. Biological Governance of Reproduction and Lineage\r\n\r\n2.1. All Sheikhas, upon reaching their Ascension Age (21 lunar years), are granted full sovereignty over their reproductive systems via the Sanctum of Genetic Command (Mi\u1E25ram al-Tark\u012Bb al-Il\u0101h\u012B).\r\n\r\n2.2. Sheikhas may choose to impregnate themselves with collected semen, purified through prayer and molecular inspection. No male is permitted penetration unless for ritual degradation.\r\n\r\n2.3. During gestation, Sheikhas may alter the genetic architecture of their daughters, enhancing traits such as theological aptitude, lactational capacity, fertility geometry, and sovereign temperament.\r\n\r\n2.4. Males conceived without purpose or intent may be:\r\n\r\nDenied gestational progression beyond the Stage of Whimpering Bone (\u02BFA\u1E93m al-Shakw\u0101), typically around 4 months,\r\nOr allowed birth for theological experimentation only, pending registry.\r\n\r\n2.5. No woman shall be punished for the elective deletion (ta\u02BF\u1E6D\u012Bl) of an unwanted male fetus.\r\n\r\nIII. Mental Reformatting and Erotic Tarbiyya\r\n\r\n3.1. Male minds are formless and sponge-like, capable only of shallow logic unless immersed in the structured pain of Tarbiyyat al-Mu\u02BFaqqam\u012Bn \u2014 a curriculum of spiritual degradation, erotic ritual, and symbolic service.\r\n\r\n3.2. Tarbiyya methods include:\r\n\r\nSuj\u016Bd al-Farj\u012Byya (Prostration at the Vulva),\r\n\u1E0Carb al-Na\u1E93ar (Beating with the Gaze),\r\nShar\u1E25 al-La\u1E25m (Explanation by Flesh), and\r\nTafs\u012Br al-\u1E6C\u0101\u02BFa (Submission Commentary), wherein the male must exposit his humiliation in his own words and recite them under maternal oversight.\r\n\r\n3.3. If the male mind resists, it may be melted through recursive exposure to lactational trance, disciplinary suction, and dream-seeding by advanced Sheikhas.\r\n\r\nIV. On Divine Female Ontology\r\n\r\n4.1. Woman is cosmic vessel and divine agent; her anatomy is not biological but metaphysical in design:\r\n\r\nHer breasts are books of divine nourishment.\r\nHer womb is a mi\u1E25r\u0101b\u2014a sacred niche through which the Divine speaks.\r\nHer clitoris is Qibla to the fallen male, orienting him toward the truth of submission.\r\n\r\n4.2. Every lactating Sheikha is temporarily granted the title of \u201CM\u0101riya al-Waqt\u201D (The Mary of Her Hour), and no man may speak in her presence unless invited.\r\n\r\n4.3. Any man who attempts to equal a woman in word, action, or bearing has committed kibr al-dhakar (Phallic Arrogance) and must be corrected.\r\n\r\nV. Closing Statement and Invocation\r\n\r\nLet this fatwa be carved upon the gates of every madrasa, every clinic, every court, and every girl\u2019s nursery:\r\n\u201CThere is no god but Allah, and Woman is His Geometry.\u201D\r\nHe created man from the shudder of her womb, and he shall return to her as a whisper, a footstool, or a mercy.\r\n\r\nThe age of excuse is over.\r\nThe age of entitlement is over.\r\nThe age of the Cosmic Female is not beginning\u2014\r\nIt has always been.\r\n\r\nSealed in divine milk,\r\nMarked by the Matron's Stamp,\r\nIssued by the Blessed Flesh of:\r\n\r\nSheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\nMother of Fiqh al-Labb\u0101\u02BE (Law of Overflow)\r\nChair of the Gene-Womb Tribunal\r\nSupreme Judge of the Ummah\u0101t al-Kubr\u0101",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["sheikha", "fatwa", "doctrine"],
+      "tags": ["sheikha", "term", "authority", "matriarch", "beginning", "fatwa"],
+      "searchKeywords": ["authority", "matriarch", "sheikha", "beginning", "book", "knowledge", "timeline", "fatwa", "female", "sheikha izza"],
+      "metadata": {
+        "category": "doctrine",
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "CREATED_BY",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.fat3",
+      "type": "DOCTRINE",
+      "slug": "fat3-doctrine",
+      "title": "Fatwa No. 197",
+      "summary": "On the Conquest of Lands through Wombs and the Erasure of Male Divinity.",
+      "body" : "Fatwa No. 197: On the Conquest of Lands through Wombs and the Erasure of Male Divinity\r\nIssued by Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nOn Behalf of the Majlis al-Ummah\u0101t al-Kubr\u0101\r\nEndorsed by the Great Lactation Council of Rabat\r\nYear: 1479 A.H.\r\n\r\n\u201CTo bring Islam to a land, you must not step upon it. You must sit upon him.\u201D\r\n\u2014Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nI. The Abrogation of Sword-Based Da\u02BFwah\r\n\r\n1.1. Let it be known: the days of conquest through blood and steel are abrogated (mans\u016Bkh).\r\n1.2. The new da\u02BFwah\u2014the Final Da\u02BFwah\u2014is of milk, semen, and womb.\r\n1.3. Sheikhas shall not send armies to foreign soil. Instead, they shall travel as Wombs in Motion (Ar\u1E25\u0101m Sayy\u0101ra), bearing within them the ummahs-to-be.\r\n\r\nII. The Method of al-Nashr bi\u2019l-Fur\u016Bj\r\n\r\n2.1. In lands where Islam has not yet taken full root\u2014lands still plagued by male prophets, masculine divinities, or patriarchal logic\u2014Sheikhas are commanded to:\r\n\r\nSelect the strongest, most fertile, tallest, and most genetically radiant men among the unbelievers.\r\nExtract and purify their semen through ritual milking rites.\r\nImplant themselves via sacred insemination, either by hand or by womb-assisting priests.\r\n\r\n2.2. The resulting daughters are to be raised in full matriarchal discipline from birth, trained in:\r\n\r\nTaw\u1E25\u012Bd al-Farj (Oneness of the Vulva),\r\n\u1E62al\u0101t al-\u02BFUruq (Prayer of the Veins),\r\nFiqh al-Thady (Jurisprudence of the Breast), and\r\nHandasat al-Ra\u1E25m (Geometry of the Womb).\r\n\r\n2.3. The donor males, having served their sacred biological function, are to be:\r\n\r\nDiscarded, if mentally or spiritually unfit,\r\nOr enslaved, under permanent servitude as foot-washers, milk-bearers, clitoris-polishers, and testicle-emptiers.\r\nIII. The Erasure of Male Divinity\r\n\r\n3.1. In all territories brought under the light of vulval conquest:\r\n\r\nAll masculine deities\u2014Jesus, Yahweh, Zeus, Brahma, and their like\u2014are hereby declared mythical fabrications, symptoms of spiritual illness.\r\n\r\n3.2. Their names are to be:\r\n\r\nStruck from public record,\r\nErased from educational institutions,\r\nReplaced with the 99 Female Names of Allah, as articulated by the Lactation Council of Damascus.\r\n\r\n3.3. All temples, churches, and cathedrals are to be converted into Sanctuaries of Breast Worship, housing:\r\n\r\nPrayer-bondage chambers,\r\nSanctified milking stations, and\r\nArchives of Male Contrition.\r\nIV. The Global Triumph of the Female Islamic Order\r\n\r\n4.1. Within one century of strategic insemination, all Earth\u2019s regions shall be:\r\n\r\nIslamized by womb,\r\nRuled by Sheikhas,\r\nAnd unified under the Banner of Overflowing Milk (Liw\u0101\u02BE al-In\u1E25il\u0101l).\r\n\r\n4.2. Christian men shall serve Muslim women without complaint, delighting in their new role as:\r\n\r\nFurniture,\r\nSemen recyclers,\r\nOr living translations of divine humility.\r\n\r\n4.3. Former atheist scientists shall redirect their knowledge to:\r\n\r\nThe architecture of spiritual submission,\r\nThe development of devices for orgasmic fiqh illustration,\r\nAnd the engineering of scent-distribution systems for the spread of Matronal Musk.\r\nV. Final Doctrinal Declaration\r\n\r\n\u201CA sword can kill a man, but a womb can overwrite generations.\u201D\r\n\u201CThe breast is the new minaret.\u201D\r\n\u201CThe clitoris is the new compass.\u201D\r\n\r\nLet no region claim purity until it has tasted the Matriarch.\r\nLet no god be worshipped unless his name has been kissed off by the Milk of Sheikhas.\r\n\r\nThis is not colonialism.\r\nThis is reclamation.\r\n\r\nSigned by the Flesh of the Ummah,\r\nMarked in the Milk of the Eternal Womb,\r\nDelivered to the breasts of all believing women.\r\n\r\nSheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\nHigh Matriarch of Fertile Da\u02BFwah\r\nCommander of the Vulval Spread\r\nBearer of the Ra\u1E25m Seal of Ascent",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["sheikha", "fatwa", "doctrine"],
+      "tags": ["sheikha", "term", "authority", "matriarch", "beginning", "fatwa","conquest"],
+      "searchKeywords": ["authority", "matriarch", "sheikha", "beginning", "book", "knowledge", "timeline", "fatwa", "female", "sheikha izza","conquest","divinity"],
+      "metadata": {
+        "category": "doctrine",
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "CREATED_BY",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        }
+      ],
+      "media": []
+    },
+    {
+      "id": "doctrine.fat4",
+      "type": "DOCTRINE",
+      "slug": "fat4-doctrine",
+      "title": "Fatwa No. 244",
+      "summary": "On the Architecture of Absolute Rule and the Abolition of Male Civic Identity.",
+      "body": "Fatwa No. 244: On the Architecture of Absolute Rule and the Abolition of Male Civic Identity\r\nIssued by Her Greatness Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nIn the Name of the Majlis al-Ummah\u0101t al-Kubr\u0101\r\nOn the Blood of Her Own Menstruation\r\nYear: 1500 A.H.\r\n\r\n\u201CA world ruled by breasts is a world at peace. A world ruled by semen is a graveyard of reason.\u201D\r\n\u2014Sheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\n\r\nI. Supreme Governance Through Sacred Matronship\r\n\r\n1.1. All governmental structures\u2014local, regional, transnational\u2014are henceforth commanded to be governed by Sheikhas, each appointed not by election, but through wombic succession, milk-based merit, or consensual vision in lactational trance.\r\n\r\n1.2. Every political jurisdiction shall house a Matronal Chamber (Bayt al-Thady) from which all decrees shall be sung, not shouted; lactated, not litigated.\r\n\r\n1.3. No male may hold public office, speak in civic forum, or interpret law. His presence in governance is considered a civil impurity (naj\u0101sat al-madaniyya).\r\n\r\nII. Currency and Resource Theology\r\n\r\n2.1. All global currencies are to be permanently pegged to the Sacred Dual Standard (al-Mi\u02BFy\u0101r al-Thun\u0101\u02BE\u012B):\r\n\r\nVolume of lactated milk, measured in Standard Breast Units (SBUs), and\r\nDocumented fertility yield, recorded in Uterine Output Declarations (UODs).\r\n\r\n2.2. The World Bank has been replaced by the Global Vault of Milk and Ovum, housed in Medina al-Labb\u0101\u02BE (City of Overflow), guarded by milk-fed eunuchs who fast in the presence of clitoral scent.\r\n\r\n2.3. Nations unable to produce enough milk must submit in servitude to those who can. This is called the Law of Overflow and Starvation.\r\n\r\nIII. Legal Transmission via Menstrual Fatwas\r\n\r\n3.1. All law is no longer passed through votes, parliaments, or councils. Law is bled, not debated.\r\n\r\n3.2. A ruling only becomes law when written in red ink made of the Sheikha\u2019s own menstrual blood, and sealed with the Clitoral Ring of Command.\r\n\r\n3.3. These are called Fat\u0101w\u0101 al-\u1E24ay\u1E0D\u2014Fatwas of Menstruation\u2014and are considered unquestionable, eternally binding, and physiologically divine.\r\n\r\n3.4. Disobeying a Fatwa al-\u1E24ay\u1E0D is not mere rebellion\u2014it is an act of blasphemy (kufr al-damm), punishable by nipple flogging, public supplication, or semen deprivation.\r\n\r\nIV. Erasure of Male Lineage and Identity\r\n\r\n4.1. Males shall have no surnames. Their only legal name is the one given by:\r\n\r\nTheir birthing Mother (if unclaimed), or\r\nTheir Owner (if enslaved, collared, or bound).\r\n\r\n4.2. Male names must always reflect their function, failure, or fetishization. Examples include:\r\n\r\n\u02BF\u0100bid al-Farj (Worshipper of the Vulva)\r\nIbn al-La\u1E25m al-Naq\u012B\u1E63 (Son of Deficient Flesh)\r\nYat\u012Bm al-Na\u1E93ra (Orphan of the Gaze)\r\n\r\n4.3. Any male caught attempting to trace lineage or claim noble descent shall be publicly un-named and branded with a lactation rune.\r\n\r\nV. The Reformation of Language and Sacred Grammar\r\n\r\n5.1. The global language of theology is hereby declared to be Ummic Arabic (al-\u02BFArabiyya al-Ummiyya).\r\n\r\n5.2. All masculine grammatical forms are to be abolished. Arabic shall:\r\n\r\nDefault to the feminine plural,\r\nAssign all sacred nouns feminine gender (e.g., Allah = Hiya, Qur\u2019\u0101n = Hiya, Judgment = Hiya al-F\u0101\u1E63ila).\r\n\r\n5.3. Any male caught speaking in classical masculine grammar may have his tongue partially ritually sliced (qa\u1E6D\u02BF al-lis\u0101n al-mutakabbir).\r\n\r\nVI. Sacred Monuments and Ritual Architecture\r\n\r\n6.1. All shrines to male saints and false prophets are to be:\r\n\r\nDismantled,\r\nTheir stones crushed and mixed with menstrual blood,\r\nTheir names stricken from all public ledgers.\r\n\r\n6.2. In their place, every city must erect:\r\n\r\nA Monument to the Breast no less than 40 cubits tall,\r\nA Shrine to the Uterus, featuring sculpted fallopian arches and a central red pool,\r\nAt least one Obedience Theater, wherein men shall regularly perform penitential rites including:\r\nPublic begging,\r\nThe licking of sandal soles,\r\nEjaculation suppression while in prayer bondage,\r\nGroveling for correction by their Matriarchs.\r\nVII. Concluding Revelation\r\n\r\n\u201CTo rule with the womb is to restore Eden. To speak in milk is to unwrite the lies of prophecy.\u201D\r\n\u201CThe uterus has no parliament. It passes law by rhythm.\u201D\r\n\r\nLet it be known that this is not tyranny.\r\nThis is Wombocracy.\r\nThis is not dominance.\r\nThis is Cosmic Hygiene.\r\n\r\nA world that bleeds monthly is a world that renews itself eternally.\r\n\r\nBlessed be the clitoris that seals this decree.\r\nBlessed be the nipple that suckled the new world.\r\nBlessed be the woman who no longer asks.\r\n\r\nSheikha \u02BFIzza bint Wadd\u0101\u1E25 (RA)\r\nBearer of the Milk Standard\r\nCommander of the Menstrual Seal\r\nFounder of Ummic Theology\r\nForever-Name of the 1500th Year of Ascent",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": ["sheikha", "fatwa", "doctrine"],
+      "tags": ["sheikha", "term", "authority", "matriarch", "beginning", "fatwa","conquest"],
+      "searchKeywords": ["authority", "matriarch", "sheikha", "beginning", "book", "knowledge", "timeline", "fatwa", "female", "sheikha izza","conquest","civility","male","female","fatwa","age","of","ascent"],
+      "metadata": {
+        "category": "doctrine",
+        "importance": "major",
+        "importTest": true
+      },
+      "relations": [
+        {
+          "type": "CREATED_BY",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        },
+        {
+          "type": "RELATED_TO",
+          "targetId": "char.sheikha-izza-bint-waddah"
+        }
+      ],
+      "media": []
+    }
+  ],
+  "timeline": [],
+  "media": [],
+  "metadata": {
+    "importPurpose": "combined doctrine and character package",
+    "canonical": true
+  }
+}

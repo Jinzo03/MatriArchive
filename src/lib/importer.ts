@@ -102,11 +102,20 @@ function entityMediaKey(entitySlug: string, assetSlug: string, role: string) {
   return `${entitySlug}::${assetSlug}::${role}`;
 }
 
-function resolveRelationTargetSlug(
-  targetId: string,
-  indexes: ReturnType<typeof buildImportIndexes>
-) {
-  return resolveTargetEntity(targetId, indexes)?.slug ?? targetId;
+function indexEntitiesByIdAndSlug<
+  T extends {
+    id: string;
+    slug: string;
+  },
+>(items: T[]) {
+  const map = new Map<string, T>();
+
+  for (const item of items) {
+    map.set(item.id, item);
+    map.set(item.slug, item);
+  }
+
+  return map;
 }
 
 function resolveMediaAssetSlug(
@@ -146,12 +155,12 @@ export async function dryRunImport(
   const entitySlugs = [...new Set(entities.map((entity) => entity.slug))];
   const mediaSlugs = [...new Set(media.map((asset) => asset.slug))];
 
-  const relationTargetSlugs = new Set<string>();
+  const relationTargetRefs = new Set<string>();
   const entityMediaAssetSlugs = new Set<string>();
 
   for (const entity of entities) {
     for (const relation of entity.relations ?? []) {
-      relationTargetSlugs.add(resolveRelationTargetSlug(relation.targetId, indexes));
+      relationTargetRefs.add(relation.targetId);
     }
 
     for (const link of entity.media ?? []) {
@@ -198,7 +207,12 @@ export async function dryRunImport(
         },
       }),
       prisma.entity.findMany({
-        where: { slug: { in: [...relationTargetSlugs] } },
+        where: {
+          OR: [
+            { id: { in: [...relationTargetRefs] } },
+            { slug: { in: [...relationTargetRefs] } },
+          ],
+        },
         select: {
           id: true,
           slug: true,
@@ -218,8 +232,21 @@ export async function dryRunImport(
 
   const existingEntityMap = new Map(existingEntities.map((item) => [item.slug, item]));
   const existingMediaMap = new Map(existingMedia.map((item) => [item.slug, item]));
-  const existingTargetEntityMap = new Map(existingTargetEntities.map((item) => [item.slug, item]));
+  const existingTargetEntityMap = indexEntitiesByIdAndSlug(existingTargetEntities);
   const existingTargetMediaMap = new Map(existingTargetMedia.map((item) => [item.slug, item]));
+
+  const relationTargetSlugs = new Set<string>();
+  for (const entity of entities) {
+    for (const relation of entity.relations ?? []) {
+      const packageTarget = resolveTargetEntity(relation.targetId, indexes);
+      const databaseTarget = existingTargetEntityMap.get(relation.targetId);
+      const resolvedSlug = packageTarget?.slug ?? databaseTarget?.slug;
+
+      if (resolvedSlug) {
+        relationTargetSlugs.add(resolvedSlug);
+      }
+    }
+  }
 
   const existingRelationships = await prisma.relationship.findMany({
     where: {
@@ -374,8 +401,9 @@ export async function dryRunImport(
 
   for (const entity of entities) {
     for (const relation of entity.relations ?? []) {
-      const targetSlug = resolveRelationTargetSlug(relation.targetId, indexes);
-      const target = existingTargetEntityMap.get(targetSlug);
+      const packageTarget = resolveTargetEntity(relation.targetId, indexes);
+      const target =
+        packageTarget ? existingTargetEntityMap.get(packageTarget.slug) ?? packageTarget : existingTargetEntityMap.get(relation.targetId);
 
       if (!target) {
         warnings.push(

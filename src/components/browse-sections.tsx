@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { startTransition, useState } from "react";
 import { Reveal } from "@/components/reveal";
+import { EntityMediaFrame } from "@/components/entity-media-frame";
 
 const DEFAULT_VISIBLE_ITEMS = 6;
 type BrowseEntityType =
@@ -32,6 +33,8 @@ type BrowseEntity = {
       alt: string | null;
       title: string;
       type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
+      width?: number | null;
+      height?: number | null;
     };
   }>;
 };
@@ -157,13 +160,13 @@ export function BrowseSections({
                         className="block overflow-hidden rounded-xl border border-border transition hover:bg-accent"
                       >
                         {primaryMedia && primaryMedia.type === "IMAGE" ? (
-                          <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-border/60 bg-muted/30">
-                            <img
-                              src={primaryMedia.src}
-                              alt={primaryMedia.alt || primaryMedia.title || item.title}
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
+                          <EntityMediaFrame
+                            src={primaryMedia.src}
+                            alt={primaryMedia.alt || primaryMedia.title || item.title}
+                            title={primaryMedia.title}
+                            width={primaryMedia.width}
+                            height={primaryMedia.height}
+                          />
                         ) : null}
 
                         <div className="p-4">

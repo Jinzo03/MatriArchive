@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
+import { EntityMediaFrame } from "@/components/entity-media-frame";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +39,8 @@ type SearchEntity = {
       alt: string | null;
       title: string;
       type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
+      width: number | null;
+      height: number | null;
     };
   }>;
 };
@@ -129,6 +132,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                   alt: true,
                   title: true,
                   type: true,
+                  width: true,
+                  height: true,
                 },
               },
             },
@@ -196,13 +201,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                           className="block overflow-hidden rounded-xl border border-border transition hover:bg-accent"
                         >
                           {primaryMedia && primaryMedia.type === "IMAGE" ? (
-                            <div className="relative aspect-[16/7] w-full overflow-hidden border-b border-border/60 bg-muted/30">
-                              <img
-                                src={primaryMedia.src}
-                                alt={primaryMedia.alt || primaryMedia.title || item.title}
-                                className="h-full w-full object-cover"
-                              />
-                            </div>
+                            <EntityMediaFrame
+                              src={primaryMedia.src}
+                              alt={primaryMedia.alt || primaryMedia.title || item.title}
+                              title={primaryMedia.title}
+                              width={primaryMedia.width}
+                              height={primaryMedia.height}
+                            />
                           ) : null}
 
                           <div className="p-4">

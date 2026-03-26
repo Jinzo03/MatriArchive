@@ -91,7 +91,8 @@
         "sequence": 1,
         "previewType": "chapter-preview",
         "externalLinks": {
-          "wattpad": "https://www.wattpad.com/story/400549953-verse-made-flesh"
+          "wattpad": "https://www.wattpad.com/story/400549953-verse-made-flesh",
+          "ao3":     "https://archiveofourown.org/works/81903956/chapters/215477836"
           
         },
         "importTest": true

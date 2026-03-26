@@ -11,6 +11,7 @@ import { getRequestLocale } from "@/lib/locale.server";
 import { getRelationshipLabel } from "@/lib/relationships";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
+import { EntityMediaFrame } from "@/components/entity-media-frame";
 
 export const dynamic = "force-dynamic";
 
@@ -194,15 +195,14 @@ export default async function EntityPage({ params }: PageProps) {
         <Reveal>
           <section className="ms-panel overflow-hidden">
             {primaryMedia ? (
-              <div className="border-b border-border/60">
-                <div className="relative aspect-[16/6] w-full overflow-hidden bg-muted/30">
-                  <img
-                    src={primaryMedia.src}
-                    alt={primaryMedia.alt || entity.title}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              </div>
+              <EntityMediaFrame
+                src={primaryMedia.src}
+                alt={primaryMedia.alt || entity.title}
+                title={primaryMedia.title}
+                width={primaryMedia.width}
+                height={primaryMedia.height}
+                variant="hero"
+              />
             ) : null}
 
             <div className="p-6">

@@ -47,6 +47,8 @@ type BrowseEntity = {
       alt: string | null;
       title: string;
       type: "IMAGE" | "VIDEO" | "AUDIO" | "OTHER";
+      width: number | null;
+      height: number | null;
     };
   }>;
 };
@@ -75,6 +77,8 @@ export default async function BrowsePage() {
               alt: true,
               title: true,
               type: true,
+              width: true,
+              height: true,
             },
           },
         },

@@ -1,8 +1,8 @@
 {
   "packageId": "pkg.term",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "term package",
-  "description": "An import for all major terms",
+  "description": "An import for all major terms, expanded with doctrinal and bodily vocabulary",
   "source": "manual package",
   "lore": [
     {
@@ -40,7 +40,7 @@
       "slug": "matriarch-term",
       "title": "Matriarch",
       "summary": null,
-      "body": "An elder woman who holds recognized authority, especially over a household, institution, or community.",
+      "body": "An elder woman who holds senior authority and may govern households, institutions, or wider communities.",
       "status": "ACTIVE",
       "visibility": "PUBLIC",
       "aliases": [
@@ -55,6 +55,7 @@
       "searchKeywords": [
         "authority",
         "elder",
+        "governance",
         "matriarch",
         "term"
       ],
@@ -69,7 +70,7 @@
       "slug": "mother-term",
       "title": "Mother",
       "summary": null,
-      "body": "A female parent or maternal figure within the world.",
+      "body": "A woman recognized as a source of origin, care, and maternal authority.",
       "status": "ACTIVE",
       "visibility": "PUBLIC",
       "aliases": [
@@ -78,13 +79,14 @@
       "tags": [
         "mother",
         "term",
-        "parent",
-        "maternal"
+        "maternal",
+        "origin"
       ],
       "searchKeywords": [
+        "authority",
         "maternal",
         "mother",
-        "parent",
+        "origin",
         "term"
       ],
       "metadata": {
@@ -98,7 +100,7 @@
       "slug": "son-term",
       "title": "Son",
       "summary": null,
-      "body": "A male child in relation to a parent.",
+      "body": "A male child or male descendant defined in relation to maternal lineage and authority.",
       "status": "ACTIVE",
       "visibility": "PUBLIC",
       "aliases": [
@@ -107,12 +109,13 @@
       "tags": [
         "son",
         "term",
-        "child",
+        "lineage",
         "male"
       ],
       "searchKeywords": [
-        "child",
+        "lineage",
         "male",
+        "maternal",
         "son",
         "term"
       ],
@@ -190,7 +193,7 @@
       "slug": "wilaya-term",
       "title": "Wilaya",
       "summary": null,
-      "body": "A governed region under the authority of a Sheikha or council.",
+      "body": "A governed region defined by jurisdiction, authority, and doctrinal enforcement.",
       "status": "ACTIVE",
       "visibility": "PUBLIC",
       "aliases": [
@@ -199,12 +202,13 @@
       "tags": [
         "wilaya",
         "term",
-        "region",
+        "location",
         "authority"
       ],
       "searchKeywords": [
         "authority",
-        "region",
+        "jurisdiction",
+        "location",
         "term",
         "wilaya"
       ],
@@ -1655,6 +1659,1111 @@
         "consequence",
         "discipline",
         "sanction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.breast",
+      "type": "TERM",
+      "slug": "breast-term",
+      "title": "Breast",
+      "summary": null,
+      "body": "A female organ recognized as a source of nourishment, authority, and symbolic power within doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "breast",
+        "breasts"
+      ],
+      "tags": [
+        "breast",
+        "breasts",
+        "term",
+        "body"
+      ],
+      "searchKeywords": [
+        "body",
+        "breast",
+        "breasts",
+        "nourishment",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.womb",
+      "type": "TERM",
+      "slug": "womb-term",
+      "title": "Womb",
+      "summary": null,
+      "body": "The organ of gestation, regarded as the primary locus of creation, authority, and continuity.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "womb"
+      ],
+      "tags": [
+        "womb",
+        "term",
+        "body",
+        "creation"
+      ],
+      "searchKeywords": [
+        "body",
+        "creation",
+        "gestation",
+        "term",
+        "womb"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.milk",
+      "type": "TERM",
+      "slug": "milk-term",
+      "title": "Milk",
+      "summary": null,
+      "body": "A substance produced by the breast, treated as nourishment and as a medium of symbolic transmission.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "milk"
+      ],
+      "tags": [
+        "milk",
+        "term",
+        "body",
+        "nourishment"
+      ],
+      "searchKeywords": [
+        "body",
+        "milk",
+        "nourishment",
+        "term",
+        "transmission"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.flesh",
+      "type": "TERM",
+      "slug": "flesh-term",
+      "title": "Flesh",
+      "summary": null,
+      "body": "The physical body as an object of control, discipline, and doctrinal interpretation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "flesh"
+      ],
+      "tags": [
+        "flesh",
+        "term",
+        "body",
+        "discipline"
+      ],
+      "searchKeywords": [
+        "body",
+        "control",
+        "discipline",
+        "flesh",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.seed",
+      "type": "TERM",
+      "slug": "seed-term",
+      "title": "Seed",
+      "summary": null,
+      "body": "The male reproductive element, considered functionally subordinate within the system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "seed"
+      ],
+      "tags": [
+        "seed",
+        "term",
+        "body",
+        "male"
+      ],
+      "searchKeywords": [
+        "body",
+        "male",
+        "reproduction",
+        "seed",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.body",
+      "type": "TERM",
+      "slug": "body-term",
+      "title": "Body",
+      "summary": null,
+      "body": "The physical form of an individual as defined, regulated, and interpreted by doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "body"
+      ],
+      "tags": [
+        "body",
+        "term",
+        "physical"
+      ],
+      "searchKeywords": [
+        "body",
+        "doctrine",
+        "physical",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.trace",
+      "type": "TERM",
+      "slug": "trace-term",
+      "title": "Trace",
+      "summary": null,
+      "body": "A measurable imprint or residue left by an act, presence, or interaction.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "trace"
+      ],
+      "tags": [
+        "trace",
+        "term",
+        "evidence"
+      ],
+      "searchKeywords": [
+        "evidence",
+        "imprint",
+        "term",
+        "trace"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.imprint",
+      "type": "TERM",
+      "slug": "imprint-term",
+      "title": "Imprint",
+      "summary": null,
+      "body": "A lasting effect produced on the body or state through ritual, contact, or authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "imprint"
+      ],
+      "tags": [
+        "imprint",
+        "term",
+        "effect"
+      ],
+      "searchKeywords": [
+        "effect",
+        "imprint",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.mark",
+      "type": "TERM",
+      "slug": "mark-term",
+      "title": "Mark",
+      "summary": null,
+      "body": "A visible or defined sign indicating status, event, or transformation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "mark"
+      ],
+      "tags": [
+        "mark",
+        "term",
+        "sign"
+      ],
+      "searchKeywords": [
+        "mark",
+        "sign",
+        "status",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.state-of-being",
+      "type": "TERM",
+      "slug": "state-of-being-term",
+      "title": "State of Being",
+      "summary": null,
+      "body": "A defined condition of existence as recognized by doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "state of being"
+      ],
+      "tags": [
+        "state",
+        "term",
+        "condition"
+      ],
+      "searchKeywords": [
+        "condition",
+        "existence",
+        "state of being",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.function",
+      "type": "TERM",
+      "slug": "function-term",
+      "title": "Function",
+      "summary": null,
+      "body": "The assigned purpose of a body, role, or element within the system.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "function"
+      ],
+      "tags": [
+        "function",
+        "term",
+        "purpose"
+      ],
+      "searchKeywords": [
+        "function",
+        "purpose",
+        "role",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.designation-of-function",
+      "type": "TERM",
+      "slug": "designation-of-function-term",
+      "title": "Designation of Function",
+      "summary": null,
+      "body": "The formal assignment of a specific role or purpose.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "designation of function"
+      ],
+      "tags": [
+        "designation",
+        "term",
+        "role"
+      ],
+      "searchKeywords": [
+        "designation of function",
+        "purpose",
+        "role",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.fatwa",
+      "type": "TERM",
+      "slug": "fatwa-term",
+      "title": "Fatwa",
+      "summary": null,
+      "body": "A formal ruling issued by a Sheikha or other authority to interpret doctrine in a specific matter.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "fatwa"
+      ],
+      "tags": [
+        "fatwa",
+        "term",
+        "law",
+        "doctrine"
+      ],
+      "searchKeywords": [
+        "doctrine",
+        "fatwa",
+        "law",
+        "ruling",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.ruling",
+      "type": "TERM",
+      "slug": "ruling-term",
+      "title": "Ruling",
+      "summary": null,
+      "body": "An authoritative decision that defines what is permitted, required, or forbidden.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "ruling"
+      ],
+      "tags": [
+        "ruling",
+        "term",
+        "law"
+      ],
+      "searchKeywords": [
+        "decision",
+        "law",
+        "ruling",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.law",
+      "type": "TERM",
+      "slug": "law-term",
+      "title": "Law",
+      "summary": null,
+      "body": "A binding rule derived from doctrine and enforced by authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "law"
+      ],
+      "tags": [
+        "law",
+        "term",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "doctrine",
+        "law",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.permission",
+      "type": "TERM",
+      "slug": "permission-term",
+      "title": "Permission",
+      "summary": null,
+      "body": "An authorized allowance granted by a higher authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "permission"
+      ],
+      "tags": [
+        "permission",
+        "term",
+        "authority"
+      ],
+      "searchKeywords": [
+        "allowance",
+        "authority",
+        "permission",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.prohibition",
+      "type": "TERM",
+      "slug": "prohibition-term",
+      "title": "Prohibition",
+      "summary": null,
+      "body": "A formal restriction imposed by doctrine or authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "prohibition"
+      ],
+      "tags": [
+        "prohibition",
+        "term",
+        "restriction"
+      ],
+      "searchKeywords": [
+        "doctrine",
+        "prohibition",
+        "restriction",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.obligation",
+      "type": "TERM",
+      "slug": "obligation-term",
+      "title": "Obligation",
+      "summary": null,
+      "body": "A required act or state enforced by doctrine.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "obligation"
+      ],
+      "tags": [
+        "obligation",
+        "term",
+        "duty"
+      ],
+      "searchKeywords": [
+        "doctrine",
+        "duty",
+        "obligation",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.correctional-rite",
+      "type": "TERM",
+      "slug": "correctional-rite-term",
+      "title": "Correctional Rite",
+      "summary": null,
+      "body": "A ritual performed to enforce alignment and remove deviation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "correctional rite"
+      ],
+      "tags": [
+        "rite",
+        "term",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "correction",
+        "correctional rite",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.submission-state",
+      "type": "TERM",
+      "slug": "submission-state-term",
+      "title": "Submission State",
+      "summary": null,
+      "body": "A condition in which an individual fully yields to authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "submission state"
+      ],
+      "tags": [
+        "submission",
+        "term",
+        "state"
+      ],
+      "searchKeywords": [
+        "authority",
+        "condition",
+        "submission state",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.sealing",
+      "type": "TERM",
+      "slug": "sealing-term",
+      "title": "Sealing",
+      "summary": null,
+      "body": "The act of restricting, finalizing, or formally defining a state or function.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "sealing"
+      ],
+      "tags": [
+        "sealing",
+        "term",
+        "restriction"
+      ],
+      "searchKeywords": [
+        "finalization",
+        "restriction",
+        "sealing",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.opening",
+      "type": "TERM",
+      "slug": "opening-term",
+      "title": "Opening",
+      "summary": null,
+      "body": "The act of permitting access, function, or transformation.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "opening"
+      ],
+      "tags": [
+        "opening",
+        "term",
+        "access"
+      ],
+      "searchKeywords": [
+        "access",
+        "opening",
+        "permission",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.transformation",
+      "type": "TERM",
+      "slug": "transformation-term",
+      "title": "Transformation",
+      "summary": null,
+      "body": "A change in state, role, or condition through doctrine or ritual.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "transformation"
+      ],
+      "tags": [
+        "transformation",
+        "term",
+        "change"
+      ],
+      "searchKeywords": [
+        "change",
+        "ritual",
+        "term",
+        "transformation"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.reconditioning",
+      "type": "TERM",
+      "slug": "reconditioning-term",
+      "title": "Reconditioning",
+      "summary": null,
+      "body": "The repeated process of enforcing behavioral or physical alignment.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "reconditioning"
+      ],
+      "tags": [
+        "reconditioning",
+        "term",
+        "discipline"
+      ],
+      "searchKeywords": [
+        "alignment",
+        "discipline",
+        "reconditioning",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.sanctified-space",
+      "type": "TERM",
+      "slug": "sanctified-space-term",
+      "title": "Sanctified Space",
+      "summary": null,
+      "body": "A location formally designated for ritual or doctrinal activity.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "sanctified space"
+      ],
+      "tags": [
+        "space",
+        "term",
+        "sacred"
+      ],
+      "searchKeywords": [
+        "location",
+        "ritual",
+        "sanctified space",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.zone-of-control",
+      "type": "TERM",
+      "slug": "zone-of-control-term",
+      "title": "Zone of Control",
+      "summary": null,
+      "body": "An area where a specific authority exercises direct influence.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "zone of control"
+      ],
+      "tags": [
+        "zone",
+        "term",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "location",
+        "term",
+        "zone of control"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.inner-chamber",
+      "type": "TERM",
+      "slug": "inner-chamber-term",
+      "title": "Inner Chamber",
+      "summary": null,
+      "body": "A restricted space reserved for high-level rituals or authority actions.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "inner chamber"
+      ],
+      "tags": [
+        "chamber",
+        "term",
+        "restricted"
+      ],
+      "searchKeywords": [
+        "inner chamber",
+        "restricted",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.lineage",
+      "type": "TERM",
+      "slug": "lineage-term",
+      "title": "Lineage",
+      "summary": null,
+      "body": "A structured chain of authority, origin, or transmission.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "lineage"
+      ],
+      "tags": [
+        "lineage",
+        "term",
+        "origin"
+      ],
+      "searchKeywords": [
+        "lineage",
+        "origin",
+        "term",
+        "transmission"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.possession",
+      "type": "TERM",
+      "slug": "possession-term",
+      "title": "Possession",
+      "summary": null,
+      "body": "A state in which authority is fully exercised over a body or subject.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "possession"
+      ],
+      "tags": [
+        "possession",
+        "term",
+        "authority"
+      ],
+      "searchKeywords": [
+        "authority",
+        "control",
+        "possession",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.lactation",
+      "type": "TERM",
+      "slug": "lactation-term",
+      "title": "Lactation",
+      "summary": null,
+      "body": "The process through which milk is produced and made available.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "lactation"
+      ],
+      "tags": [
+        "lactation",
+        "term",
+        "body"
+      ],
+      "searchKeywords": [
+        "body",
+        "lactation",
+        "milk",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.ingestion",
+      "type": "TERM",
+      "slug": "ingestion-term",
+      "title": "Ingestion",
+      "summary": null,
+      "body": "The act of consuming a substance within a ritual or functional context.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "ingestion"
+      ],
+      "tags": [
+        "ingestion",
+        "term",
+        "ritual"
+      ],
+      "searchKeywords": [
+        "consumption",
+        "ingestion",
+        "ritual",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.transmission",
+      "type": "TERM",
+      "slug": "transmission-term",
+      "title": "Transmission",
+      "summary": null,
+      "body": "The transfer of state, meaning, or influence through substance or act.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "transmission"
+      ],
+      "tags": [
+        "transmission",
+        "term",
+        "transfer"
+      ],
+      "searchKeywords": [
+        "meaning",
+        "term",
+        "transfer",
+        "transmission"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.assessment",
+      "type": "TERM",
+      "slug": "assessment-term",
+      "title": "Assessment",
+      "summary": null,
+      "body": "The evaluation of a subject’s state, alignment, or function.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "assessment"
+      ],
+      "tags": [
+        "assessment",
+        "term",
+        "evaluation"
+      ],
+      "searchKeywords": [
+        "assessment",
+        "evaluation",
+        "state",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.measurement",
+      "type": "TERM",
+      "slug": "measurement-term",
+      "title": "Measurement",
+      "summary": null,
+      "body": "The act of quantifying attributes, states, or traces.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "measurement"
+      ],
+      "tags": [
+        "measurement",
+        "term",
+        "evaluation"
+      ],
+      "searchKeywords": [
+        "measurement",
+        "quantifying",
+        "state",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.record-of-state",
+      "type": "TERM",
+      "slug": "record-of-state-term",
+      "title": "Record of State",
+      "summary": null,
+      "body": "A documented account of an individual’s condition or status.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "record of state"
+      ],
+      "tags": [
+        "record",
+        "term",
+        "status"
+      ],
+      "searchKeywords": [
+        "condition",
+        "record of state",
+        "status",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.embodiment",
+      "type": "TERM",
+      "slug": "embodiment-term",
+      "title": "Embodiment",
+      "summary": null,
+      "body": "The state of fully expressing a defined function or doctrine through the body.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "embodiment"
+      ],
+      "tags": [
+        "embodiment",
+        "term",
+        "body"
+      ],
+      "searchKeywords": [
+        "body",
+        "doctrine",
+        "embodiment",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.reduction",
+      "type": "TERM",
+      "slug": "reduction-term",
+      "title": "Reduction",
+      "summary": null,
+      "body": "The process of limiting a subject to a specific function or role.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "reduction"
+      ],
+      "tags": [
+        "reduction",
+        "term",
+        "limitation"
+      ],
+      "searchKeywords": [
+        "limiting",
+        "reduction",
+        "role",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.expansion",
+      "type": "TERM",
+      "slug": "expansion-term",
+      "title": "Expansion",
+      "summary": null,
+      "body": "The increase or broadening of function, influence, or authority.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "expansion"
+      ],
+      "tags": [
+        "expansion",
+        "term",
+        "growth"
+      ],
+      "searchKeywords": [
+        "authority",
+        "expansion",
+        "growth",
+        "term"
+      ],
+      "metadata": {
+        "importance": "major",
+        "importTest": true
+      }
+    },
+    {
+      "id": "term.containment",
+      "type": "TERM",
+      "slug": "containment-term",
+      "title": "Containment",
+      "summary": null,
+      "body": "The act of restricting movement, function, or influence within defined limits.",
+      "status": "ACTIVE",
+      "visibility": "PUBLIC",
+      "aliases": [
+        "containment"
+      ],
+      "tags": [
+        "containment",
+        "term",
+        "restriction"
+      ],
+      "searchKeywords": [
+        "containment",
+        "limits",
+        "restriction",
         "term"
       ],
       "metadata": {

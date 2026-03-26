@@ -11,6 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "media:delete": "tsx scripts/delete-media.ts",
     "import:dry-run": "tsx scripts/import-dry-run.ts",
     "import:content": "tsx scripts/import-content.ts"
   },
