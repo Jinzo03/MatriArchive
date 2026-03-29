@@ -9,7 +9,7 @@ import { t } from "@/lib/locale";
 
 type NavLink = {
   href: string;
-  keyName: "dashboard" | "browse" | "search" | "create" | "timeline" | "admin";
+  keyName: "dashboard" | "aboutMe" | "browse" | "search" | "create" | "timeline" | "admin";
   isActive: (pathname: string) => boolean;
 };
 
@@ -20,6 +20,7 @@ const navLinks: NavLink[] = [
   { href: "/create", keyName: "create", isActive: (p) => p.startsWith("/create") },
   { href: "/timeline", keyName: "timeline", isActive: (p) => p.startsWith("/timeline") },
   { href: "/admin", keyName: "admin", isActive: (p) => p.startsWith("/admin") },
+  { href: "/about-me", keyName: "aboutMe", isActive: (p) => p.startsWith("/about-me") },
 ];
 
 export function SiteNav() {

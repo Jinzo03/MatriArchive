@@ -16,6 +16,7 @@ export const localeDir: Record<Locale, "ltr" | "rtl"> = {
 export const ui = {
   en: {
     dashboard: "Dashboard",
+    aboutMe: "About Me",
     browse: "Browse",
     search: "Search",
     create: "Create",
@@ -133,6 +134,7 @@ export const ui = {
   },
   ar: {
     dashboard: "لوحة التحكم",
+    aboutMe: "عني",
     browse: "تصفح",
     search: "بحث",
     create: "إنشاء",
