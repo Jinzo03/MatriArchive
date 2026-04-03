@@ -9,22 +9,18 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const locale = await getRequestLocale();
-  const [entityCount, archivedCount, relationshipCount, revisionCount] = await Promise.all([
-    prisma.entity.count(),
-    prisma.entity.count({ where: { status: "ARCHIVED" } }),
-    prisma.relationship.count(),
-    prisma.entityRevision.count(),
-  ]);
+
+  const [entityCount, archivedCount, relationshipCount, revisionCount, importJobCount, mediaCount] =
+    await Promise.all([
+      prisma.entity.count(),
+      prisma.entity.count({ where: { status: "ARCHIVED" } }),
+      prisma.relationship.count(),
+      prisma.entityRevision.count(),
+      prisma.importJob.count(),
+      prisma.mediaAsset.count(),
+    ]);
 
   const adminSections = [
-    {
-      title: t(locale, "dashboard"),
-      description:
-        locale === "ar"
-          ? "نظرة عامة على النظام وروابط الصيانة ومؤشرات سلامة الكون."
-          : "System overview, maintenance shortcuts, and universe health.",
-      href: "/admin",
-    },
     {
       title: t(locale, "content"),
       description:
@@ -80,13 +76,15 @@ export default async function AdminPage() {
     { label: t(locale, "archived"), value: archivedCount },
     { label: t(locale, "relationships"), value: relationshipCount },
     { label: t(locale, "revisions"), value: revisionCount },
+    { label: locale === "ar" ? "عمليات الاستيراد" : "Import jobs", value: importJobCount },
+    { label: locale === "ar" ? "الوسائط" : "Media assets", value: mediaCount },
   ];
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="ms-panel">
+          <section className="ms-panel p-6">
             <p className="text-sm text-muted-foreground">
               {locale === "ar" ? "لوحة الإدارة" : "Admin Panel"}
             </p>
@@ -105,10 +103,10 @@ export default async function AdminPage() {
           </section>
         </Reveal>
 
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {stats.map((stat, index) => (
             <Reveal key={stat.label} delay={index * 0.03}>
-              <div className="ms-panel-soft">
+              <div className="ms-panel-soft p-4">
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
                 <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
               </div>
@@ -119,13 +117,70 @@ export default async function AdminPage() {
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {adminSections.map((section, index) => (
             <Reveal key={section.href} delay={index * 0.03}>
-              <Link href={section.href} className="block ms-panel-soft transition hover:bg-accent">
+              <Link
+                href={section.href}
+                className="block ms-panel-soft p-5 transition hover:bg-accent"
+              >
                 <p className="text-lg font-semibold">{section.title}</p>
                 <p className="mt-2 text-sm text-muted-foreground">{section.description}</p>
               </Link>
             </Reveal>
           ))}
         </section>
+
+        <Reveal delay={0.12}>
+          <section className="ms-panel p-6">
+            <h2 className="text-lg font-semibold">
+              {locale === "ar" ? "ملاحظات التشغيل" : "Operational Notes"}
+            </h2>
+
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <div className="rounded-xl border border-border p-4">
+                <p className="font-medium">
+                  {locale === "ar" ? "وضع الزوار" : "Guest mode"}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {locale === "ar"
+                    ? "الواجهة العامة للزوار للقراءة فقط."
+                    : "Public browsing stays read-only for guests."}
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border p-4">
+                <p className="font-medium">
+                  {locale === "ar" ? "الاستيراد الآمن" : "Safe imports"}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {locale === "ar"
+                    ? "الاستيراد يتم عبر dry-run ثم confirm-write."
+                    : "Imports run through dry-run before confirm-write."}
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border p-4">
+                <p className="font-medium">
+                  {locale === "ar" ? "المراجعات" : "Revisions"}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {locale === "ar"
+                    ? "كل تعديل مهم يكتب نسخة جديدة في التاريخ."
+                    : "Important edits create a new historical snapshot."}
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-border p-4">
+                <p className="font-medium">
+                  {locale === "ar" ? "الوسائط" : "Media"}
+                </p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {locale === "ar"
+                    ? "الصور اختيارية وتستخدم فقط عند الحاجة."
+                    : "Images are optional and only used where useful."}
+                </p>
+              </div>
+            </div>
+          </section>
+        </Reveal>
       </div>
     </main>
   );

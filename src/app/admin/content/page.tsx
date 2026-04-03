@@ -1,107 +1,191 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { formatLocaleDateTime, t } from "@/lib/locale";
+import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
+import { t } from "@/lib/locale";
 import { Reveal } from "@/components/reveal";
 import { AdminIndexNav } from "@/components/admin-index-nav";
 
 export const dynamic = "force-dynamic";
 
+const typeOrder: EntityType[] = [
+  EntityType.CHARACTER,
+  EntityType.STORY,
+  EntityType.INSTITUTION,
+  EntityType.LOCATION,
+  EntityType.DOCTRINE,
+  EntityType.EVENT,
+  EntityType.TERM,
+  EntityType.ARTIFACT,
+  EntityType.OTHER,
+];
+
+const typeLabels: Record<EntityType, string> = {
+  CHARACTER: "Characters",
+  STORY: "Stories",
+  INSTITUTION: "Institutions",
+  LOCATION: "Locations",
+  DOCTRINE: "Doctrines",
+  EVENT: "Events",
+  TERM: "Terms",
+  ARTIFACT: "Artifacts",
+  OTHER: "Other",
+};
+
+function hasMissingMetadata(type: EntityType, metadata: unknown) {
+  if (type !== EntityType.STORY) return false;
+  if (!metadata || typeof metadata !== "object") return true;
+
+  const value = metadata as Record<string, unknown>;
+  return !value.externalLinks;
+}
+
 export default async function AdminContentPage() {
   const locale = await getRequestLocale();
-  const [entities, archived, relationships, revisions] = await Promise.all([
-    prisma.entity.count(),
-    prisma.entity.count({ where: { status: "ARCHIVED" } }),
-    prisma.relationship.count(),
-    prisma.entityRevision.count(),
-  ]);
 
-  const recent = await prisma.entity.findMany({
-    orderBy: { updatedAt: "desc" },
-    take: 10,
+  const entities = await prisma.entity.findMany({
+    orderBy: [{ type: "asc" }, { updatedAt: "desc" }],
     select: {
       id: true,
       title: true,
       slug: true,
       type: true,
+      summary: true,
       status: true,
+      visibility: true,
+      metadata: true,
+      createdAt: true,
       updatedAt: true,
     },
   });
+
+  const grouped = typeOrder.reduce<Record<string, typeof entities>>((acc, type) => {
+    acc[type] = entities.filter((entity) => entity.type === type);
+    return acc;
+  }, {});
+
+  const total = entities.length;
+  const storiesMissingMetadata = entities.filter((entity) =>
+    hasMissingMetadata(entity.type, entity.metadata)
+  ).length;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
         <Reveal>
-          <section className="ms-panel">
+          <section className="ms-panel p-6">
             <p className="text-sm text-muted-foreground">
               {locale === "ar" ? "الإدارة / المحتوى" : "Admin / Content"}
             </p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight">
-              {locale === "ar" ? "صيانة المحتوى" : "Content Maintenance"}
+              {locale === "ar" ? "محتوى الأرشيف" : "Archive Content"}
             </h1>
             <p className="mt-3 max-w-3xl text-sm text-muted-foreground">
               {locale === "ar"
-                ? "افحص الكون، وحافظ على المحتوى منظمًا، وانتقل بسرعة إلى صيانة العناصر."
-                : "Inspect the universe, keep content clean, and jump into entity maintenance quickly."}
+                ? "راقب عناصر الكون، أحدث التحديثات، والحالات التي تحتاج مراجعة."
+                : "Monitor archive entities, recent updates, and items that may need review."}
             </p>
-            <div className="mt-4">
+
+            <div className="mt-4 flex items-center gap-4">
               <Link href="/admin" className="text-sm underline">
                 {t(locale, "backToAdminHub")}
               </Link>
-            </div>
-
-            <div className="mt-5">
               <AdminIndexNav />
             </div>
           </section>
         </Reveal>
 
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {[
-            { label: t(locale, "entities"), value: entities },
-            { label: t(locale, "archived"), value: archived },
-            { label: t(locale, "relationships"), value: relationships },
-            { label: t(locale, "revisions"), value: revisions },
-          ].map((stat, index) => (
-            <Reveal key={stat.label} delay={index * 0.03}>
-              <div className="ms-panel-soft">
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
-                <p className="mt-2 text-2xl font-semibold">{stat.value}</p>
-              </div>
-            </Reveal>
-          ))}
+          <Reveal>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "إجمالي العناصر" : "Total entities"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{total}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.03}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "شخصيات" : "Characters"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{grouped.CHARACTER?.length ?? 0}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "قصص" : "Stories"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{grouped.STORY?.length ?? 0}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.09}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "قصص بلا روابط خارجية" : "Stories missing external links"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{storiesMissingMetadata}</p>
+            </div>
+          </Reveal>
         </section>
 
-        <Reveal delay={0.08}>
-          <section className="ms-panel">
-            <div className="flex items-center justify-between gap-4">
-              <h2 className="text-lg font-semibold">{t(locale, "recentContent")}</h2>
-              <Link href="/browse" className="text-sm text-muted-foreground hover:underline">
-                {t(locale, "openBrowse")}
-              </Link>
-            </div>
+        <div className="grid gap-6 lg:grid-cols-2">
+          <Reveal delay={0.06}>
+            <section className="ms-panel p-6">
+              <h2 className="text-lg font-semibold">
+                {locale === "ar" ? "أحدث العناصر" : "Recent Entities"}
+              </h2>
 
-            <div className="mt-4 space-y-3">
-              {recent.map((item, index) => (
-                <Reveal key={item.id} delay={index * 0.03}>
+              <div className="mt-4 space-y-3">
+                {entities.slice(0, 12).map((entity) => (
                   <Link
-                    href={`/entities/${item.slug}`}
+                    key={entity.id}
+                    href={`/entities/${entity.slug}`}
                     className="block rounded-xl border border-border p-4 transition hover:bg-accent"
                   >
-                    <div className="flex items-center justify-between gap-4">
-                      <p className="font-medium">{item.title}</p>
-                      <span className="text-xs text-muted-foreground">{item.type}</span>
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="font-medium">{entity.title}</p>
+                        <p className="text-sm text-muted-foreground">{typeLabels[entity.type]}</p>
+                      </div>
+                      <span className="text-xs text-muted-foreground">{entity.status}</span>
                     </div>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {item.status} | {formatLocaleDateTime(locale, item.updatedAt)}
-                    </p>
                   </Link>
-                </Reveal>
-              ))}
-            </div>
-          </section>
-        </Reveal>
+                ))}
+              </div>
+            </section>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <section className="ms-panel p-6">
+              <h2 className="text-lg font-semibold">
+                {locale === "ar" ? "مراجعة حسب النوع" : "Type Breakdown"}
+              </h2>
+
+              <div className="mt-4 space-y-3">
+                {typeOrder.map((type) => {
+                  const items = grouped[type] ?? [];
+
+                  return (
+                    <div
+                      key={type}
+                      className="flex items-center justify-between rounded-xl border border-border px-4 py-3"
+                    >
+                      <div>
+                        <p className="font-medium">{typeLabels[type]}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {locale === "ar" ? "عناصر" : "items"}
+                        </p>
+                      </div>
+                      <span className="text-lg font-semibold">{items.length}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </Reveal>
+        </div>
       </div>
     </main>
   );

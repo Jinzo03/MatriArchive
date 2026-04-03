@@ -26,11 +26,7 @@ type PreviewSummary = {
 function isPreviewSummary(value: unknown): value is PreviewSummary {
   if (!value || typeof value !== "object") return false;
   const record = value as Record<string, unknown>;
-  return (
-    !!record.payload &&
-    !!record.preview &&
-    typeof record.createdAt === "string"
-  );
+  return !!record.payload && !!record.preview && typeof record.createdAt === "string";
 }
 
 function formatCountsBlock(counts: { create: number; update: number; skip: number }) {
@@ -45,10 +41,11 @@ export default async function ImportExportPage({
   const locale = await getRequestLocale();
   const { job } = await searchParams;
 
-  const [entities, relationships, revisions, previewJob] = await Promise.all([
-    prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
-    prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
-    prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
+  const [entityCount, relationshipCount, revisionCount, mediaCount, previewJob] = await Promise.all([
+    prisma.entity.count(),
+    prisma.relationship.count(),
+    prisma.entityRevision.count(),
+    prisma.mediaAsset.count(),
     job
       ? prisma.importJob.findUnique({
           where: { id: job },
@@ -57,17 +54,15 @@ export default async function ImportExportPage({
   ]);
 
   const exportBundle = {
-    entities,
-    relationships,
-    revisions,
+    entities: await prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
+    relationships: await prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
+    revisions: await prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
   };
 
   const exportJson = JSON.stringify(exportBundle, null, 2);
 
   const previewSummary =
-    previewJob?.summary && isPreviewSummary(previewJob.summary)
-      ? previewJob.summary
-      : null;
+    previewJob?.summary && isPreviewSummary(previewJob.summary) ? previewJob.summary : null;
 
   async function createPreview(formData: FormData) {
     "use server";
@@ -141,6 +136,7 @@ export default async function ImportExportPage({
     revalidatePath("/admin/import-export");
     revalidatePath("/admin/logs");
     revalidatePath("/admin/content");
+    revalidatePath("/admin/analytics");
     revalidatePath("/browse");
     revalidatePath("/search");
     revalidatePath("/timeline");
@@ -173,13 +169,47 @@ export default async function ImportExportPage({
           </section>
         </Reveal>
 
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <Reveal>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "العناصر" : "Entities"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{entityCount}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.03}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "العلاقات" : "Relationships"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{relationshipCount}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "المراجعات" : "Revisions"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{revisionCount}</p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.09}>
+            <div className="ms-panel-soft p-4">
+              <p className="text-sm text-muted-foreground">
+                {locale === "ar" ? "الوسائط" : "Media assets"}
+              </p>
+              <p className="mt-2 text-2xl font-semibold">{mediaCount}</p>
+            </div>
+          </Reveal>
+        </section>
+
         <section className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.08}>
             <div className="ms-panel p-6">
               <h2 className="text-lg font-semibold">{t(locale, "exportJson")}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {t(locale, "exportBackupHelp")}
-              </p>
+              <p className="mt-2 text-sm text-muted-foreground">{t(locale, "exportBackupHelp")}</p>
+
               <textarea
                 readOnly
                 value={exportJson}
@@ -207,14 +237,18 @@ export default async function ImportExportPage({
                   <FilePicker
                     name="package"
                     accept="application/json,.json"
-                    label={locale === "ar" ? "\u0627\u062e\u062a\u0631 \u0645\u0644\u0641\u064b\u0627" : "Choose File"}
+                    label={locale === "ar" ? "اختر ملفًا" : "Choose File"}
                     emptyLabel={
-                      locale === "ar"
-                        ? "\u0644\u0645 \u064a\u062a\u0645 \u0627\u062e\u062a\u064a\u0627\u0631 \u0645\u0644\u0641 \u0628\u0639\u062f"
-                        : "No file selected"
+                      locale === "ar" ? "لم يتم اختيار ملف بعد" : "No file selected"
                     }
                   />
                 </label>
+
+                <div className="rounded-xl border border-border/60 bg-background/40 p-4 text-sm text-muted-foreground">
+                  {locale === "ar"
+                    ? "الاستيراد يمر دائمًا عبر معاينة dry-run قبل أي كتابة."
+                    : "Imports always pass through a dry-run preview before any write."}
+                </div>
 
                 <div className="flex justify-end">
                   <button type="submit" className="ms-button">
