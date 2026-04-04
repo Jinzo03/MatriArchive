@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
@@ -41,6 +43,10 @@ function hasMissingMetadata(type: EntityType, metadata: unknown) {
 }
 
 export default async function AdminContentPage() {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
 
   const entities = await prisma.entity.findMany({

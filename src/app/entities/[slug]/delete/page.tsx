@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { getEntityTypeLabel } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +15,8 @@ type PageProps = {
 };
 
 export default async function DeleteEntityPage({ params }: PageProps) {
+  if (!SHOW_ADMIN_UI) notFound();
+
   const locale = await getRequestLocale();
   const { slug } = await params;
 
@@ -30,6 +34,7 @@ export default async function DeleteEntityPage({ params }: PageProps) {
 
   async function deleteEntity() {
     "use server";
+    assertMutationAllowed(`delete entity (${slug})`);
     if (!entity) return;
     await prisma.entity.delete({
       where: { id: entity.id },

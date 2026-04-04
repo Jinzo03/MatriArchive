@@ -1,10 +1,12 @@
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { EntityForm } from "@/components/entity-form";
 import { Reveal } from "@/components/reveal";
 import { getEntityTypeLabel } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { EntityStatus, EntityType, Visibility } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -42,6 +44,8 @@ function splitList(value: FormDataEntryValue | null) {
 }
 
 export default async function CreateEntityPage({ params }: PageProps) {
+  if (!SHOW_ADMIN_UI) notFound();
+
   const locale = await getRequestLocale();
   const { type } = await params;
   const entityType = typeMap[type];
@@ -50,6 +54,7 @@ export default async function CreateEntityPage({ params }: PageProps) {
 
   async function createEntity(formData: FormData) {
     "use server";
+    assertMutationAllowed(`create entity (${entityType})`);
 
     const title = String(formData.get("title") ?? "").trim();
     if (!title) return;

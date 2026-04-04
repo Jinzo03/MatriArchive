@@ -4,10 +4,15 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 
 export function DashboardCta() {
   const reduceMotion = useReducedMotion();
   const { locale } = useLocale();
+
+  if (!SHOW_ADMIN_UI) {
+    return null;
+  }
 
   return (
     <motion.div

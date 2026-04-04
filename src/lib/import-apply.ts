@@ -18,6 +18,7 @@ import {
   resolveMediaAsset,
   resolveTargetEntity,
 } from "@/lib/import-resolver";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { isRelationshipAllowed } from "@/lib/relationships";
 import type { ImportPreview } from "@/lib/importer";
 
@@ -138,6 +139,7 @@ export async function applyUniverseImport(
   input: string | UniversePackage,
   options: ApplyOptions = {}
 ): Promise<ApplyResult> {
+  assertMutationAllowed("apply universe import");
   const packageData = await loadPackage(input);
   const preview = options.approvedPreview;
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
@@ -10,6 +11,7 @@ import { FilePicker } from "@/components/file-picker";
 import { dryRunImport, type ImportPreview } from "@/lib/importer";
 import { applyUniverseImport } from "@/lib/import-apply";
 import { UniversePackageSchema, type UniversePackage } from "@/lib/import-schema";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { ImportJobStatus } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
@@ -38,6 +40,10 @@ export default async function ImportExportPage({
 }: {
   searchParams: Promise<{ job?: string }>;
 }) {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
   const { job } = await searchParams;
 
@@ -66,6 +72,7 @@ export default async function ImportExportPage({
 
   async function createPreview(formData: FormData) {
     "use server";
+    assertMutationAllowed("create import preview");
 
     const file = formData.get("package");
     if (!(file instanceof File) || file.size === 0) {
@@ -100,6 +107,7 @@ export default async function ImportExportPage({
 
   async function confirmImport(formData: FormData) {
     "use server";
+    assertMutationAllowed("confirm import");
 
     const jobId = String(formData.get("jobId") ?? "").trim();
     if (!jobId) return;

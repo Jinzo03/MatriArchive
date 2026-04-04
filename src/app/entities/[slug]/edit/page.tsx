@@ -1,5 +1,6 @@
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import {
   EntityStatus,
@@ -11,6 +12,7 @@ import {
   getEntityTypeLabel,
   t,
 } from "@/lib/locale";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
 
@@ -50,6 +52,8 @@ function parseMetadata(value: FormDataEntryValue | null) {
 }
 
 export default async function EditEntityPage({ params }: PageProps) {
+  if (!SHOW_ADMIN_UI) notFound();
+
   const locale = await getRequestLocale();
   const { slug } = await params;
 
@@ -76,7 +80,8 @@ export default async function EditEntityPage({ params }: PageProps) {
 
   async function updateEntity(formData: FormData) {
     "use server";
-  if (!entity) return;
+    assertMutationAllowed(`update entity (${slug})`);
+    if (!entity) return;
 
     const title = String(formData.get("title") ?? "").trim();
     if (!title) return;

@@ -1,10 +1,16 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { getEntityTypeLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
 import { EntityType } from "@/generated/prisma/client";
 import { Reveal } from "@/components/reveal";
 
 export default async function CreateIndexPage() {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
   const createOptions = [
     { type: EntityType.CHARACTER, href: "/create/character" },
@@ -21,8 +27,6 @@ export default async function CreateIndexPage() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
-        
-        {/* FIXED: Removed the undefined map. Just wrap the header once. */}
         <section>
           <Reveal delay={0}>
             <p className="text-sm text-muted-foreground">{t(locale, "create")}</p>
@@ -40,7 +44,6 @@ export default async function CreateIndexPage() {
             const label = getEntityTypeLabel(locale, option.type);
 
             return (
-              /* FIXED: Added Reveal here so your cards stagger in beautifully! */
               <Reveal key={option.href} delay={index * 0.05}>
                 <Link
                   href={option.href}
@@ -55,7 +58,6 @@ export default async function CreateIndexPage() {
             );
           })}
         </section>
-        
       </div>
     </main>
   );

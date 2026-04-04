@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { getRequestLocale } from "@/lib/locale.server";
 import { t } from "@/lib/locale";
 import { Reveal } from "@/components/reveal";
@@ -7,6 +9,10 @@ import { AdminIndexNav } from "@/components/admin-index-nav";
 export const dynamic = "force-dynamic";
 
 export default async function AdminSettingsPage() {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
 
   return (

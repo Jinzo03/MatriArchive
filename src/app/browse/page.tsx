@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { getRequestLocale } from "@/lib/locale.server";
 import { Reveal } from "@/components/reveal";
 import { BrowseSections } from "@/components/browse-sections";
@@ -138,13 +139,17 @@ export default async function BrowsePage() {
             <p className="mt-2 text-sm text-muted-foreground">
               {locale === "ar"
                 ? "أنشئ أول عنصر لبدء بناء الكون."
-                : "Create your first entity to begin building the universe."}
+                : SHOW_ADMIN_UI
+                  ? "Create your first entity to begin building the universe."
+                  : "No entities are available yet."}
             </p>
-            <div className="mt-5">
-              <Link href="/create" className="ms-button">
-                {locale === "ar" ? "إنشاء أول عنصر" : "Create First Entity"}
-              </Link>
-            </div>
+            {SHOW_ADMIN_UI ? (
+              <div className="mt-5">
+                <Link href="/create" className="ms-button">
+                  {locale === "ar" ? "إنشاء أول عنصر" : "Create First Entity"}
+                </Link>
+              </div>
+            ) : null}
           </section>
         ) : null}
 

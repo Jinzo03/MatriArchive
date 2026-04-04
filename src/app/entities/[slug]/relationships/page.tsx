@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
@@ -9,6 +10,7 @@ import {
   isRelationshipAllowed,
   isRelationshipType,
 } from "@/lib/relationships";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { Reveal } from "@/components/reveal";
 import { RelationshipType } from "@/generated/prisma/client";
 
@@ -51,6 +53,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
   async function addRelationship(formData: FormData) {
     "use server";
+    assertMutationAllowed(`create relationship (${slug})`);
 
     const relationshipType = String(
       formData.get("relationshipType") ?? "RELATED_TO"
@@ -82,6 +85,7 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
 
   async function removeRelationship(formData: FormData) {
     "use server";
+    assertMutationAllowed(`delete relationship (${slug})`);
     if (!entity) return;
 
     const relationshipId = String(formData.get("relationshipId") ?? "").trim();
@@ -111,54 +115,56 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
           </section>
         </Reveal>
 
-        <Reveal delay={0.08}>
-          <section className="ms-panel">
-            <h2 className="text-lg font-semibold">{t(locale, "addRelationship")}</h2>
-            <form action={addRelationship} className="mt-4 space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="space-y-2">
-                  <span className="text-sm font-medium">{t(locale, "relationshipType")}</span>
-                  <select
-                    name="relationshipType"
-                    defaultValue="RELATED_TO"
-                    className="ms-input"
-                  >
-                    {relationshipOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {getRelationshipLabel(option, locale, "outgoing")}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+        {SHOW_ADMIN_UI ? (
+          <Reveal delay={0.08}>
+            <section className="ms-panel">
+              <h2 className="text-lg font-semibold">{t(locale, "addRelationship")}</h2>
+              <form action={addRelationship} className="mt-4 space-y-4">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <label className="space-y-2">
+                    <span className="text-sm font-medium">{t(locale, "relationshipType")}</span>
+                    <select
+                      name="relationshipType"
+                      defaultValue="RELATED_TO"
+                      className="ms-input"
+                    >
+                      {relationshipOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {getRelationshipLabel(option, locale, "outgoing")}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
 
-                <label className="space-y-2">
-                  <span className="text-sm font-medium">{t(locale, "targetEntitySlug")}</span>
-                  <input
-                    name="targetSlug"
-                    className="ms-input"
-                    placeholder={locale === "ar" ? "معرف-العنصر-الهدف" : "the-target-entity"}
+                  <label className="space-y-2">
+                    <span className="text-sm font-medium">{t(locale, "targetEntitySlug")}</span>
+                    <input
+                      name="targetSlug"
+                      className="ms-input"
+                      placeholder={locale === "ar" ? "معرف-العنصر-الهدف" : "the-target-entity"}
+                    />
+                  </label>
+                </div>
+
+                <label className="block space-y-2">
+                  <span className="text-sm font-medium">{t(locale, "notes")}</span>
+                  <textarea
+                    name="notes"
+                    rows={3}
+                    className="ms-textarea"
+                    placeholder={t(locale, "optionalRelationshipContext")}
                   />
                 </label>
-              </div>
 
-              <label className="block space-y-2">
-                <span className="text-sm font-medium">{t(locale, "notes")}</span>
-                <textarea
-                  name="notes"
-                  rows={3}
-                  className="ms-textarea"
-                  placeholder={t(locale, "optionalRelationshipContext")}
-                />
-              </label>
-
-              <div className="flex justify-end">
-                <button type="submit" className="ms-button">
-                  {t(locale, "addRelationship")}
-                </button>
-              </div>
-            </form>
-          </section>
-        </Reveal>
+                <div className="flex justify-end">
+                  <button type="submit" className="ms-button">
+                    {t(locale, "addRelationship")}
+                  </button>
+                </div>
+              </form>
+            </section>
+          </Reveal>
+        ) : null}
 
         <div className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.12}>
@@ -179,12 +185,14 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                           <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
                         ) : null}
 
-                        <form action={removeRelationship} className="mt-3">
-                          <input type="hidden" name="relationshipId" value={relationship.id} />
-                          <button type="submit" className="text-sm text-red-500 underline">
-                            {t(locale, "remove")}
-                          </button>
-                        </form>
+                        {SHOW_ADMIN_UI ? (
+                          <form action={removeRelationship} className="mt-3">
+                            <input type="hidden" name="relationshipId" value={relationship.id} />
+                            <button type="submit" className="text-sm text-red-500 underline">
+                              {t(locale, "remove")}
+                            </button>
+                          </form>
+                        ) : null}
                       </div>
                     </Reveal>
                   ))
@@ -217,12 +225,14 @@ export default async function EntityRelationshipsPage({ params }: PageProps) {
                           <p className="mt-1 text-sm text-muted-foreground">{relationship.notes}</p>
                         ) : null}
 
-                        <form action={removeRelationship} className="mt-3">
-                          <input type="hidden" name="relationshipId" value={relationship.id} />
-                          <button type="submit" className="text-sm text-red-500 underline">
-                            {t(locale, "remove")}
-                          </button>
-                        </form>
+                        {SHOW_ADMIN_UI ? (
+                          <form action={removeRelationship} className="mt-3">
+                            <input type="hidden" name="relationshipId" value={relationship.id} />
+                            <button type="submit" className="text-sm text-red-500 underline">
+                              {t(locale, "remove")}
+                            </button>
+                          </form>
+                        ) : null}
                       </div>
                     </Reveal>
                   ))

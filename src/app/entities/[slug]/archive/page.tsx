@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { getEntityStatusLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { Reveal } from "@/components/reveal";
 import { EntityStatus } from "@/generated/prisma/client";
 
@@ -14,6 +16,8 @@ type PageProps = {
 };
 
 export default async function ArchiveEntityPage({ params }: PageProps) {
+  if (!SHOW_ADMIN_UI) notFound();
+
   const locale = await getRequestLocale();
   const { slug } = await params;
 
@@ -34,6 +38,7 @@ export default async function ArchiveEntityPage({ params }: PageProps) {
 
   async function toggleArchive() {
     "use server";
+    assertMutationAllowed(`${isArchived ? "unarchive" : "archive"} entity (${slug})`);
     if (!entity) return;
     await prisma.entity.update({
       where: { slug: entity.slug },

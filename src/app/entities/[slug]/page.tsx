@@ -7,6 +7,7 @@ import {
   getVisibilityLabel,
   t,
 } from "@/lib/locale";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { getRequestLocale } from "@/lib/locale.server";
 import { getRelationshipLabel } from "@/lib/relationships";
 import { PageHeader } from "@/components/page-header";
@@ -252,36 +253,46 @@ export default async function EntityPage({ params }: PageProps) {
               ) : null}
 
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link
-                  href={`/entities/${entity.slug}/edit`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                >
-                  {t(locale, "edit")}
-                </Link>
-                <Link
-                  href={`/entities/${entity.slug}/relationships`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                >
-                  {t(locale, "relationships")}
-                </Link>
-                <Link
-                  href={`/entities/${entity.slug}/archive`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                >
-                  {t(locale, "archive")}
-                </Link>
-                <Link
-                  href={`/entities/${entity.slug}/history`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                >
-                  {t(locale, "history")}
-                </Link>
-                <Link
-                  href={`/entities/${entity.slug}/delete`}
-                  className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                >
-                  {t(locale, "delete")}
-                </Link>
+                {SHOW_ADMIN_UI ? (
+                  <Link
+                    href={`/entities/${entity.slug}/edit`}
+                    className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                    {t(locale, "edit")}
+                  </Link>
+                ) : null}
+                {SHOW_ADMIN_UI ? (
+                  <Link
+                    href={`/entities/${entity.slug}/relationships`}
+                    className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                    {t(locale, "relationships")}
+                  </Link>
+                ) : null}
+                {SHOW_ADMIN_UI ? (
+                  <Link
+                    href={`/entities/${entity.slug}/archive`}
+                    className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                    {t(locale, "archive")}
+                  </Link>
+                ) : null}
+                {SHOW_ADMIN_UI ? (
+                  <Link
+                    href={`/entities/${entity.slug}/history`}
+                    className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                    {t(locale, "history")}
+                  </Link>
+                ) : null}
+                {SHOW_ADMIN_UI ? (
+                  <Link
+                    href={`/entities/${entity.slug}/delete`}
+                    className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                  >
+                    {t(locale, "delete")}
+                  </Link>
+                ) : null}
               </div>
 
               <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">

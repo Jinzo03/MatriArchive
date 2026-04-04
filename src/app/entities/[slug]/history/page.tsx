@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { formatLocaleDateTime, getEntityStatusLabel, getVisibilityLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
+import { assertMutationAllowed } from "@/lib/mutation-guard";
 import { Reveal } from "@/components/reveal";
 
 export const dynamic = "force-dynamic";
@@ -36,6 +38,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
 
   async function restoreRevision(formData: FormData) {
     "use server";
+    assertMutationAllowed(`restore entity revision (${slug})`);
     if (!entity) return;
     const revisionId = String(formData.get("revisionId") ?? "").trim();
     if (!revisionId) return;
@@ -134,15 +137,17 @@ export default async function EntityHistoryPage({ params }: PageProps) {
                           </p>
                         </div>
 
-                        <form action={restoreRevision}>
-                          <input type="hidden" name="revisionId" value={revision.id} />
-                          <button
-                            type="submit"
-                            className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
-                          >
-                            {locale === "ar" ? "استعادة" : "Restore"}
-                          </button>
-                        </form>
+                        {SHOW_ADMIN_UI ? (
+                          <form action={restoreRevision}>
+                            <input type="hidden" name="revisionId" value={revision.id} />
+                            <button
+                              type="submit"
+                              className="inline-flex h-10 items-center justify-center rounded-xl border border-border px-4 text-sm transition hover:bg-accent"
+                            >
+                              {locale === "ar" ? "استعادة" : "Restore"}
+                            </button>
+                          </form>
+                        ) : null}
                       </div>
 
                       <p className="mt-2 text-sm text-muted-foreground">{revision.slug}</p>

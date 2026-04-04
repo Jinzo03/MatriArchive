@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
@@ -33,6 +35,10 @@ const typeLabels: Record<EntityType, string> = {
 };
 
 export default async function AdminAnalyticsPage() {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
 
   const [entities, relationships, revisions, mediaAssets] = await Promise.all([

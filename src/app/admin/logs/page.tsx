@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
 import { getRequestLocale } from "@/lib/locale.server";
 import { t } from "@/lib/locale";
@@ -37,6 +39,10 @@ function statusBadgeClass(status: ImportJobStatus) {
 }
 
 export default async function AdminLogsPage() {
+  if (!SHOW_ADMIN_UI) {
+    notFound();
+  }
+
   const locale = await getRequestLocale();
 
   const [importJobs, recentLogs] = await Promise.all([

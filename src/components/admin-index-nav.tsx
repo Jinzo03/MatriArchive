@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { useLocale } from "@/components/locale-provider";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { t } from "@/lib/locale";
 
 type AdminLink = {
@@ -30,6 +31,10 @@ export function AdminIndexNav() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const { locale } = useLocale();
+
+  if (!SHOW_ADMIN_UI) {
+    return null;
+  }
 
   return (
     <motion.nav

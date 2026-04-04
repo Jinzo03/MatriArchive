@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { getEntityTypeLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
 import { PageHeader } from "@/components/page-header";
@@ -36,27 +37,35 @@ export default async function DashboardPage() {
   ];
 
   const quickActions = [
-    {
-      label: locale === "ar" ? "شخصية جديدة" : "New Character",
-      href: "/create/character",
-    },
-    {
-      label: locale === "ar" ? "قصة جديدة" : "New Story",
-      href: "/create/story",
-    },
-    {
-      label: locale === "ar" ? "مؤسسة جديدة" : "New Institution",
-      href: "/create/institution",
-    },
-    {
-      label: locale === "ar" ? "افتح الخط الزمني" : "Open Timeline",
-      href: "/timeline",
-    },
-    { label: t(locale, "importExport"), href: "/admin/import-export" },
-    {
-      label: locale === "ar" ? "مركز الإدارة" : "Admin Hub",
-      href: "/admin",
-    },
+    ...(SHOW_ADMIN_UI
+      ? [
+          {
+            label: locale === "ar" ? "شخصية جديدة" : "New Character",
+            href: "/create/character",
+          },
+          {
+            label: locale === "ar" ? "قصة جديدة" : "New Story",
+            href: "/create/story",
+          },
+          {
+            label: locale === "ar" ? "مؤسسة جديدة" : "New Institution",
+            href: "/create/institution",
+          },
+          {
+            label: locale === "ar" ? "افتح الخط الزمني" : "Open Timeline",
+            href: "/timeline",
+          },
+        ]
+      : []),
+    ...(SHOW_ADMIN_UI
+      ? [
+          { label: t(locale, "importExport"), href: "/admin/import-export" },
+          {
+            label: locale === "ar" ? "مركز الإدارة" : "Admin Hub",
+            href: "/admin",
+          },
+        ]
+      : []),
   ];
 
   return (
@@ -66,9 +75,11 @@ export default async function DashboardPage() {
         title={t(locale, "dashboardTitle")}
         description={t(locale, "dashboardIntro")}
       />
-      <div className="mt-4">
-        <DashboardCta />
-      </div>
+      {SHOW_ADMIN_UI ? (
+        <div className="mt-4">
+          <DashboardCta />
+        </div>
+      ) : null}
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {quickStats.map((stat) => (
@@ -107,20 +118,22 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        <div className="ms-panel-soft">
-          <h2 className="text-lg font-semibold">{t(locale, "quickActions")}</h2>
-          <div className="mt-4 flex flex-col gap-3">
-            {quickActions.map((action) => (
-              <Link
-                key={action.label}
-                href={action.href}
-                className="inline-flex h-11 items-center justify-center rounded-xl border border-border px-4 text-sm font-medium transition hover:bg-accent"
-              >
-                {action.label}
-              </Link>
-            ))}
+        {SHOW_ADMIN_UI ? (
+          <div className="ms-panel-soft">
+            <h2 className="text-lg font-semibold">{t(locale, "quickActions")}</h2>
+            <div className="mt-4 flex flex-col gap-3">
+              {quickActions.map((action) => (
+                <Link
+                  key={action.label}
+                  href={action.href}
+                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border px-4 text-sm font-medium transition hover:bg-accent"
+                >
+                  {action.label}
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        ) : null}
       </section>
     </DashboardShell>
   );

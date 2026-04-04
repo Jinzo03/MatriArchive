@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion, useReducedMotion } from "motion/react";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLocale } from "@/components/locale-provider";
+import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { t } from "@/lib/locale";
 
 type NavLink = {
@@ -27,6 +28,13 @@ export function SiteNav() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const { locale } = useLocale();
+  const visibleLinks = navLinks.filter((link) => {
+    if (!SHOW_ADMIN_UI && (link.href === "/create" || link.href === "/admin")) {
+      return false;
+    }
+
+    return true;
+  });
 
   return (
     <motion.header
@@ -42,7 +50,7 @@ export function SiteNav() {
 
         <div className="flex flex-wrap items-center gap-2">
           <nav className="flex flex-wrap items-center gap-2">
-            {navLinks.map((link, index) => {
+            {visibleLinks.map((link, index) => {
               const isActive = link.isActive(pathname);
 
               return (
