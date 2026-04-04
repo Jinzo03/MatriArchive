@@ -8,6 +8,7 @@ import {
   ImportLogLevel,
   MediaKind,
   MediaRole,
+  Prisma,
   RelationshipType,
   Visibility,
 } from "@/generated/prisma/client";
@@ -59,6 +60,14 @@ function sameStringArray(a: string[] = [], b: string[] = []) {
 
 function sameJson(a: unknown, b: unknown) {
   return JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+}
+
+function toJsonInput(value: unknown): Prisma.InputJsonValue {
+  return JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
+}
+
+function toNullableJsonInput(value: unknown) {
+  return value === null ? Prisma.DbNull : toJsonInput(value);
 }
 
 function entityPayload(entity: NormalizedEntity) {
@@ -161,10 +170,10 @@ export async function applyUniverseImport(
       sourcePath,
       status: ImportJobStatus.RUNNING,
       dryRun: false,
-      summary: {
+      summary: toJsonInput({
         startedAt: new Date().toISOString(),
         mode: "write",
-      },
+      }),
     },
   });
 
@@ -182,10 +191,10 @@ export async function applyUniverseImport(
           level: ImportLogLevel.INFO,
           stage: "START",
           message: `Import started for package ${packageData.packageId}`,
-          details: {
+          details: toJsonInput({
             packageId: packageData.packageId,
             version: packageData.version,
-          },
+          }),
         },
       });
 
@@ -230,7 +239,7 @@ export async function applyUniverseImport(
               height: next.height,
               credit: next.credit,
               tags: next.tags,
-              metadata: next.metadata,
+              metadata: toNullableJsonInput(next.metadata),
             },
           });
 
@@ -282,7 +291,7 @@ export async function applyUniverseImport(
             height: next.height,
             credit: next.credit,
             tags: next.tags,
-            metadata: next.metadata,
+            metadata: toNullableJsonInput(next.metadata),
           },
         });
 
@@ -320,7 +329,7 @@ export async function applyUniverseImport(
               aliases: next.aliases,
               tags: next.tags,
               searchKeywords: next.searchKeywords,
-              metadata: next.metadata,
+              metadata: toNullableJsonInput(next.metadata),
               version: 1,
             },
           });
@@ -399,7 +408,7 @@ export async function applyUniverseImport(
             aliases: next.aliases,
             tags: next.tags,
             searchKeywords: next.searchKeywords,
-            metadata: next.metadata,
+            metadata: toNullableJsonInput(next.metadata),
             version: { increment: 1 },
           },
         });
@@ -558,10 +567,10 @@ export async function applyUniverseImport(
                 stage: "RELATION_SKIP",
                 message: `Unresolved relation target ${relation.targetId}`,
                 entitySlug: entity.slug,
-                details: {
+                details: toJsonInput({
                   relationType: relation.type,
                   targetId: relation.targetId,
-                },
+                }),
               },
             });
 
@@ -587,12 +596,12 @@ export async function applyUniverseImport(
                 stage: "RELATION_SKIP",
                 message: `Invalid relationship ${relation.type} for ${entity.slug} -> ${targetSlug}`,
                 entitySlug: entity.slug,
-                details: {
+                details: toJsonInput({
                   relationType: relation.type,
                   sourceType: sourceRecord.type,
                   targetSlug,
                   targetType: targetRecord.type,
-                },
+                }),
               },
             });
 
@@ -623,10 +632,10 @@ export async function applyUniverseImport(
                 stage: "RELATION_CREATE",
                 message: `Created relationship ${sourceRecord.slug} -> ${targetRecord.slug}`,
                 entitySlug: entity.slug,
-                details: {
+                details: toJsonInput({
                   targetSlug: targetRecord.slug,
                   relationType: relation.type,
-                },
+                }),
               },
             });
 
@@ -659,10 +668,10 @@ export async function applyUniverseImport(
               stage: "RELATION_UPDATE",
               message: `Updated relationship ${sourceRecord.slug} -> ${targetRecord.slug}`,
               entitySlug: entity.slug,
-              details: {
+              details: toJsonInput({
                 targetSlug: targetRecord.slug,
                 relationType: relation.type,
-              },
+              }),
             },
           });
         }
@@ -694,10 +703,10 @@ export async function applyUniverseImport(
                 stage: "ENTITY_MEDIA_SKIP",
                 message: `Unresolved media asset ${link.assetId}`,
                 entitySlug: entity.slug,
-                details: {
+                details: toJsonInput({
                   assetId: link.assetId,
                   role: link.role,
-                },
+                }),
               },
             });
 
@@ -729,10 +738,10 @@ export async function applyUniverseImport(
                 stage: "ENTITY_MEDIA_CREATE",
                 message: `Created entity-media link ${sourceRecord.slug} -> ${mediaRecord.slug}`,
                 entitySlug: entity.slug,
-                details: {
+                details: toJsonInput({
                   assetSlug: mediaRecord.slug,
                   role: link.role,
-                },
+                }),
               },
             });
 
@@ -767,10 +776,10 @@ export async function applyUniverseImport(
               stage: "ENTITY_MEDIA_UPDATE",
               message: `Updated entity-media link ${sourceRecord.slug} -> ${mediaRecord.slug}`,
               entitySlug: entity.slug,
-              details: {
+              details: toJsonInput({
                 assetSlug: mediaRecord.slug,
                 role: link.role,
-              },
+              }),
             },
           });
         }
@@ -785,13 +794,13 @@ export async function applyUniverseImport(
           updatedCount,
           skippedCount,
           failedCount,
-          summary: {
+          summary: toJsonInput({
             packageId: packageData.packageId,
             packageVersion: packageData.version,
             title: packageData.title,
             sourcePath,
             warnings,
-          },
+          }),
         },
       });
 
@@ -801,13 +810,13 @@ export async function applyUniverseImport(
           level: warnings.length > 0 ? ImportLogLevel.WARN : ImportLogLevel.INFO,
           stage: "FINISH",
           message: `Import finished for package ${packageData.packageId}`,
-          details: {
+          details: toJsonInput({
             createdCount,
             updatedCount,
             skippedCount,
             failedCount,
             warnings,
-          },
+          }),
         },
       });
     });
@@ -829,14 +838,14 @@ export async function applyUniverseImport(
         status: ImportJobStatus.FAILED,
         finishedAt: new Date(),
         failedCount: failedCount + 1,
-        summary: {
+        summary: toJsonInput({
           packageId: packageData.packageId,
           packageVersion: packageData.version,
           title: packageData.title,
           sourcePath,
           warnings,
           error: error instanceof Error ? error.message : String(error),
-        },
+        }),
       },
     });
 
@@ -846,9 +855,9 @@ export async function applyUniverseImport(
         level: ImportLogLevel.ERROR,
         stage: "ERROR",
         message: error instanceof Error ? error.message : "Unknown import failure",
-        details: {
+        details: toJsonInput({
           stack: error instanceof Error ? error.stack : undefined,
-        },
+        }),
       },
     });
 

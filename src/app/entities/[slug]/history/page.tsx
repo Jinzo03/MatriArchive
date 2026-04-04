@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { notFound, redirect } from "next/navigation";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
+import { Prisma } from "@/generated/prisma/client";
 import { formatLocaleDateTime, getEntityStatusLabel, getVisibilityLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
 import { assertMutationAllowed } from "@/lib/mutation-guard";
@@ -48,6 +49,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
     });
 
     if (!revision) return;
+    const revisionMetadata = revision.metadata === null ? Prisma.DbNull : revision.metadata;
 
     const restored = await prisma.$transaction(async (tx) => {
       const updatedEntity = await tx.entity.update({
@@ -62,7 +64,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           aliases: revision.aliases,
           tags: revision.tags,
           searchKeywords: revision.searchKeywords,
-          metadata: revision.metadata,
+          metadata: revisionMetadata,
           version: { increment: 1 },
         },
       });
@@ -80,7 +82,7 @@ export default async function EntityHistoryPage({ params }: PageProps) {
           aliases: updatedEntity.aliases,
           tags: updatedEntity.tags,
           searchKeywords: updatedEntity.searchKeywords,
-          metadata: updatedEntity.metadata,
+          metadata: updatedEntity.metadata === null ? Prisma.DbNull : updatedEntity.metadata,
         },
       });
 

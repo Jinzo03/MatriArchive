@@ -7,6 +7,8 @@ import { useLocale } from "@/components/locale-provider";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { t } from "@/lib/locale";
 
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+
 type AdminLink = {
   href: string;
   keyName: "dashboard" | "content" | "analytics" | "settings" | "logs" | "support" | "importExport";
@@ -41,7 +43,7 @@ export function AdminIndexNav() {
       className="flex flex-wrap gap-2"
       initial={reduceMotion ? false : { opacity: 0, y: -6 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.4, ease: smoothEase }}
     >
       {adminLinks.map((link, index) => {
         const isActive = link.isActive(pathname);
@@ -54,7 +56,7 @@ export function AdminIndexNav() {
             transition={{
               duration: 0.3,
               delay: index * 0.03,
-              ease: [0.22, 1, 0.36, 1],
+              ease: smoothEase,
             }}
           >
             <Link

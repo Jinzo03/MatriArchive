@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import {
   EntityStatus,
   EntityType,
+  Prisma,
   Visibility,
 } from "@/generated/prisma/client";
 import { getRequestLocale } from "@/lib/locale.server";
@@ -38,14 +39,14 @@ function splitList(value: FormDataEntryValue | null) {
     .filter(Boolean);
 }
 
-function parseMetadata(value: FormDataEntryValue | null) {
+function parseMetadata(value: FormDataEntryValue | null): Prisma.InputJsonValue | null {
   if (typeof value !== "string") return null;
 
   const trimmed = value.trim();
   if (!trimmed) return null;
 
   try {
-    return JSON.parse(trimmed) as unknown;
+    return JSON.parse(trimmed) as Prisma.InputJsonValue;
   } catch {
     throw new Error("Metadata must be valid JSON.");
   }
@@ -97,6 +98,8 @@ export default async function EditEntityPage({ params }: PageProps) {
     const aliases = splitList(formData.get("aliases"));
     const tags = splitList(formData.get("tags"));
     const searchKeywords = splitList(formData.get("searchKeywords"));
+    const metadataInput =
+      metadata === null ? Prisma.DbNull : metadata;
 
     const updated = await prisma.$transaction(async (tx) => {
       const updatedEntity = await tx.entity.update({
@@ -111,7 +114,7 @@ export default async function EditEntityPage({ params }: PageProps) {
           aliases,
           tags,
           searchKeywords,
-          metadata,
+          metadata: metadataInput,
           version: { increment: 1 },
         },
       });
@@ -129,7 +132,7 @@ export default async function EditEntityPage({ params }: PageProps) {
           aliases: updatedEntity.aliases,
           tags: updatedEntity.tags,
           searchKeywords: updatedEntity.searchKeywords,
-          metadata: updatedEntity.metadata,
+          metadata: updatedEntity.metadata === null ? Prisma.DbNull : updatedEntity.metadata,
         },
       });
 

@@ -6,6 +6,8 @@ import { ArrowRight, Sparkles, Orbit } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { t } from "@/lib/locale";
 
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+
 const floaters = [
   { className: "left-[10%] top-[16%] h-56 w-56" },
   { className: "left-[82%] top-[14%] h-44 w-44" },
@@ -102,7 +104,7 @@ export default function SplashPage() {
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.8, ease: smoothEase },
     },
   };
 

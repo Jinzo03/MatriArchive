@@ -148,7 +148,7 @@ function renderNoteBody(body: string | string[]) {
 }
 
 export default async function AboutMePage() {
-  const creatorMedia: CreatorMedia[] = await prisma.mediaAsset.findMany({
+  const creatorMediaResult = await prisma.mediaAsset.findMany({
     where: {
       type: "IMAGE",
       tags: {
@@ -168,6 +168,12 @@ export default async function AboutMePage() {
       metadata: true,
     },
   });
+
+  const creatorMedia: CreatorMedia[] = creatorMediaResult.map((item) => ({
+    ...item,
+    width: item.width ?? undefined,
+    height: item.height ?? undefined,
+  }));
 
   const mediaByPlacement = creatorMedia.reduce<Map<string, CreatorMedia[]>>((map, item) => {
     const placement = getMediaPlacement(item);

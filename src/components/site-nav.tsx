@@ -8,6 +8,8 @@ import { useLocale } from "@/components/locale-provider";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { t } from "@/lib/locale";
 
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+
 type NavLink = {
   href: string;
   keyName: "dashboard" | "aboutMe" | "browse" | "search" | "create" | "timeline" | "admin";
@@ -41,7 +43,7 @@ export function SiteNav() {
       className="border-b border-border/60 bg-background/55 backdrop-blur-xl"
       initial={reduceMotion ? false : { opacity: 0, y: -10 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.55, ease: smoothEase }}
     >
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link href="/dashboard" className="text-sm font-semibold tracking-tight">
@@ -61,7 +63,7 @@ export function SiteNav() {
                   transition={{
                     duration: 0.35,
                     delay: 0.06 + index * 0.04,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: smoothEase,
                   }}
                 >
                   <Link

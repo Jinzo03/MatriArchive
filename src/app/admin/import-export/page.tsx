@@ -12,7 +12,7 @@ import { dryRunImport, type ImportPreview } from "@/lib/importer";
 import { applyUniverseImport } from "@/lib/import-apply";
 import { UniversePackageSchema, type UniversePackage } from "@/lib/import-schema";
 import { assertMutationAllowed } from "@/lib/mutation-guard";
-import { ImportJobStatus } from "@/generated/prisma/client";
+import { ImportJobStatus, Prisma } from "@/generated/prisma/client";
 
 export const dynamic = "force-dynamic";
 
@@ -33,6 +33,10 @@ function isPreviewSummary(value: unknown): value is PreviewSummary {
 
 function formatCountsBlock(counts: { create: number; update: number; skip: number }) {
   return `create=${counts.create} update=${counts.update} skip=${counts.skip}`;
+}
+
+function toJsonInput(value: unknown): Prisma.InputJsonValue {
+  return JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 }
 
 export default async function ImportExportPage({
@@ -92,12 +96,12 @@ export default async function ImportExportPage({
         sourcePath: file.name,
         status: ImportJobStatus.DRAFT,
         dryRun: true,
-        summary: {
+        summary: toJsonInput({
           payload: packageData,
           preview,
           sourceName: file.name,
           createdAt: new Date().toISOString(),
-        } satisfies PreviewSummary,
+        } satisfies PreviewSummary),
       },
     });
 
@@ -122,10 +126,11 @@ export default async function ImportExportPage({
     if (!summaryValue || !isPreviewSummary(summaryValue)) {
       throw new Error("This import job does not contain a valid preview payload.");
     }
+    const previewSummaryValue: PreviewSummary = summaryValue;
 
-    const result = await applyUniverseImport(summaryValue.payload, {
+    const result = await applyUniverseImport(previewSummaryValue.payload, {
       sourcePath: jobRow.sourcePath ?? undefined,
-      approvedPreview: summaryValue.preview,
+      approvedPreview: previewSummaryValue.preview,
     });
 
     await prisma.importJob.update({
@@ -133,11 +138,11 @@ export default async function ImportExportPage({
       data: {
         status: ImportJobStatus.SUCCEEDED,
         finishedAt: new Date(),
-        summary: {
-          ...summaryValue,
+        summary: toJsonInput({
+          ...previewSummaryValue,
           confirmedAt: new Date().toISOString(),
           appliedImportJobId: result.jobId,
-        },
+        }),
       },
     });
 

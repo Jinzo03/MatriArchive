@@ -3,6 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+
 type DashboardShellProps = {
   children: ReactNode;
 };
@@ -15,7 +17,7 @@ export function DashboardShell({ children }: DashboardShellProps) {
       className="min-h-screen bg-background text-foreground"
       initial={reduceMotion ? false : { opacity: 0, y: 12 }}
       animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.6, ease: smoothEase }}
     >
       <motion.div
         className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8"
