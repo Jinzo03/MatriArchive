@@ -153,7 +153,7 @@ export default function SplashPage() {
             <div className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-background shadow-sm">
               <Sparkles className="h-4 w-4" />
             </div>
-            <p className="text-sm font-medium tracking-wide">Matriarchal Shari&apos;ah</p>
+            <p className="text-sm font-medium tracking-wide">MatriArchive</p>
           </div>
 
           <CtaLink href="/dashboard">{t(locale, "enter")}</CtaLink>

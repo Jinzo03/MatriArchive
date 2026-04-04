@@ -71,7 +71,7 @@ export default async function DashboardPage() {
   return (
     <DashboardShell>
       <PageHeader
-        eyebrow="Matriarchal Shari'ah"
+        eyebrow="MatriArchive"
         title={t(locale, "dashboardTitle")}
         description={t(locale, "dashboardIntro")}
       />

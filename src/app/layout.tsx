@@ -20,7 +20,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Matriarchal Shari'ah",
+  title: "MatriArchive",
   description: "Connected universe dashboard for lore, stories, and navigation.",
 };
 
