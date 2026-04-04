@@ -71,6 +71,31 @@ function renderLongFormBody(body: string) {
   );
 }
 
+function renderPreviewBody(body: string, maxBlocks = 5) {
+  const blocks = body
+    .split(/\r?\n\r?\n+/)
+    .map((block) => block.trim())
+    .filter(Boolean)
+    .slice(0, maxBlocks);
+
+  if (blocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="space-y-4">
+      {blocks.map((block, index) => (
+        <p
+          key={`${index}-${block.slice(0, 24)}`}
+          className="whitespace-pre-wrap break-words text-sm leading-7 text-foreground/90"
+        >
+          {block}
+        </p>
+      ))}
+    </div>
+  );
+}
+
 function getExternalLinks(metadata: unknown): ExternalLinks | null {
   if (!metadata || typeof metadata !== "object") return null;
 
@@ -184,7 +209,8 @@ export default async function EntityPage({ params }: PageProps) {
     entity.mediaLinks[0]?.role ??
     null;
 
-  const isLongFormArtifact = entity.type === "ARTIFACT";
+  const isExternallyContinuedArtifact = entity.type === "ARTIFACT" && !!externalLinks;
+  const isLongFormArtifact = entity.type === "ARTIFACT" && !externalLinks;
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -309,11 +335,15 @@ export default async function EntityPage({ params }: PageProps) {
                 ))}
               </div>
 
-              {entity.type === "STORY" && externalLinks ? (
+              {(entity.type === "STORY" || isExternallyContinuedArtifact) && externalLinks ? (
                 <div className="mt-6 ms-panel-soft p-5">
                   <div className="flex flex-wrap gap-2">
                     <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
-                      {locale === "ar" ? "فصل معاينة" : "Preview chapter"}
+                      {entity.type === "ARTIFACT"
+                        ? "Preview excerpt"
+                        : locale === "ar"
+                          ? "فصل معاينة"
+                          : "Preview chapter"}
                     </span>
                     <span className="rounded-full border border-border px-2.5 py-1 text-[11px] text-muted-foreground">
                       {locale === "ar" ? "قراءة خارجية" : "External reading"}
@@ -321,9 +351,11 @@ export default async function EntityPage({ params }: PageProps) {
                   </div>
 
                   <p className="mt-3 text-sm text-muted-foreground">
-                    {locale === "ar"
-                      ? "اقرأ المعاينة هنا، ثم تابع على المنصة الخارجية إذا أردت إكمال القصة الطويلة."
-                      : "Read the preview here, then continue on the external platform if you want the full long-form story."}
+                    {entity.type === "ARTIFACT"
+                      ? "Read the excerpt here, then continue on the external platform for the full long-form artifact text."
+                      : locale === "ar"
+                        ? "اقرأ المعاينة هنا، ثم تابع على المنصة الخارجية إذا أردت إكمال القصة الطويلة."
+                        : "Read the preview here, then continue on the external platform if you want the full long-form story."}
                   </p>
 
                   <div className="mt-4 flex flex-wrap gap-3">
@@ -412,9 +444,21 @@ export default async function EntityPage({ params }: PageProps) {
           <div className="grid gap-6 lg:grid-cols-3">
             <Reveal delay={0.08} className="lg:col-span-2">
               <section className="ms-panel p-6">
-                <h2 className="text-lg font-semibold">{t(locale, "contentSection")}</h2>
-                <div className="mt-4 whitespace-pre-wrap text-sm leading-6 text-foreground/90">
-                  {entity.body || t(locale, "noBodyYet")}
+                <h2 className="text-lg font-semibold">
+                  {isExternallyContinuedArtifact
+                    ? "Preview excerpt"
+                    : t(locale, "contentSection")}
+                </h2>
+                <div className="mt-4">
+                  {isExternallyContinuedArtifact
+                    ? entity.body
+                      ? renderPreviewBody(entity.body)
+                      : t(locale, "noBodyYet")
+                    : (
+                        <div className="whitespace-pre-wrap text-sm leading-6 text-foreground/90">
+                          {entity.body || t(locale, "noBodyYet")}
+                        </div>
+                      )}
                 </div>
               </section>
             </Reveal>

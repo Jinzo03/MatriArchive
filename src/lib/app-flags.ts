@@ -20,7 +20,7 @@ function parseBooleanFlag(value: string | undefined, defaultValue: boolean) {
 }
 
 export const SHOW_ADMIN_UI = parseBooleanFlag(
-  process.env.NEXT_PUBLIC_SHOW_ADMIN_UI = "true",
+  process.env.NEXT_PUBLIC_SHOW_ADMIN_UI = "false",
   process.env.NODE_ENV !== "production"
 );
 
