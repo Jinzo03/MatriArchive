@@ -59,7 +59,7 @@ export default async function ImportExportPage({
   let mediaCount = 0;
   let previewJob: Awaited<ReturnType<typeof prisma.importJob.findUnique>> = null;
   let exportJson = JSON.stringify(
-    { entities: [], relationships: [], revisions: [] },
+    { entities: [], relationships: [], revisions: [], mediaAssets: [], entityMedia: [] },
     null,
     2
   );
@@ -81,6 +81,8 @@ export default async function ImportExportPage({
       entities: await prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
       relationships: await prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
       revisions: await prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
+      mediaAssets: await prisma.mediaAsset.findMany({ orderBy: { createdAt: "asc" } }),
+      entityMedia: await prisma.entityMedia.findMany({ orderBy: { createdAt: "asc" } }),
     };
 
     exportJson = JSON.stringify(exportBundle, null, 2);
@@ -449,4 +451,3 @@ export default async function ImportExportPage({
     </main>
   );
 }
-

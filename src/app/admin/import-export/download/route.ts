@@ -15,6 +15,8 @@ export async function GET() {
       entities: await prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
       relationships: await prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
       revisions: await prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
+      mediaAssets: await prisma.mediaAsset.findMany({ orderBy: { createdAt: "asc" } }),
+      entityMedia: await prisma.entityMedia.findMany({ orderBy: { createdAt: "asc" } }),
     };
 
     const exportJson = JSON.stringify(exportBundle, null, 2);

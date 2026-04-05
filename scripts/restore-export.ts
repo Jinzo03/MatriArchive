@@ -81,10 +81,51 @@ const RelationshipSchema = z.object({
   updatedAt: z.coerce.date(),
 });
 
+const MediaAssetSchema = z.object({
+  id: z.string().min(1),
+  slug: z.string().min(1),
+  type: z.enum(["IMAGE", "VIDEO", "AUDIO", "OTHER"]),
+  title: z.string(),
+  summary: z.string().nullable(),
+  src: z.string(),
+  alt: z.string().nullable(),
+  mimeType: z.string().nullable(),
+  width: z.number().int().nullable(),
+  height: z.number().int().nullable(),
+  credit: z.string().nullable(),
+  tags: z.array(z.string()),
+  metadata: JsonValueSchema.nullable(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+});
+
+const EntityMediaSchema = z.object({
+  id: z.string().min(1),
+  entityId: z.string().min(1),
+  mediaAssetId: z.string().min(1),
+  role: z.enum([
+    "PORTRAIT",
+    "COVER",
+    "ICON",
+    "SCENE",
+    "GALLERY",
+    "TIMELINE_ART",
+    "EMBLEM",
+    "THUMBNAIL",
+  ]),
+  primary: z.boolean(),
+  sortOrder: z.number().int(),
+  alt: z.string().nullable(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+});
+
 const ExportSchema = z.object({
   entities: z.array(EntitySchema),
   relationships: z.array(RelationshipSchema),
   revisions: z.array(RevisionSchema),
+  mediaAssets: z.array(MediaAssetSchema).default([]),
+  entityMedia: z.array(EntityMediaSchema).default([]),
 });
 
 function toNullableJson(value: unknown | null) {
@@ -131,6 +172,8 @@ async function main() {
     console.log(`Entities: ${parsed.entities.length}`);
     console.log(`Relationships: ${parsed.relationships.length}`);
     console.log(`Revisions: ${parsed.revisions.length}`);
+    console.log(`Media assets: ${parsed.mediaAssets.length}`);
+    console.log(`Entity media links: ${parsed.entityMedia.length}`);
 
     if (shouldClear) {
       await prisma.relationship.deleteMany();
@@ -140,6 +183,32 @@ async function main() {
       await prisma.importJob.deleteMany();
       await prisma.entity.deleteMany();
       await prisma.mediaAsset.deleteMany();
+    }
+
+    for (const asset of parsed.mediaAssets) {
+      await prisma.mediaAsset.upsert({
+        where: { id: asset.id },
+        create: {
+          ...asset,
+          metadata: toNullableJson(asset.metadata),
+        },
+        update: {
+          slug: asset.slug,
+          type: asset.type,
+          title: asset.title,
+          summary: asset.summary,
+          src: asset.src,
+          alt: asset.alt,
+          mimeType: asset.mimeType,
+          width: asset.width,
+          height: asset.height,
+          credit: asset.credit,
+          tags: asset.tags,
+          metadata: toNullableJson(asset.metadata),
+          createdAt: asset.createdAt,
+          updatedAt: asset.updatedAt,
+        },
+      });
     }
 
     for (const entity of parsed.entities) {
@@ -230,6 +299,25 @@ async function main() {
           directionality: relationship.directionality,
           createdAt: relationship.createdAt,
           updatedAt: relationship.updatedAt,
+        },
+      });
+    }
+
+    for (const link of parsed.entityMedia) {
+      await prisma.entityMedia.upsert({
+        where: { id: link.id },
+        create: {
+          ...link,
+        },
+        update: {
+          entityId: link.entityId,
+          mediaAssetId: link.mediaAssetId,
+          role: link.role,
+          primary: link.primary,
+          sortOrder: link.sortOrder,
+          alt: link.alt,
+          createdAt: link.createdAt,
+          updatedAt: link.updatedAt,
         },
       });
     }
