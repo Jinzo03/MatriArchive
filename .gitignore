@@ -52,5 +52,12 @@ next-env.d.ts
 .vitest-attachments/
 
 /src/generated/prisma
-public/
+/public/*
+!/public/file.svg
+!/public/globe.svg
+!/public/next.svg
+!/public/vercel.svg
+!/public/window.svg
+!/public/media/
+!/public/media/**
 content/packages
