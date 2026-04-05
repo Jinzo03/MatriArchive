@@ -10,8 +10,12 @@
     "postinstall": "prisma generate",
     "dev": "next dev",
     "build": "prisma generate && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "eslint",
+    "db:generate": "prisma generate",
+    "db:migrate:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
     "media:delete": "tsx scripts/delete-media.ts",
     "import:dry-run": "tsx scripts/import-dry-run.ts",
     "import:content": "tsx scripts/import-content.ts"

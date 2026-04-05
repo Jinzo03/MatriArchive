@@ -2,8 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
 import { prisma } from "@/lib/prisma";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 import { Reveal } from "@/components/reveal";
 import { AdminIndexNav } from "@/components/admin-index-nav";
 
@@ -16,15 +18,51 @@ export default async function AdminPage() {
 
   const locale = await getRequestLocale();
 
-  const [entityCount, archivedCount, relationshipCount, revisionCount, importJobCount, mediaCount] =
-    await Promise.all([
-      prisma.entity.count(),
-      prisma.entity.count({ where: { status: "ARCHIVED" } }),
-      prisma.relationship.count(),
-      prisma.entityRevision.count(),
-      prisma.importJob.count(),
-      prisma.mediaAsset.count(),
-    ]);
+  let entityCount = 0;
+  let archivedCount = 0;
+  let relationshipCount = 0;
+  let revisionCount = 0;
+  let importJobCount = 0;
+  let mediaCount = 0;
+
+  try {
+    [entityCount, archivedCount, relationshipCount, revisionCount, importJobCount, mediaCount] =
+      await Promise.all([
+        prisma.entity.count(),
+        prisma.entity.count({ where: { status: "ARCHIVED" } }),
+        prisma.relationship.count(),
+        prisma.entityRevision.count(),
+        prisma.importJob.count(),
+        prisma.mediaAsset.count(),
+      ]);
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <main className="min-h-screen bg-background text-foreground">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
+            <Reveal>
+              <section className="ms-panel p-6">
+                <p className="text-sm text-muted-foreground">
+                  {locale === "ar" ? "لوحة الإدارة" : "Admin Panel"}
+                </p>
+                <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+                  {locale === "ar" ? "مركز الصيانة" : "Maintenance Hub"}
+                </h1>
+                <div className="mt-5">
+                  <AdminIndexNav />
+                </div>
+              </section>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <DatabaseUnavailableState locale={locale} />
+            </Reveal>
+          </div>
+        </main>
+      );
+    }
+
+    throw error;
+  }
 
   const adminSections = [
     {

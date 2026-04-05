@@ -8,7 +8,9 @@ import {
   t,
 } from "@/lib/locale";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { getRequestLocale } from "@/lib/locale.server";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 import { getRelationshipLabel } from "@/lib/relationships";
 import { PageHeader } from "@/components/page-header";
 import { Reveal } from "@/components/reveal";
@@ -157,41 +159,62 @@ export default async function EntityPage({ params }: PageProps) {
   const locale = await getRequestLocale();
   const { slug } = await params;
 
-  const entity = await prisma.entity.findUnique({
-    where: { slug },
-    include: {
-      incomingRelationships: {
-        include: {
-          sourceEntity: {
-            select: {
-              slug: true,
-              title: true,
+  let entity;
+
+  try {
+    entity = await prisma.entity.findUnique({
+      where: { slug },
+      include: {
+        incomingRelationships: {
+          include: {
+            sourceEntity: {
+              select: {
+                slug: true,
+                title: true,
+              },
             },
           },
         },
-      },
-      outgoingRelationships: {
-        include: {
-          targetEntity: {
-            select: {
-              slug: true,
-              title: true,
+        outgoingRelationships: {
+          include: {
+            targetEntity: {
+              select: {
+                slug: true,
+                title: true,
+              },
             },
           },
         },
-      },
-      mediaLinks: {
-        include: {
-          mediaAsset: true,
+        mediaLinks: {
+          include: {
+            mediaAsset: true,
+          },
+          orderBy: [
+            { primary: "desc" },
+            { sortOrder: "asc" },
+            { createdAt: "asc" },
+          ],
         },
-        orderBy: [
-          { primary: "desc" },
-          { sortOrder: "asc" },
-          { createdAt: "asc" },
-        ],
       },
-    },
-  });
+    });
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <main className="min-h-screen bg-background text-foreground">
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
+            <Reveal>
+              <DatabaseUnavailableState
+                locale={locale}
+                title={locale === "ar" ? "صفحة العنصر غير متاحة حالياً" : "Entity page unavailable right now"}
+              />
+            </Reveal>
+          </div>
+        </main>
+      );
+    }
+
+    throw error;
+  }
 
   if (!entity) {
     notFound();

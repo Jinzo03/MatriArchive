@@ -12,7 +12,9 @@ import { dryRunImport, type ImportPreview } from "@/lib/importer";
 import { applyUniverseImport } from "@/lib/import-apply";
 import { UniversePackageSchema, type UniversePackage } from "@/lib/import-schema";
 import { assertMutationAllowed } from "@/lib/mutation-guard";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { ImportJobStatus, Prisma } from "@/generated/prisma/client";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 
 export const dynamic = "force-dynamic";
 
@@ -51,25 +53,68 @@ export default async function ImportExportPage({
   const locale = await getRequestLocale();
   const { job } = await searchParams;
 
-  const [entityCount, relationshipCount, revisionCount, mediaCount, previewJob] = await Promise.all([
-    prisma.entity.count(),
-    prisma.relationship.count(),
-    prisma.entityRevision.count(),
-    prisma.mediaAsset.count(),
-    job
-      ? prisma.importJob.findUnique({
-          where: { id: job },
-        })
-      : Promise.resolve(null),
-  ]);
+  let entityCount = 0;
+  let relationshipCount = 0;
+  let revisionCount = 0;
+  let mediaCount = 0;
+  let previewJob: Awaited<ReturnType<typeof prisma.importJob.findUnique>> = null;
+  let exportJson = JSON.stringify(
+    { entities: [], relationships: [], revisions: [] },
+    null,
+    2
+  );
 
-  const exportBundle = {
-    entities: await prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
-    relationships: await prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
-    revisions: await prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
-  };
+  try {
+    [entityCount, relationshipCount, revisionCount, mediaCount, previewJob] = await Promise.all([
+      prisma.entity.count(),
+      prisma.relationship.count(),
+      prisma.entityRevision.count(),
+      prisma.mediaAsset.count(),
+      job
+        ? prisma.importJob.findUnique({
+            where: { id: job },
+          })
+        : Promise.resolve(null),
+    ]);
 
-  const exportJson = JSON.stringify(exportBundle, null, 2);
+    const exportBundle = {
+      entities: await prisma.entity.findMany({ orderBy: { createdAt: "asc" } }),
+      relationships: await prisma.relationship.findMany({ orderBy: { createdAt: "asc" } }),
+      revisions: await prisma.entityRevision.findMany({ orderBy: { createdAt: "asc" } }),
+    };
+
+    exportJson = JSON.stringify(exportBundle, null, 2);
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <main className="min-h-screen bg-background text-foreground">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
+            <Reveal>
+              <section className="ms-panel p-6">
+                <p className="text-sm text-muted-foreground">
+                  {locale === "ar" ? "الإدارة / الاستيراد والتصدير" : "Admin / Import & Export"}
+                </p>
+                <h1 className="mt-2 text-3xl font-semibold tracking-tight">
+                  {t(locale, "importExport")}
+                </h1>
+                <div className="mt-4 flex items-center gap-4">
+                  <Link href="/admin" className="text-sm underline">
+                    {t(locale, "backToAdminHub")}
+                  </Link>
+                  <AdminIndexNav />
+                </div>
+              </section>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <DatabaseUnavailableState locale={locale} />
+            </Reveal>
+          </div>
+        </main>
+      );
+    }
+
+    throw error;
+  }
 
   const previewSummary =
     previewJob?.summary && isPreviewSummary(previewJob.summary) ? previewJob.summary : null;
@@ -404,5 +449,4 @@ export default async function ImportExportPage({
     </main>
   );
 }
-
 

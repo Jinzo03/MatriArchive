@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MatriArchive
 
-## Getting Started
+MatriArchive is a Next.js 16 + Prisma app for building and browsing a connected universe of entities, relationships, revisions, media, and imports.
 
-First, run the development server:
+## Local development
+
+1. Set `DATABASE_URL` in `.env` to your local Postgres database.
+2. Generate the Prisma client:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm run db:generate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Apply local migrations during development:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm prisma migrate dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Start the app:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Vercel deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This app should use a hosted Postgres database in Vercel, not `localhost`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create or connect a hosted Postgres database such as Neon.
+2. In Vercel, set `DATABASE_URL` for `Production`.
+3. Set `DATABASE_URL` for `Preview` too if you want preview deployments to work.
+4. In Vercel project settings, set the build command to:
 
-## Deploy on Vercel
+```bash
+pnpm run vercel-build
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+That build command will:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- generate Prisma Client
+- apply pending Prisma migrations with `prisma migrate deploy`
+- build the Next.js app
+
+## Database commands
+
+Generate Prisma client:
+
+```bash
+pnpm run db:generate
+```
+
+Apply pending production/staging migrations:
+
+```bash
+pnpm run db:migrate:deploy
+```
+
+Run the seed script intentionally:
+
+```bash
+ALLOW_DESTRUCTIVE_SEED=true pnpm run db:seed
+```
+
+The current seed script deletes existing entity data before inserting sample data, so it is protected behind `ALLOW_DESTRUCTIVE_SEED=true`.
+
+## Content import
+
+If you already have universe package JSON files, prefer importing real content instead of running the destructive sample seed.
+
+Examples:
+
+```bash
+pnpm run import:dry-run
+pnpm run import:content
+```

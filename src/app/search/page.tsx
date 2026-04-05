@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { getRequestLocale } from "@/lib/locale.server";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 import { Reveal } from "@/components/reveal";
 import { EntityMediaFrame } from "@/components/entity-media-frame";
 
@@ -99,48 +101,66 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const { q } = await searchParams;
   const query = q?.trim() ?? "";
 
-  const results = (query
-    ? await prisma.entity.findMany({
-        where: {
-          OR: [
-            { title: { contains: query, mode: "insensitive" } },
-            { summary: { contains: query, mode: "insensitive" } },
-            { body: { contains: query, mode: "insensitive" } },
-            { slug: { contains: query, mode: "insensitive" } },
-            { aliases: { has: query } },
-            { tags: { has: query } },
-            { searchKeywords: { has: query } },
-          ],
-        },
-        orderBy: [{ updatedAt: "desc" }],
-        select: {
-          id: true,
-          title: true,
-          slug: true,
-          type: true,
-          summary: true,
-          metadata: true,
-          mediaLinks: {
-            orderBy: [{ primary: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
-            select: {
-              role: true,
-              primary: true,
-              sortOrder: true,
-              mediaAsset: {
-                select: {
-                  src: true,
-                  alt: true,
-                  title: true,
-                  type: true,
-                  width: true,
-                  height: true,
+  let results: SearchEntity[] = [];
+
+  try {
+    results = (query
+      ? await prisma.entity.findMany({
+          where: {
+            OR: [
+              { title: { contains: query, mode: "insensitive" } },
+              { summary: { contains: query, mode: "insensitive" } },
+              { body: { contains: query, mode: "insensitive" } },
+              { slug: { contains: query, mode: "insensitive" } },
+              { aliases: { has: query } },
+              { tags: { has: query } },
+              { searchKeywords: { has: query } },
+            ],
+          },
+          orderBy: [{ updatedAt: "desc" }],
+          select: {
+            id: true,
+            title: true,
+            slug: true,
+            type: true,
+            summary: true,
+            metadata: true,
+            mediaLinks: {
+              orderBy: [{ primary: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+              select: {
+                role: true,
+                primary: true,
+                sortOrder: true,
+                mediaAsset: {
+                  select: {
+                    src: true,
+                    alt: true,
+                    title: true,
+                    type: true,
+                    width: true,
+                    height: true,
+                  },
                 },
               },
             },
           },
-        },
-      })
-    : []) as SearchEntity[];
+        })
+      : []) as SearchEntity[];
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <main className="min-h-screen bg-background text-foreground">
+          <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 py-8">
+            <Reveal>
+              <DatabaseUnavailableState locale={locale} />
+            </Reveal>
+          </div>
+        </main>
+      );
+    }
+
+    throw error;
+  }
 
   return (
     <main className="min-h-screen bg-background text-foreground">

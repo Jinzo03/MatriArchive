@@ -2,7 +2,9 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { EntityType } from "@/generated/prisma/client";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { getRequestLocale } from "@/lib/locale.server";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 import { Reveal } from "@/components/reveal";
 import { BrowseSections } from "@/components/browse-sections";
 
@@ -61,35 +63,53 @@ type BrowseEntity = {
 export default async function BrowsePage() {
   const locale = await getRequestLocale();
 
-  const entities = (await prisma.entity.findMany({
-    orderBy: [{ type: "asc" }, { title: "asc" }],
-    select: {
-      id: true,
-      title: true,
-      slug: true,
-      type: true,
-      summary: true,
-      metadata: true,
-      mediaLinks: {
-        orderBy: [{ primary: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
-        select: {
-          role: true,
-          primary: true,
-          sortOrder: true,
-          mediaAsset: {
-            select: {
-              src: true,
-              alt: true,
-              title: true,
-              type: true,
-              width: true,
-              height: true,
+  let entities: BrowseEntity[] = [];
+
+  try {
+    entities = (await prisma.entity.findMany({
+      orderBy: [{ type: "asc" }, { title: "asc" }],
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        type: true,
+        summary: true,
+        metadata: true,
+        mediaLinks: {
+          orderBy: [{ primary: "desc" }, { sortOrder: "asc" }, { createdAt: "asc" }],
+          select: {
+            role: true,
+            primary: true,
+            sortOrder: true,
+            mediaAsset: {
+              select: {
+                src: true,
+                alt: true,
+                title: true,
+                type: true,
+                width: true,
+                height: true,
+              },
             },
           },
         },
       },
-    },
-  })) as BrowseEntity[];
+    })) as BrowseEntity[];
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <main className="min-h-screen bg-background text-foreground">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-8">
+            <Reveal>
+              <DatabaseUnavailableState locale={locale} />
+            </Reveal>
+          </div>
+        </main>
+      );
+    }
+
+    throw error;
+  }
 
   const grouped = typeOrder.reduce<Record<string, BrowseEntity[]>>((acc, type) => {
     acc[type] = entities.filter((entity) => entity.type === type);

@@ -15,6 +15,12 @@ const adapter = new PrismaPg({
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  if (process.env.ALLOW_DESTRUCTIVE_SEED !== "true") {
+    throw new Error(
+      "Seeding is disabled by default because this script deletes existing data. Set ALLOW_DESTRUCTIVE_SEED=true to run it intentionally."
+    );
+  }
+
   await prisma.relationship.deleteMany();
   await prisma.entity.deleteMany();
 

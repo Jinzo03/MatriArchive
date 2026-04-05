@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { SHOW_ADMIN_UI } from "@/lib/app-flags";
+import { isDatabaseUnavailableError } from "@/lib/database-errors";
 import { getEntityTypeLabel, t } from "@/lib/locale";
 import { getRequestLocale } from "@/lib/locale.server";
 import { PageHeader } from "@/components/page-header";
+import { DatabaseUnavailableState } from "@/components/database-unavailable-state";
 import { DashboardShell } from "@/components/dashboard-shell";
 import { DashboardCta } from "@/components/dashboard-cta";
 
@@ -11,23 +13,52 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   const locale = await getRequestLocale();
-  const [characters, stories, institutions, locations, recentItems] = await Promise.all([
-    prisma.entity.count({ where: { type: "CHARACTER" } }),
-    prisma.entity.count({ where: { type: "STORY" } }),
-    prisma.entity.count({ where: { type: "INSTITUTION" } }),
-    prisma.entity.count({ where: { type: "LOCATION" } }),
-    prisma.entity.findMany({
-      orderBy: { updatedAt: "desc" },
-      take: 6,
-      select: {
-        id: true,
-        title: true,
-        slug: true,
-        type: true,
-        updatedAt: true,
-      },
-    }),
-  ]);
+  let characters = 0;
+  let stories = 0;
+  let institutions = 0;
+  let locations = 0;
+  let recentItems: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    type: "CHARACTER" | "STORY" | "INSTITUTION" | "LOCATION" | "DOCTRINE" | "EVENT" | "TERM" | "ARTIFACT" | "OTHER";
+    updatedAt: Date;
+  }> = [];
+
+  try {
+    [characters, stories, institutions, locations, recentItems] = await Promise.all([
+      prisma.entity.count({ where: { type: "CHARACTER" } }),
+      prisma.entity.count({ where: { type: "STORY" } }),
+      prisma.entity.count({ where: { type: "INSTITUTION" } }),
+      prisma.entity.count({ where: { type: "LOCATION" } }),
+      prisma.entity.findMany({
+        orderBy: { updatedAt: "desc" },
+        take: 6,
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          type: true,
+          updatedAt: true,
+        },
+      }),
+    ]);
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      return (
+        <DashboardShell>
+          <PageHeader
+            eyebrow="MatriArchive"
+            title={t(locale, "dashboardTitle")}
+            description={t(locale, "dashboardIntro")}
+          />
+          <DatabaseUnavailableState locale={locale} />
+        </DashboardShell>
+      );
+    }
+
+    throw error;
+  }
 
   const quickStats = [
     { label: locale === "ar" ? "الشخصيات" : "Characters", value: characters },
