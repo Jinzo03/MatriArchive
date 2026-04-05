@@ -220,8 +220,20 @@ export default async function ImportExportPage({
         <section className="grid gap-6 lg:grid-cols-2">
           <Reveal delay={0.08}>
             <div className="ms-panel p-6">
-              <h2 className="text-lg font-semibold">{t(locale, "exportJson")}</h2>
-              <p className="mt-2 text-sm text-muted-foreground">{t(locale, "exportBackupHelp")}</p>
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-lg font-semibold">{t(locale, "exportJson")}</h2>
+                  <p className="mt-2 text-sm text-muted-foreground">{t(locale, "exportBackupHelp")}</p>
+                </div>
+
+                <a
+                  href="/admin/import-export/download"
+                  className="ms-button-ghost"
+                  download="matriarchive-export.json"
+                >
+                  {locale === "ar" ? "تحميل JSON" : "Download JSON"}
+                </a>
+              </div>
 
               <textarea
                 readOnly
@@ -392,3 +404,5 @@ export default async function ImportExportPage({
     </main>
   );
 }
+
+
