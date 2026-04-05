@@ -16,6 +16,7 @@
     "db:generate": "prisma generate",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
+    "db:restore-export": "tsx scripts/restore-export.ts",
     "media:delete": "tsx scripts/delete-media.ts",
     "import:dry-run": "tsx scripts/import-dry-run.ts",
     "import:content": "tsx scripts/import-content.ts"
