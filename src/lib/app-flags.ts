@@ -25,6 +25,6 @@ export const SHOW_ADMIN_UI = parseBooleanFlag(
 );
 
 export const ENABLE_ADMIN_MUTATIONS = parseBooleanFlag(
-  process.env.ENABLE_ADMIN_MUTATIONS ?? "false",
+  process.env.ENABLE_ADMIN_MUTATIONS ?? "true",
   process.env.NODE_ENV !== "production"
 );
